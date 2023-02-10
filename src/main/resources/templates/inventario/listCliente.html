@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+		<form action="" class="firma" method="post" th:object="${cliente}" th:action="@{/listCliente}">
+            <p> id Cliente:</p> <input type="number" name="idCliente">
+            <p> Nombre: </p> <input type="text" name="nombreCliente">
+            <p> Celular: </p> <input type="number" name="telefonoCliente">
+            <p>Direccion:</p> <input type="text" name="direccionCliente">
+            <p> Fecha de nacimiento:</p> <input type="date" id="" name="fechaNacimientoCliente">
+            <p><button type="submit">Guardar</button></p>
+        </form>
+        
+        <table border="1" >
+				<thead>
+					<tr>
+						<th> id Cliente</th>
+						<th> Nombre: </th>
+						<th>Celular:</th>
+						<th>Direccion:</th>
+						<th>Fecha de nacimiento:</th>
+					</tr>
+				</thead>
+				
+				 <tbody>
+					<tr th:each="cliente : ${listCliente}">
+						 <td th:text="${cliente.idCliente}"></td>
+						<td th:text="${cliente.nombreCliente}"></td>
+						<td th:text="${cliente.telefonoCliente}"></td>
+						<td th:text="${cliente.direccionCliente}"></td>
+						<td th:text="${cliente.fechaNacimientoCliente}"></td>
+						<td> 
+							<a th:href="@{/cliente/{id}/edit(id=${cliente.idCliente})}" class="edit">Edit</a>
+							<a th:href="@{/cliente/{id}/delete(id=${cliente.idCliente})}" class="delete">Delete</a> 
+							
+					</tr>
+					
+				</tbody>
+			</table>
+
+</body>
+</html>

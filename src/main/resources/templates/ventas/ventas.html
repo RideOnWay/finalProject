@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles/estilosVentas.css">
+  <link rel="stylesheet" href="styles/styleventa2.css">
+  <script src="js/funcionVentas.js"></script>
+  
+  <title>ventas</title>
+</head>
+
+<body onload="easyTabs()">
+  <header>
+    <h1>Ventas</h1>
+    <img src="images/vecteezy_coffee-logo-vector_.jpg" alt="" id="main_logo">
+  </header>
+<div id="wrapper">
+  <div id="erasetab" ondrop="drop(event)" ondragover="allowDrop(event)"> 
+    <img src="./images/basura.png" id="bote">
+  </div>
+  <div id="nomempl"> NOMBRE DEL EMPLEADO</div>
+
+  <menu>
+    <span id="fecha">
+      <div id="dia"></div>
+      <div id="hora"></div>
+    </span>
+    <nav>
+      <div class="t-container">
+        <ul class="t-tabs" onchange="" id="ulmain">
+          <li class="t-tab selected" id="tab1" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)" index="1">Venta 1</li>
+          <li class="t-tab" id="tab2" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)" index="2">Venta 2</li>
+          <li class="t-tab" id="tab3" draggable="true" ondragstart="drag(event)" ondragend="dragEnd(event)" index="3">Venta 3</li>
+          <li class="t-tab" draggable="false" onclick="newtab()" id="last">...</li>
+        </ul>
+      </div>
+    </nav>
+  </menu>
+
+  <section  class="sec" id="forms">
+    <form  class="t-form selected" id="form1" index="1" method="post" th:action="@{/pedido}" th:object="${venta}">
+      <div id="inform">
+        <div id="drinkContent">
+          <div id="drinks">  Escoge las bebidas:
+            <select id="drinkList1" onchange="enlistar('drinkList1','#drinktable1',1)">
+              <option value=""></option>
+              <option value="Tinto">Tinto</option>
+              <option value="Capuchino">Capuchino</option>
+              <option value="Aromatica">Aromatica</option>
+              <option value="Cafe">Cafe</option>
+              <option value="Mocachino">mocachino</option>
+              <option value="Milo">Milo</option>
+              <option value="Carajillo">Carajillo</option>
+              <option value="Leche">Leche</option>
+              <option value="Matte">Matte</option>
+              <option value="Turko">turko</option>
+            </select>
+          </div>
+          <div id="vasos" onchange=""> Medida del vaso:
+            <select name="" id="">
+              <option value=""></option>
+              <option value="">mini</option>
+              <option value="">medio</option>
+              <option value="">grande</option>
+            </select>
+          </div>
+        </div>
+
+        <table id="drinktable1"></table>
+
+        <label  id="labdrink"> Total Bebidas</label>
+       
+
+
+      </div>
+
+      <div>
+        <div id="snacks"> Escoge los Snacks:
+          <select id="snacklist1" onchange="enlistar('snacklist1','#tablesnack1',1)">
+            <option value=""></option>
+            <option value="Galletadeavena">Galleta de avena</option>
+            <option value="Calentanos">Calentanos</option>
+            <option value="Galletasdecoco">Galletas de coco</option>
+            <option value="Achiras">Achiras</option>
+            <option value="Frutaseca">Fruta seca</option>
+            <option value="chilets">chilets</option>
+            <option value="cigarrillo">cigarrillos</option>
+            <option value="Mantecada">Mantecada</option>
+            <option value="Torta">Torta</option>
+            <option value="Bocadillo">Bocadillo</option>
+          </select>
+        </div>
+
+        <table id="tablesnack1"></table>
+
+
+        <label > Total snacks</label>
+
+      </div>
+
+      <div id="botones">
+        <div id="idto">
+          <button type="button" id="total1" onclick="totales('.precio1','latotal1')">Total</button>
+          <label for="" id="latotal1"> Total</label>
+
+        </div>
+        <button type="button" id="borrar1" onclick="erasetab()">Borrar</button>
+        <button type="button" id="erase1" onclick="eraseall('drinktable1','tablesnack1')"> Borrar todo</button>
+        <button type="submit" id="ok" onclick="">Guardar</button>
+      </div>
+    </form>
+
+    <form action="" class="t-form" id="form2" index="2">
+      <div id="inform">
+        <div id="drinkContent">
+          <div id="drinks">
+            <select id="drinkList2" onchange="enlistar('drinkList2','#drinktable2',2)">
+              <option value=""></option>
+              <option value="Tinto">Tinto</option>
+              <option value="Capuchino">Capuchino</option>
+              <option value="Aromatica">Aromatica</option>
+              <option value="Cafe">Cafe</option>
+              <option value="Mocachino">mocachino</option>
+              <option value="Milo">Milo</option>
+              <option value="Carajillo">Carajillo</option>
+              <option value="Leche">Leche</option>
+              <option value="Matte">Matte</option>
+              <option value="Turko">turko</option>
+            </select>
+          </div>
+          <div id="vasos" onchange="">
+            <select name="" id="">
+              <option value=""></option>
+              <option value="">mini</option>
+              <option value="">medio</option>
+              <option value="">grande</option>
+            </select>
+          </div>
+        </div>
+
+        <table id="drinktable2">
+
+        </table>
+
+        <label  id="labdrink"> Total Bebidas</label>
+
+      </div>
+
+      <div>
+        <div id="snacks">
+          <select id="snacklist2" onchange="enlistar('snacklist2','#tablesnack2',2)">
+            <option value=""></option>
+            <option value="Galletadeavena">Galleta de avena</option>
+            <option value="Calentanos">Calentanos</option>
+            <option value="Galletasdecoco">Galletas de coco</option>
+            <option value="Achiras">Achiras</option>
+            <option value="Frutaseca">Fruta seca</option>
+            <option value="chilets">chilets</option>
+            <option value="cigarrillo">cigarrillos</option>
+            <option value="Mantecada">Mantecada</option>
+            <option value="Torta">Torta</option>
+            <option value="Bocadillo">Bocadillo</option>
+          </select>
+        </div>
+
+        <table id="tablesnack2">
+
+        </table>
+
+
+        <label > Total snacks</label>
+
+      </div>
+
+      <div id="botones">
+        <div id="idto">
+          <button type="button" id="total2" onclick="totales('.precio2','latotal2')">Total</button>
+          <label for="" id="latotal2"> Total</label>
+
+        </div>
+        <button type="button" id="ok" onclick="">Guardar</button>
+        <button type="button" id="borrar2" onclick="erasetab()">Borrar</button>
+        <button type="button" id="erase2" onclick="eraseall('drinktable2','tablesnack2')"> Borrar todo</button>
+      </div>
+    </form>
+
+    <form action="" class="t-form" id="form3" index="3">
+      <div id="inform">
+        <div id="drinkContent">
+          <div id="drinks">
+            <select id="drinkList3" onchange="enlistar('drinkList3','#drinktable3',3)">
+              <option value=""></option>
+              <option value="Tinto">Tinto</option>
+              <option value="Capuchino">Capuchino</option>
+              <option value="Aromatica">Aromatica</option>
+              <option value="Cafe">Cafe</option>
+              <option value="Mocachino">mocachino</option>
+              <option value="Milo">Milo</option>
+              <option value="Carajillo">Carajillo</option>
+              <option value="Leche">Leche</option>
+              <option value="Matte">Matte</option>
+              <option value="Turko">turko</option>
+            </select>
+          </div>
+          <div id="vasos" onchange="">
+            <select name="" id="">
+              <option value=""></option>
+              <option value="">mini</option>
+              <option value="">medio</option>
+              <option value="">grande</option>
+            </select>
+          </div>
+        </div>
+
+        <table id="drinktable3">
+
+        </table>
+
+        <label id="labdrink"> Total Bebidas</label>
+        <p id="camino">formulario tres</p>
+
+
+      </div>
+
+      <div>
+        <div id="snacks">
+          <select id="snacklist3" onchange="enlistar('snacklist3','#tablesnack3',3)">
+            <option value=""></option>
+            <option value="Galletadeavena">Galleta de avena</option>
+            <option value="Calentanos">Calentanos</option>
+            <option value="Galletasdecoco">Galletas de coco</option>
+            <option value="Achiras">Achiras</option>
+            <option value="Frutaseca">Fruta seca</option>
+            <option value="chilets">chilets</option>
+            <option value="cigarrillo">cigarrillos</option>
+            <option value="Mantecada">Mantecada</option>
+            <option value="Torta">Torta</option>
+            <option value="Bocadillo">Bocadillo</option>
+          </select>
+        </div>
+
+        <table id="tablesnack3">
+
+        </table>
+
+
+        <label > Total snacks</label>
+
+      </div>
+
+      <div id="botones">
+        <div id="idto">
+          <button type="button" id="total3" onclick="totales('.precio3','latotal3')">Total</button>
+          <label for="" id="latotal3"> Total</label>
+
+        </div>
+        <button type="button" id="ok" onclick="">Guardar</button>
+        <button type="button" id="borrar3" onclick="erasetab()">Borrar</button>
+        <button type="button" id="erase3" onclick="eraseall('drinktable3','tablesnack3')"> Borrar todo</button>
+      </div>
+    </form>
+
+    <form action="" id="formulario">
+      <div id="inform">
+        <div id="drinkContent">
+          <div id="drinks"> Escoge las bebidas:
+            <select id="drinkList" onchange="enlistar('drinkList','#drinktable',0)">
+              <option value=""></option>
+              <option value="Tinto">Tinto</option>
+              <option value="Capuchino">Capuchino</option>
+              <option value="Aromatica">Aromatica</option>
+              <option value="Cafe">Cafe</option>
+              <option value="Mocachino">mocachino</option>
+              <option value="Milo">Milo</option>
+              <option value="Carajillo">Carajillo</option>
+              <option value="Leche">Leche</option>
+              <option value="Matte">Matte</option>
+              <option value="Turko">turko</option>
+            </select>
+          </div>
+          <div id="vasos" onchange="">
+            <select name="" id="" onchange="chnprice()">
+              <option value=""></option>
+              <option value="">mini</option>
+              <option value="">medio</option>
+              <option value="">grande</option>
+            </select>
+          </div>
+        </div>
+
+        <table id="drinktable"></table>
+
+        <label  id="labdrink"> Total Bebidas</label>
+        <p id="camino"></p>
+
+
+      </div>
+
+      <div>
+        <div id="snacks">  Escoge los snacks:
+          <select id="snacklist" onchange="enlistar('snacklist','#tablesnack')">
+            <option value=""></option>
+            <option value="Galletadeavena">Galleta de avena</option>
+            <option value="Calentanos">Calentanos</option>
+            <option value="Galletasdecoco">Galletas de coco</option>
+            <option value="Achiras">Achiras</option>
+            <option value="Frutaseca">Fruta seca</option>
+            <option value="chilets">chilets</option>
+            <option value="cigarrillo">cigarrillos</option>
+            <option value="Mantecada">Mantecada</option>
+            <option value="Torta">Torta</option>
+            <option value="Bocadillo">Bocadillo</option>
+          </select>
+        </div>
+
+        <table id="tablesnack"> </table>
+
+        <label > Total snacks</label>
+
+      </div>
+
+      <div id="botones">
+        <div id="idto">
+          <button type="button" id="total" onclick="totales('.precio')">Total</button>
+          <label for="" id="latotal"> Total</label>
+
+        </div>
+        <button type="button" id="ok" >Guardar</button>
+        <button type="button" id="borrar" >Borrar</button>
+        <button type="button" id="erase" onclick="eraseall()"> Borrar todo</button>
+      </div>
+
+    </form>
+  </section>
+  <aside>
+
+  </aside>
+  <footer>
+
+  </footer>
+</div>
+</body>
+
+</html>

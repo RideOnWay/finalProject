@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<div id="forms">
+        <form action="" class="firma" method="post" th:object="${insumo}" th:action="@{/listInsumo}">
+            <p> idInsumo: </p><input type="number" name="idInsumo">
+            <p>nombreInsumo: </p><input type="text" name="nombreInsumo">
+            <p>precioInsumo: </p><input type="number" name="precioInsumo">
+            <p>tipoInsumo: </p><input type="text" name="tipoInsumo">
+            <p>fechaCreacionInsumo: </p><input type="date" name="echaCreacionInsumo">
+            <p>fechaVencimientoInsumo: </p><input type="date" name="fechaVencimientoInsumo">
+            <p>producto: </p><input type="number" name="producto">
+            
+            <select  class="form-control" th:object="${proveedor}" name="proveedor">
+				<option th:each="proveedor : ${listProveedor}" th:value="${proveedor.idProveedor}"
+				th:text="${proveedor.idProveedor}" />
+			</select>
+            
+            <p>descripcionInsumo: </p><input type="text" name="descripcionInsumo">
+            <button type="submit">Guardar</button>
+        </form>
+        </div>
+        
+        <table border="1" >
+				<thead>
+					<tr>
+						<th>idInsumo:</th>
+						<th>nombreInsumo:</th>
+						<th>precioInsumo:</th>
+						<th>tipoInsumo:</th>
+						<th>fechaCreacionInsumo:</th>
+						<th>fechaVencimientoInsumo:</th>
+						<th>proveedor:</th>
+						<th>descripcionInsumo:</th>
+						<th>producto:</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				
+				 <tbody>
+					<tr th:each="insumo : ${listInsumo}">
+						<td th:text="${insumo.idInsumo}"></td>
+						<td th:text="${insumo.nombreInsumo}"></td>
+						<td th:text="${insumo.precioInsumo}"></td>
+						<td th:text="${insumo.tipoInsumo}"></td>
+						<td th:text="${insumo.fechaCreacionInsumo}"></td>
+						<td th:text="${insumo.fechaVencimientoInsumo}"></td>
+						<td th:text="${insumo.proveedor}"></td>
+						<td th:text="${insumo.descripcionInsumo}"></td>
+						<td th:text="${insumo.producto}"></td>
+						<td> 
+							<a th:href="@{/insumo/{id}/edit(id=${insumo.idInsumo})}" class="edit">Edit</a>
+							<a th:href="@{/insumo/{id}/delete(id=${insumo.idInsumo})}" class="delete">Delete</a> 
+							
+					</tr>
+					
+				</tbody>
+			</table>
+</body>
+
+</html>

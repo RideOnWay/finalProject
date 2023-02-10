@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario</title>
+    <link rel="stylesheet" href="./styles/estilosInventario.css">
+    <script src="./js/funcioninventario"></script>
+</head>
+
+<body onload='onchar()'>
+    <header>
+        <h1>
+            INVENTARIO
+        </h1>
+    </header>
+    <nav>
+        <button onclick="restaurar()">Volver</button>
+    </nav>
+    <section>
+        <ul id="fhather">
+            <a href="/listInsumo"><li id="insumo" class="ilc" >Ingreso de insumos </br>
+                <img src="./images/coffeepops.png" alt="" class="icon">
+            </li></a>
+            
+            <a href="/listInventariod"><li id="invdiario" class="ilc" >Inventario diario </br>
+                <img src="./images/inventoryimg.png" alt="" class="icon">
+            </li></a>
+            
+            <a href="/listReporte"><li id="reporte" class="ilc" >Reportes </br>
+                <img src="./images/reports.png" alt="" class="icon">
+            </li></a>
+            
+            <a href="/listUsuario"><li id="newuser" class="ilc" > Usuarios </br>
+                <img src="./images/user.png" alt="" class="icon">
+            </li></a>
+            
+            <a href="/listDevolucione"><li id="devolucion" class="ilc" >Devoluciones </br>
+                <img src="./images/returns.png" alt="" class="icon">
+            </li></a>
+            
+            <a  href="/listProveedor"><li id="proveedor" class="ilc" >Proveedores </br>
+                <img src="./images/supplier.png" alt="" class="icon">
+            </li></a>
+            
+            <a href="/listProducto"><li id="product" class="ilc" >Productos </br>
+                <img src="./images/coffee.png" alt="" class="icon">
+            </li></a>
+            
+            <a href="/listCliente"><li id="cliente" class="ilc" >Clientes </br>
+                <img src="./images/customer.png" alt="" class="icon">
+            </li></a>
+            
+            <a href="listOtros"><li id="otro" class="ilc" >Otros </br>
+                <img src="./images/configuratios.png" alt="" class="icon">
+            </li></a>
+        </ul>
+    </section>
+
+    <footer>
+
+    </footer>
+</body>
+
+</html>

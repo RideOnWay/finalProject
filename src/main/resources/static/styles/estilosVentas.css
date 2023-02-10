@@ -1,0 +1,298 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 1em;
+	line-height: 1.5em;
+  background-image: url("../images/transBack.jpg");
+  background-size:cover ;
+  background-attachment: fixed;
+  position: relative;
+}
+
+#bote{
+  height: 2.5em;
+  width: 35x;
+  padding: 3px;
+}
+
+header{  
+  background-image: url("../images/15479-cafe.jpg");
+  color: white;
+  align-items: center;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content:space-around;
+  
+}
+
+#main_logo{
+  height: 50px;
+  width: 100px;
+}
+
+#wrapper{
+  width: 80%;
+  margin: auto;
+}
+
+#erasetab{
+  height: 3em;
+  width: 100%;
+  background-color: red;
+  visibility: hidden;
+  text-align: center;
+}
+
+#nomempl{
+  color: white;
+}
+
+menu {
+  display: flex;
+  justify-content: space-around;
+ 
+}
+
+#fecha {
+  background-color: #252525;
+  color: rgb(226, 226, 224); 
+  text-align: center;
+  font-size: 1.1em;
+  height: auto;
+  width: auto;
+  border: 1px solid white;
+  
+}
+
+#dia, #hora{
+  padding: 3px;
+  margin: 0 3em;
+
+}
+
+nav{
+  display:flex;
+}
+
+.t-container {
+    margin: 0 ;
+    padding: 0 ;
+    display: inline-block;
+    height: 50px;
+   
+  }
+  
+  .t-tabs {
+    list-style-type: none;
+    margin: 0;
+    padding: 0 ;
+    box-sizing: border-box;
+    display: flex;
+    
+  }
+
+  .t-tabs li {
+    color: #252525;
+    padding: 0.5em 0.7em;
+    text-decoration: none;
+    justify-content: space-around;
+    text-align: center;
+    font-size: 1.1em;
+    background: rgb(116, 113, 113);
+    border-bottom: 0;
+    min-width: 3%;
+    margin-right: 2px;
+    margin-bottom: 0 !important;
+    box-sizing: border-box;
+    cursor: pointer;
+    border: 2px solid rgb(43, 42, 42);
+  
+    
+    
+  }
+
+  .t-tabs li:hover {
+    background-color: #252525;
+    color: rgb(116, 113, 113);
+  }
+
+  .t-tabs li.selected {
+    color: rgb(231, 228, 228);
+    cursor: default;
+    background: #252525;
+    border: 1px solid white;
+  }
+
+  #formulario{
+   visibility: hidden; 
+  }
+ 
+  .price{
+    width: 3em;
+    height: 1.5em;
+    font-size: 1em;
+    border-radius: 5px;
+  }
+
+  #drinkContent{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+  }
+
+  #drinks{
+    height: 7em;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+
+  #vasos{
+    height: 7em;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+
+  #snacks{
+    height: 7em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  select{
+    display: inline;
+    height: 2em;
+    width: 10em;
+    border-radius: 5px;
+  }
+
+  option{
+    height: 10em;
+    margin: 2em;
+  }
+
+  .lista{
+    text-align: center;
+  }
+
+  label{
+    display: flex;
+   justify-content: space-around;
+    
+  }
+
+  textarea{
+    resize: none;
+  }
+  .t-form {
+    padding: 0 1em;
+    background-color: #333;
+    box-sizing: border-box;   
+    color: #eeedea;
+    line-height: 1.3em;
+    text-align: justify;
+    z-index: 1;
+    position: relative;
+    max-height: 0; 
+    overflow: hidden;
+    margin: auto;
+  }
+
+  .t-form.selected {
+    max-height: 3000px;
+    
+  }
+
+  #botones{
+    display: flex;   
+    justify-content: space-around;
+    align-items: center;
+    height: 5em; 
+  }
+
+  button{
+    height: 2em; 
+
+  }
+
+  #idto{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+  }
+  
+  
+
+
+
+
+
+/*
+
+
+
+  .t-tabs, .t-contents {
+    list-style-type: none;
+    margin: 0;
+    padding: 0 ;
+    box-sizing: border-box;
+  }
+    .t-tabs li {
+      color: #dedede;
+      padding: 0.5em 0.7em;
+      text-decoration: none;
+      float: left;
+      text-align: center;
+      font-size: 1.1em;
+      background: #717171;
+      border-bottom: 0;
+      min-width: 40px;
+      margin-right: 2px;
+      margin-bottom: 0 !important;
+      box-sizing: border-box;
+      cursor: pointer;
+    }
+  .t-tabs li:hover {
+    background-color: #545454;
+    color: #d2d2d2;
+  }
+  .t-tabs li.selected {
+    color: #458ace;
+    cursor: default;
+    background: #333;
+  }
+  .t-contents {
+    padding: 0 !important
+  }
+  .t-content {
+    padding: 0 1em;
+    background-color: #333;
+    box-sizing: border-box;
+    float: left;
+    width: 80%;
+    color: #b7b7b7;
+    line-height: 1.3em;
+    text-align: justify;
+    z-index: 1;
+    position: relative;
+    max-height: 0;
+    transition: max-height 0.5s ease 0s;
+    overflow: hidden;
+  }
+  .t-content.selected {
+    max-height: 3000px;
+    transition: max-height 1.25s ease 0.5s;
+  }*/
+
+  

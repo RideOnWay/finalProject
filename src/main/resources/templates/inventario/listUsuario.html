@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+ <form action="" class="firma" method="post" th:object="${usuario}" th:action="@{/listUsuario}">
+ 			<p> id.: </p> <input type="number" name="idUsuario">
+            <p> Nombre: </p><input type="text" name="nombreUsuario">
+            <p> Rol: </p><input type="text" name="rol">            
+            <p> Fecha de nacimiento: </p> <input type="date" name="fechaNacimientoUsuario">
+            <p> Correo:</p> <input type="text" name="correoUsuario">
+            <p> Numero:</p> <input type="text" name="numeroUsuario">
+            <p> Direccion:</p> <input type="text" name="direccionUsuario">
+            <p> Descripcion:</p> <input type="text" name="descripcionUsuario">
+			<button type="submit">Guardar</button>
+        </form>
+       
+			
+			<br />
+			<table border="1" >
+				<thead>
+					<tr>
+						<th>idUsuario</th>
+						<th>nombreUsuario</th>
+						<th>Rol</th>
+						<th>fechaNacimientoUsuario</th>
+						<th>Correo</th>
+						<th>Numero</th>
+						<th>Direccion</th>
+						<th>Productos</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				
+				 <tbody>
+					<tr th:each="usuario : ${listUsuario}">
+						<td th:text="${usuario.idUsuario}"></td>
+						<td th:text="${usuario.nombreUsuario}"></td>
+						<td th:text="${usuario.rol}"></td>
+						<td th:text="${usuario.fechaNacimientoUsuario}"></td>
+						<td th:text="${usuario.correoUsuario}"></td>
+						<td th:text="${usuario.numeroUsuario}"></td>
+						<td th:text="${usuario.direccionUsuario}"></td>
+						<td th:text="${usuario.descripcionUsuario}"></td>
+						<td> 
+							<a th:href="@{/usuario/{id}/edit(id=${usuario.idUsuario})}" class="edit">Edit</a>
+							<a th:href="@{/usuario/{id}/delete(id=${usuario.idUsuario})}" class="delete">Delete</a>
+						 </td>
+							
+					</tr>
+					
+				</tbody>
+			</table>
+
+</body>
+</html>

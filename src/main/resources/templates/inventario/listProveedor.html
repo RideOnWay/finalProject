@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Listado de proveedores</title>
+</head>
+<body>
+<h1> listado de proveedores</h1>
+
+<div>
+
+
+		  <div align="center">
+			<h1>Product List</h1>
+			
+			 <form action="" class="firma"  method="post" th:object="${proveedor}" th:action="@{/listProveedor}">
+        	<p> id.:</p> <input type="text" name="idProveedor" id="">
+            <p> Proveedor/Razon social: </p> <input type="text" name="razonSocial" id="">
+            <p> Nombre contacto: </p> <input type="text" name="nombreContacto" id="">
+            <p> Fecha de creacion: </p> <input type="date" id="" name="fechaCreacionPr" >
+            <p> Correo: </p> <input type="text" name="correoProveedor" id="">
+            <p> Celular: </p> <input type="number" name="numeroProveedorP" id="">           
+            <p> Direccion: </p> <input type="text"  name="direccionProveedor" id="">
+            <p> Productos: </p> <input type="text" name="productosProveedor" id="">
+            <button type="submit">Guardar</button>
+        </form>
+			
+			<br />
+			<table border="1" >
+				<thead>
+					<tr>
+						<th>NIT Proveedor</th>
+						<th>Razon social</th>
+						<th>Nombre contacto</th>
+						<th>Fecha creacion</th>
+						<th>Correo</th>
+						<th>Numero</th>
+						<th>Direccion</th>
+						<th>Productos</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				
+				 <tbody>
+					<tr th:each="proveedor : ${listProveedor}">
+						<td th:text="${proveedor.idProveedor}"></td>
+						<td th:text="${proveedor.razonSocial}"></td>
+						<td th:text="${proveedor.nombreContacto}"></td>
+						<td th:text="${proveedor.fechaCreacionPr}"></td>
+						<td th:text="${proveedor.correoProveedor}"></td>
+						<td th:text="${proveedor.numeroProveedorP}"></td>
+						<td th:text="${proveedor.direccionProveedor}"></td>
+						<td th:text="${proveedor.productosProveedor}"></td>
+						<td> 
+							<a th:href="@{/proveedor/{id}/edit(id=${proveedor.idProveedor})}" class="edit">Edit</a>
+							<a th:href="@{/proveedor/{id}/delete(id=${proveedor.idProveedor})}" class="delete">Delete</a> 
+							
+					</tr>
+					
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+tr{
+    background-color: aqua;
+    color: blueviolet;
+    padding: 0.2em;
+}
+
+tr:hover{
+    background-color: blue;
+    
+}
+
+td{
+   padding: 3px;
+}
+
+table{
+    border-collapse: unset;
+}
+
+table tr  {
+    color: rgb(247, 245, 244);
+    cursor: default;
+    background: #4308e6;
+  }
