@@ -2,16 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Listado de proveedores</title>
+<title>Proveedores</title>
 </head>
 <body>
-<h1> listado de proveedores</h1>
+<h1> Proveedor nuevo</h1>
 
 <div>
 
 
 		  <div align="center">
-			<h1>Product List</h1>
 			
 			 <form action="" class="firma"  method="post" th:object="${proveedor}" th:action="@{/listProveedor}">
         	<p> id.:</p> <input type="text" name="idProveedor" id="">
@@ -24,6 +23,8 @@
             <p> Productos: </p> <input type="text" name="productosProveedor" id="">
             <button type="submit">Guardar</button>
         </form>
+			
+		<h2>Listado de proveedores</h2>	
 			
 			<br />
 			<table border="1" >

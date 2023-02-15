@@ -5,13 +5,14 @@ import java.time.LocalDate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table
-public class Usuario {
+public class Usuario{
 
-	
 	@Id
     @Column(name="idUsuario")
     private Long idUsuario;
@@ -19,8 +20,9 @@ public class Usuario {
     @Column(name="nombreUsuario", nullable = false, length=40)
     private String nombreUsuario;
     
-    @Column(name="rol", nullable = false)
-    private int rol;
+    @ManyToOne
+    @JoinColumn(name="idRol")
+    private Rol rol;
     
     @Column(name="fechaNacimientoUsuario")
     private LocalDate fechaNacimientoUsuario;
@@ -37,16 +39,19 @@ public class Usuario {
     @Column(name="direccionUsuario")
     private String direccionUsuario;
     
-    @Column(name="descripcionUsuario", nullable = false, length=100)
+    @Column(name="descripcionUsuario")
     private String descripcionUsuario;
+
+	@Column(name="contrasenaUsuario")
+	private String contrasenaUsuario;
 
 	public Usuario() {
 		super();
 	}
 
-	public Usuario(Long idUsuario, String nombreUsuario, int rol, LocalDate fechaNacimientoUsuario,
+	public Usuario(Long idUsuario, String nombreUsuario, Rol rol, LocalDate fechaNacimientoUsuario,
 			LocalDate fechaCreacionUsuario, String correoUsuario, String numeroUsuario, String direccionUsuario,
-			String descripcionUsuario) {
+			String descripcionUsuario,String contrasenaUsuario) {
 		super();
 		this.idUsuario = idUsuario;
 		this.nombreUsuario = nombreUsuario;
@@ -56,7 +61,14 @@ public class Usuario {
 		this.correoUsuario = correoUsuario;
 		this.numeroUsuario = numeroUsuario;
 		this.direccionUsuario = direccionUsuario;
-		this.descripcionUsuario = descripcionUsuario;
+		this.descripcionUsuario = descripcionUsuario;		
+		this.contrasenaUsuario = contrasenaUsuario;
+	}
+
+	public Usuario(String nombreUsuario, String contrasenaUsuario, Rol rol) {
+		this.nombreUsuario = nombreUsuario;
+		this.contrasenaUsuario = contrasenaUsuario;
+		this.rol = rol;
 	}
 
 	public Long getIdUsuario() {
@@ -75,11 +87,11 @@ public class Usuario {
 		this.nombreUsuario = nombreUsuario;
 	}
 
-	public int getRol() {
+	public Rol getRol() {
 		return rol;
 	}
 
-	public void setRol(int rol) {
+	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
 
@@ -131,6 +143,14 @@ public class Usuario {
 		this.descripcionUsuario = descripcionUsuario;
 	}
 
+	public String getContrasenaUsuario() {
+		return contrasenaUsuario;
+	}
+
+	public void setContrasenaUsuario(String contrasenaUsuario) {
+		this.contrasenaUsuario = contrasenaUsuario;
+	}
+
 	@Override
 	public String toString() {
 		return "Usuario [idUsuario=" + idUsuario + ", nombreUsuario=" + nombreUsuario + ", rol=" + rol
@@ -138,7 +158,5 @@ public class Usuario {
 				+ fechaCreacionUsuario + ", correoUsuario=" + correoUsuario + ", numeroUsuario=" + numeroUsuario
 				+ ", direccionUsuario=" + direccionUsuario + ", descripcion=" + descripcionUsuario + "]";
 	}
-    
-    
-    
+
 }

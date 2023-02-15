@@ -1,4 +1,4 @@
-package com.sugggarCoffe.sub.Controller;
+package com.sugggarCoffe.sub.controller;
 
 
 import java.util.List;
@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sugggarCoffe.sub.Service.InsumoService;
-import com.sugggarCoffe.sub.Service.ProductService;
 import com.sugggarCoffe.sub.model.Insumo;
 import com.sugggarCoffe.sub.model.Producto;
+import com.sugggarCoffe.sub.service.InsumoService;
+import com.sugggarCoffe.sub.service.ProductService;
 
 
 @Controller
@@ -28,13 +29,13 @@ public class ProductoController {
 	private InsumoService insumoService;
 
 	@PostMapping("/listProducto")
-	public String newProducto(@ModelAttribute Producto producto) {
+	public String newProducto(@RequestParam("insumo") List<Insumo> insumo,@ModelAttribute Producto producto) {
 		productoService.createProducto(producto);
 		return "redirect:/listProducto";
 	}
 	
 	@GetMapping("/listProducto")
-	public String getAllProducto(Producto producto,Model model) {
+	public String getAllProducto(Model model) {
 		List<Producto> listProducto  =productoService.listarProducto();
 		List<Insumo> listInsumo  =insumoService.listarInsumo();
 	
@@ -44,14 +45,13 @@ public class ProductoController {
 		    
 		    } catch (Exception e) {
 		      model.addAttribute("message", e.getMessage());
-		      System.out.println("se cayo sta cosa"); 
+		     
 		    }
 		return "inventario/listProducto";
 	}
 	
 	@GetMapping("/producto/{id}/delete")
 	public String borrarProducto(@PathVariable long id ) throws NotFoundException {
-		System.out.println(id);
 		Producto producto = productoService.getProducto(id);
 		productoService.deleteProducto(producto);
 		return "redirect:/listProducto";

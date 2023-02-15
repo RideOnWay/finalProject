@@ -1,4 +1,4 @@
-package com.sugggarCoffe.sub.Service;
+package com.sugggarCoffe.sub.service;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.sugggarCoffe.sub.Repository.ClienteRepository;
 import com.sugggarCoffe.sub.model.Cliente;
+import com.sugggarCoffe.sub.repository.ClienteRepository;
 
 
 

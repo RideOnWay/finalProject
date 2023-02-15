@@ -2,9 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Clientes</title>
 </head>
 <body>
+<h1>Cliente nuevo</h1>
 		<form action="" class="firma" method="post" th:object="${cliente}" th:action="@{/listCliente}">
             <p> id Cliente:</p> <input type="number" name="idCliente">
             <p> Nombre: </p> <input type="text" name="nombreCliente">
@@ -14,6 +15,8 @@
             <p><button type="submit">Guardar</button></p>
         </form>
         
+        <h2>Lista de clientes</h2>
+        
         <table border="1" >
 				<thead>
 					<tr>
@@ -22,6 +25,7 @@
 						<th>Celular:</th>
 						<th>Direccion:</th>
 						<th>Fecha de nacimiento:</th>
+						<th>Acciones</th>
 					</tr>
 				</thead>
 				

@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.sugggarCoffe.sub.Controller.ProductoController;
+import com.sugggarCoffe.sub.controller.ProductoController;
 
 @SpringBootApplication
 public class FinalProjectApplication {

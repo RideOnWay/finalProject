@@ -2,22 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Usuarios</title>
 </head>
 <body>
+<h1>Usuario nuevo</h1>
  <form action="" class="firma" method="post" th:object="${usuario}" th:action="@{/listUsuario}">
- 			<p> id.: </p> <input type="number" name="idUsuario">
-            <p> Nombre: </p><input type="text" name="nombreUsuario">
-            <p> Rol: </p><input type="text" name="rol">            
-            <p> Fecha de nacimiento: </p> <input type="date" name="fechaNacimientoUsuario">
-            <p> Correo:</p> <input type="text" name="correoUsuario">
-            <p> Numero:</p> <input type="text" name="numeroUsuario">
-            <p> Direccion:</p> <input type="text" name="direccionUsuario">
-            <p> Descripcion:</p> <input type="text" name="descripcionUsuario">
+ 			<p> id.: </p> <input type="number" name="idUsuario"></br>
+            <p> Nombre: </p><input type="text" name="nombreUsuario">   </br>        
+            
+            <label for="">Seleccione el rol:</label>
+            <select  class="form-control" th:object="${rol}" name="rol">
+				<option th:each="rol:${listRol}" th:value="${rol.idRol}" th:text="${rol.rolName}" />
+			</select>
+            
+            <p> Fecha de nacimiento: </p> <input type="date" name="fechaNacimientoUsuario"></br>
+            <p> Correo:</p> <input type="text" name="correoUsuario"></br>
+            <p> Numero:</p> <input type="text" name="numeroUsuario"></br>
+            <p> Direccion:</p> <input type="text" name="direccionUsuario"></br>
+            <p> contrasena:</p> <input type="password" name="contrasenaUsuario"></br>
+            <p> Descripcion:</p> <input type="text" name="descripcionUsuario"></br>
 			<button type="submit">Guardar</button>
         </form>
        
-			
+<h2>Lista de usuarios</h2>			
 			<br />
 			<table border="1" >
 				<thead>
@@ -29,7 +36,7 @@
 						<th>Correo</th>
 						<th>Numero</th>
 						<th>Direccion</th>
-						<th>Productos</th>
+						<th>descripcion</th>
 						<th>Acciones</th>
 					</tr>
 				</thead>
@@ -38,7 +45,7 @@
 					<tr th:each="usuario : ${listUsuario}">
 						<td th:text="${usuario.idUsuario}"></td>
 						<td th:text="${usuario.nombreUsuario}"></td>
-						<td th:text="${usuario.rol}"></td>
+						<td th:text="${usuario.rol.rolName}"></td>
 						<td th:text="${usuario.fechaNacimientoUsuario}"></td>
 						<td th:text="${usuario.correoUsuario}"></td>
 						<td th:text="${usuario.numeroUsuario}"></td>

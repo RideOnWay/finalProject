@@ -12,18 +12,18 @@
 
 <body>
     <div id="container">
-        <form>
+        <form method="post" th:object="${usuario}" th:action="@{/log}">
         
             <label for="name">Username:</label>
-            <input type="name" id="name">
+            <input type="name" id="name" name="correoUsuario">
             <!-- Password -->
             <label for="username">Password:</label>
             <p><a href="#">Forgot your password?</a>
-                <input type="password" id="clave">
+                <input type="password" id="clave" name="contrasenaUsuario">
                 <div id="lower">
                     <input type="checkbox"><label class="check" for="checkbox">Keep me logged in</label>
                     <!-- Submit Button -->
-                    <input type="submit" value="Login" onclick="validar()">
+                    <input type="submit" value="Login" >
                 </div>
         </form>
     </div>

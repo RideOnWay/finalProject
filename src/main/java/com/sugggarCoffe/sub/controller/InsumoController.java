@@ -1,4 +1,4 @@
-package com.sugggarCoffe.sub.Controller;
+package com.sugggarCoffe.sub.controller;
 
 import java.util.List;
 
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.sugggarCoffe.sub.Service.InsumoService;
-import com.sugggarCoffe.sub.Service.ProveedorService;
 import com.sugggarCoffe.sub.model.Insumo;
 import com.sugggarCoffe.sub.model.Proveedor;
+import com.sugggarCoffe.sub.service.InsumoService;
+import com.sugggarCoffe.sub.service.ProveedorService;
 
 @Controller
 public class InsumoController {
@@ -24,7 +24,7 @@ public class InsumoController {
 	
 	@Autowired
 	private ProveedorService proveedorService;
-
+	
 	
 	
 	@GetMapping("/listInsumo")
@@ -33,9 +33,11 @@ public class InsumoController {
 		List<Proveedor> listProveedor =proveedorService.listarProveedor(); 
 		List<Insumo> listInsumo  =insumoService.listarInsumo();
 		
+			
 		try {
 		      model.addAttribute("listInsumo", listInsumo);
 		      model.addAttribute("listProveedor", listProveedor);
+		      
 		    } catch (Exception e) {
 		      model.addAttribute("message", e.getMessage());
 		      System.out.println("se cayo sta cosa"); 

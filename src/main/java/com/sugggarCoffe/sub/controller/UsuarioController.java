@@ -1,4 +1,4 @@
-package com.sugggarCoffe.sub.Controller;
+package com.sugggarCoffe.sub.controller;
 
 import java.util.List;
 
@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.sugggarCoffe.sub.Service.UsuarioService;
+import com.sugggarCoffe.sub.model.Rol;
 import com.sugggarCoffe.sub.model.Usuario;
+import com.sugggarCoffe.sub.service.RolService;
+import com.sugggarCoffe.sub.service.UsuarioService;
 
 @Controller
 public class UsuarioController {
@@ -20,6 +22,9 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private RolService rolService;
 
 	@PostMapping("/listUsuario")
 	public String newUsuario(@ModelAttribute Usuario usuario) {
@@ -30,8 +35,10 @@ public class UsuarioController {
 	@GetMapping("/listUsuario")
 	public String getAllUsuario(Model model) {
 		List<Usuario> listUsuario  =usuarioService.listarUsuario();
+		List<Rol> listRol =rolService.listarRol();
 		try {
 		      model.addAttribute("listUsuario", listUsuario);
+		      model.addAttribute("listRol", listRol);
 		    } catch (Exception e) {
 		      model.addAttribute("message", e.getMessage());
 		      System.out.println("se cayo sta cosa"); 

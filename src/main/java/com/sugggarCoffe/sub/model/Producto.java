@@ -1,5 +1,6 @@
 package com.sugggarCoffe.sub.model;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
@@ -7,13 +8,15 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table
 public class Producto implements Serializable{
 	
+	@Serial
 	private static final long serialVersionUID = -2874019750945558354L;
 
 	@Id
@@ -32,29 +35,25 @@ public class Producto implements Serializable{
     @Column(name="fechaCreacionP")
     private LocalDate fechaCreacionP;
     
-    @Column(name="fechaVencimientoP")
-    private LocalDate fechaVencimientoP;
-    
     @Column(name="descripcionP", length=100)
     private String descripcionP;
-    
-    @OneToMany( mappedBy="producto")
-    //@JoinColumn(name="idInsumo")
+      
+    @ManyToMany
+    @JoinTable(name = "producto_insumo")
     private List<Insumo> insumo;
 
 	public Producto() {
 		
 	}
 
-	public Producto(Long idProducto, String nameProduct, int precioProducto, LocalDate fechaCreacionP, LocalDate fechaVencimientoP,String tipo,
+	public Producto(Long idProducto, String nameProduct, int precioProducto, LocalDate fechaCreacionP,String tipo,
 			Proveedor proveedor, String descripcionP,List<Insumo> insumo) {
 		super();
 		this.idProducto = idProducto;
 		this.nombreProducto = nameProduct;
 		this.precioProducto = precioProducto;
 		this.tipo=tipo;
-		this.fechaCreacionP = fechaCreacionP;
-		this.fechaVencimientoP = fechaVencimientoP;		
+		this.fechaCreacionP = fechaCreacionP;	
 		this.descripcionP = descripcionP;
 		this.insumo=insumo;
 	}
@@ -99,13 +98,7 @@ public class Producto implements Serializable{
 		this.fechaCreacionP = fechaCreacion;
 	}
 
-	public LocalDate getFechaVencimientoP() {
-		return fechaVencimientoP;
-	}
 
-	public void setFechaVencimientoP(LocalDate fechaVencimientoP) {
-		this.fechaVencimientoP = fechaVencimientoP;
-	}
 
 	public String getDescripcionP() {
 		return descripcionP;
@@ -126,8 +119,8 @@ public class Producto implements Serializable{
 	@Override
 	public String toString() {
 		return "Producto [idProducto=" + idProducto + ", nameProducto=" + nombreProducto + ", precioProducto=" + precioProducto
-				+ ", fechaCreacion=" + fechaCreacionP + ", fechaVencimiento=" + fechaVencimientoP + 
-				", descripcion=" + descripcionP + ", tipo="+ tipo+ ", insumos= "+insumo+"]";
+				+ ", fechaCreacion=" + fechaCreacionP + ", fechaVencimiento="  + ", descripcion=" + descripcionP + ", tipo="+ 
+				tipo+ ", insumos= "+insumo.size() +"]";
 	}
 
 }

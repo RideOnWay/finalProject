@@ -1,11 +1,15 @@
 package com.sugggarCoffe.sub.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -28,7 +32,7 @@ public class Insumo {
     
     @Column(name="fechaCreacionInsumo")
     private LocalDate fechaCreacionInsumo;
-    
+   
     @Column(name="fechaVencimientoInsumo")
     private LocalDate fechaVencimientoInsumo;
     
@@ -36,12 +40,10 @@ public class Insumo {
     @JoinColumn(name="idProveedor")
     private Proveedor proveedor;
     
-    @Column(name="descripcionInsumo",  length=100)
-    private String descripcionInsumo;
+    private List<Producto> producto ;
     
-    @ManyToOne
-    @JoinColumn(name = "idProducto")
-    private Producto producto;
+    @Column(name="descripcionInsumo")
+    private String descripcionInsumo;
 
 	public Insumo() {
 		super();
@@ -57,7 +59,7 @@ public class Insumo {
 		this.fechaVencimientoInsumo = fechaVencimientoInsumo;
 		this.proveedor = proveedor;
 		this.descripcionInsumo = descripcionInsumo;
-		this.producto=producto;
+		
 	}
 
 	public Long getIdInsumo() {
@@ -124,20 +126,21 @@ public class Insumo {
 		this.descripcionInsumo = descripcionInsumo;
 	}
 
-	public Producto getProducto() {
-		return producto;
-	}
-
-	public void setProducto(Producto producto) {
-		this.producto = producto;
-	}
 
 	@Override
 	public String toString() {
 		return "Insumo [idInsumo=" + idInsumo + ", nombreInsumo=" + nombreInsumo + ", precioInsumo=" + precioInsumo
 				+ ", tipoInsumo=" + tipoInsumo + ", fechaCreacionInsumo=" + fechaCreacionInsumo
-				+ ", fechaVencimientoInsumo=" + fechaVencimientoInsumo + ", proveedor=" + proveedor
+				+ ", fechaVencimientoInsumo=" + fechaVencimientoInsumo + ", proveedor=" + proveedor.getIdProveedor()
 				+ ", descripcionInsumo=" + descripcionInsumo + ", producto="+ "]";
+	}
+
+	public List<Producto> getProducto() {
+		return producto;
+	}
+
+	public void setProducto(List<Producto> producto) {
+		this.producto = producto;
 	}
     
 

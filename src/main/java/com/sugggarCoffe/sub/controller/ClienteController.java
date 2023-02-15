@@ -1,4 +1,4 @@
-package com.sugggarCoffe.sub.Controller;
+package com.sugggarCoffe.sub.controller;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.sugggarCoffe.sub.Service.ClienteService;
 import com.sugggarCoffe.sub.model.Cliente;
+import com.sugggarCoffe.sub.service.ClienteService;
 
 @Controller
 public class ClienteController {

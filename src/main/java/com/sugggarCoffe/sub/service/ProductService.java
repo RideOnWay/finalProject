@@ -1,13 +1,15 @@
-package com.sugggarCoffe.sub.Service;
+package com.sugggarCoffe.sub.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.sugggarCoffe.sub.Repository.ProductoRepository;
 import com.sugggarCoffe.sub.model.Producto;
+import com.sugggarCoffe.sub.model.Usuario;
+import com.sugggarCoffe.sub.repository.ProductoRepository;
 
 @Service
 public class ProductService {
@@ -34,6 +36,17 @@ public class ProductService {
 	    
 	    public List<Producto> listarProducto(){
 	    	return (List<Producto>)productoRepositorio.findAll();
+	    }
+	    
+	    public List<Producto> listarProductoxTipo(String tipo){
+	    	List<Producto> todo =(List<Producto>)productoRepositorio.findAll();
+	    	List<Producto> drink = new ArrayList<Producto>();
+	    	for(Producto bebida:todo) {
+	    		if(bebida.getTipo().equalsIgnoreCase(tipo)) {
+	    			drink.add(bebida);
+	    		}
+	    	}	
+	    	return drink;
 	    }
 	    
 

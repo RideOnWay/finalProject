@@ -90,7 +90,7 @@ function newtab() {
 
 }
 
-// new form and all its atributes
+// new form and all its atributes 
 function creaform(inc) {
   let formu = document.getElementById("formulario");
   let newformu = formu.cloneNode(true);
@@ -132,7 +132,7 @@ function creaform(inc) {
 
 }
 
-//new list with drinks or snacks objects
+//new list with drinks or snacks objects  aqui se generan las tablas de los productos seleccionados
 async function enlistar(selectid, tableid, num) {
   let auz;
   let entrada = document.getElementById(selectid).value;
@@ -148,14 +148,14 @@ async function enlistar(selectid, tableid, num) {
   if (entrada != "") {
     const tr = document.createElement("tr");
     tr.id = "fila" + aux;
-    tr.setAttribute('onclick', 'thear(event)');
+    tr.setAttribute('onclick', 'thear(event)');   
     const table = document.querySelector(tableid);
     table.appendChild(tr);
 
-    document.getElementById(tr.id).innerHTML = "<td id='column" + aux + 1 + "'></td> <td class='precio" + num + "' id ='column" + aux + 2 + "'></td> <td id='column" + aux + 3 + "'></td>"
+    document.getElementById(tr.id).innerHTML = "<td id='column" + aux + 1 + "'></td><td th:text='${producto.precioProducto}'class='precio" + num + "' id ='column" + aux + 2 + "'> <td id='column" + aux + 3 + "'></td>"
 
     document.getElementById('column' + aux + 1).innerHTML = entrada;
-    document.getElementById('column' + aux + 2).innerHTML = await price(entrada, auz);
+    document.getElementById('column' + aux + 2).innerHTML =  "<td th:text='${producto.precioProducto}'></td>"; //await price(entrada, auz);<td class='precio" + num + "' id ='column" + aux + 2 + "'></td>                        
     document.getElementById('column' + aux + 3).innerHTML = "<input type='number' class='price' onchange='multi(event)' value='1'> ";
 
   }
@@ -164,7 +164,7 @@ async function enlistar(selectid, tableid, num) {
 
 }
 
-//call the json archives to give price to list
+/*call the json archives to give price to list
 async function fetchExam(auz) {
 
   if (auz == 1) {
@@ -196,7 +196,7 @@ async function fetchExam(auz) {
 async function price(intr, auz) {
   let parts = await fetchExam(auz);
   return parts[intr];
-}
+}*/
 
 //erase the lists, drink and snack
 function eraseall(table1, table2) {

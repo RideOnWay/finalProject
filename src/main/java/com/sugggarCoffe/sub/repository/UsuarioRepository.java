@@ -1,4 +1,4 @@
-package com.sugggarCoffe.sub.Repository;
+package com.sugggarCoffe.sub.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
