@@ -1,5 +1,6 @@
 package com.sugggarCoffe.sub.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -8,13 +9,16 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table
-public class Venta {
+public class Venta implements Serializable{
+
+	private static final long serialVersionUID = 4253329364189506127L;
 
 	@Id
     @Column(name="idVenta")
@@ -22,13 +26,17 @@ public class Venta {
 	
 	@ManyToOne
     @JoinColumn(name="idCliente")
-    private Cliente cliente;
+    private Cliente idCliente;
     
 	@ManyToOne
     @JoinColumn(name="idUsuario")
-    private Usuario usuario;
-    
-    @Column(name="precioTotal")
+    private Usuario idUsuario;
+	
+	@ManyToMany
+    @JoinTable(name="venta_producto")
+    private List<Producto> producto;
+
+	@Column(name="precioTotal")
     private int precioTotal;
     
     @Column(name="fechaVenta")
@@ -42,35 +50,39 @@ public class Venta {
 
     //constructores
 	public Venta() {
-		super();
+		
 	}
 
-	public Venta(Long idVenta, Cliente cliente, Usuario usuario, int precioTotal,
+	public Venta(Long idVenta, Cliente idCliente, Usuario idUsuario, List<Producto> producto, int precioTotal,
 			LocalDate fechaVenta, LocalTime horaVenta, String observacion) {
 		super();
 		this.idVenta = idVenta;
-
-		this.cliente = cliente;
-		this.usuario = usuario;
+		this.idCliente = idCliente;
+		this.idUsuario = idUsuario;
+		this.producto = producto;
 		this.precioTotal = precioTotal;
 		this.fechaVenta = fechaVenta;
 		this.horaVenta = horaVenta;
 		this.observacion = observacion;
+		this.producto=producto;
 	}
 
-	//setters and getters
+
+
 	public Long getIdVenta() {
 		return idVenta;
 	}
 
-	
-
-	public Cliente getCliente() {
-		return cliente;
+	public Cliente getIdCliente() {
+		return idCliente;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public Usuario getIdUsuario() {
+		return idUsuario;
+	}
+
+	public List<Producto> getProducto() {
+		return producto;
 	}
 
 	public int getPrecioTotal() {
@@ -93,14 +105,16 @@ public class Venta {
 		this.idVenta = idVenta;
 	}
 
-	
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setIdCliente(Cliente idCliente) {
+		this.idCliente = idCliente;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setIdUsuario(Usuario idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public void setProducto(List<Producto> producto) {
+		this.producto = producto;
 	}
 
 	public void setPrecioTotal(int precioTotal) {
@@ -119,11 +133,12 @@ public class Venta {
 		this.observacion = observacion;
 	}
 
-	//tostring
 	@Override
 	public String toString() {
-		return "Venta [idVenta=" + idVenta + ", producto="  + ", cliente=" + cliente + ", usuario=" + usuario
+		return "Venta [idVenta=" + idVenta + ", idCliente=" + idCliente + ", idUsuario=" + idUsuario + ", producto="
 				+ ", precioTotal=" + precioTotal + ", fechaVenta=" + fechaVenta + ", horaVenta=" + horaVenta
 				+ ", observacion=" + observacion + "]";
 	}
+
+	
 }

@@ -41,13 +41,15 @@ public class Producto implements Serializable{
     @ManyToMany
     @JoinTable(name = "producto_insumo")
     private List<Insumo> insumo;
+    
+    private List<Venta> venta;
 
 	public Producto() {
 		
 	}
 
 	public Producto(Long idProducto, String nameProduct, int precioProducto, LocalDate fechaCreacionP,String tipo,
-			Proveedor proveedor, String descripcionP,List<Insumo> insumo) {
+			Proveedor proveedor, String descripcionP,List<Insumo> insumo,List<Venta> venta) {
 		super();
 		this.idProducto = idProducto;
 		this.nombreProducto = nameProduct;
@@ -56,6 +58,15 @@ public class Producto implements Serializable{
 		this.fechaCreacionP = fechaCreacionP;	
 		this.descripcionP = descripcionP;
 		this.insumo=insumo;
+		this.venta=venta;
+	}
+	
+	public List<Venta> getVenta() {
+		return venta;
+	}
+
+	public void setVenta(List<Venta> venta) {
+		this.venta = venta;
 	}
 
 	public Long getIdProducto() {

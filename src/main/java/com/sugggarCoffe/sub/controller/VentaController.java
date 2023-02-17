@@ -1,5 +1,6 @@
 package com.sugggarCoffe.sub.controller;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.sugggarCoffe.sub.model.Producto;
 import com.sugggarCoffe.sub.model.Venta;
 import com.sugggarCoffe.sub.service.ProductService;
+import com.sugggarCoffe.sub.service.UsuarioService;
 import com.sugggarCoffe.sub.service.VentaService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class VentaController {
@@ -24,23 +28,32 @@ public class VentaController {
 	private VentaService ventaService;
 	
 	@Autowired
-	private ProductService productoService; 
-
-	@PostMapping("/listVenta")
+	private ProductService productoService;
+	
+	@Autowired
+	private UsuarioService usuarioService;
+	
+	
+	@PostMapping("/venta")
 	public String newVenta(@ModelAttribute Venta venta) {
 		ventaService.createVenta(venta);
-		return "redirect:/listVenta";
+		return "redirect:/venta";
 	}
 	
 	@GetMapping("/venta")
-	public String getAllVenta(Model model) {
+	public String getAllVenta(Model model,HttpSession session) {
+		
 		List<Venta> listVenta  =ventaService.listarVenta();
 		List<Producto> listProdrink  =productoService.listarProductoxTipo("Bebida");
 		List<Producto> listProsnack  =productoService.listarProductoxTipo("snack");
+		String nombreUsuario =usuarioService.getCurrentUsername();
+		Long idUsuario=usuarioService.getCurrentIdUsuario();
 		try {
 		      model.addAttribute("listVenta", listVenta);
 		      model.addAttribute("listProdrink", listProdrink);
 		      model.addAttribute("listProsnack", listProsnack);
+		      model.addAttribute("nombreUsuario",nombreUsuario);
+		      model.addAttribute("idUsuario",idUsuario);
 		    } catch (Exception e) {
 		      model.addAttribute("message", e.getMessage());
 		     

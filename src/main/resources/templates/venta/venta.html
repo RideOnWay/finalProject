@@ -9,28 +9,27 @@
 <link rel="stylesheet" href="styles/styleventa2.css">
 <script src="js/funcionVentas.js"></script>
 
-<title>ventas</title>
+<title>Ventas</title>
 </head>
 
 <body onload="easyTabs()">
 	<header>
 		<h1>Ventas</h1>
-		<img src="images/vecteezy_coffee-logo-vector_.jpg" alt=""
-			id="main_logo">
+		<img src="images/vecteezy_coffee-logo-vector_.jpg" alt="" id="main_logo">
 	</header>
 
-	<div id="wrapper">
-		<div id="erasetab" ondrop="drop(event)" ondragover="allowDrop(event)">
+		<div id="wrapper">
+			<div id="erasetab" ondrop="drop(event)" ondragover="allowDrop(event)">
 			<img src="./images/basura.png" id="bote">
 		</div>
 
-		<div id="nomempl">NOMBRE DEL EMPLEADO</div>
+		<div id="nomempl" >Hola, <span th:text="${nombreUsuario}"></span></div>
 
 		<menu>
 
 			<span id="fecha">
-				<div id="dia"></div>
-				<div id="hora"></div>
+				<div id="diaE"></div>
+				<div id="horaE"></div>
 			</span>
 
 			<nav>
@@ -46,20 +45,30 @@
 		</menu>
 
 		<section class="sec" id="forms">
-			<form class="t-form selected" id="form1" index="1" method="post" th:action="@{/pedido}" th:object="${venta}">
+		<!-- /////////////////////////////////////////////FORMULARIO//////////////////////////////////////////////////////////////////// -->
+			<form class="t-form selected" id="form1" index="1" method="post" th:action="@{/venta}" th:object="${venta}">
 				<div id="inform">
+					
+					<input type="hidden" name="idVenta" th:value="${idUsuario+10}">
+					<input type="hidden" name="idUsuario" th:value="${idUsuario}">
+					<input type="hidden" id="dia" name="fechaVenta">
+					<input type="hidden" id="hora" name="horaVenta">
+							
 					<div id="drinkContent">
 						<div id="drinks">
 							Escoge las bebidas: 
-							<select id="drinkList1" onchange="enlistar('drinkList1','#drinktable1',1)" th:object="${producto}" name="producto">
+							<select id="drinkList1" onchange="enlistar('drinkList1','#drinktable1',1,'listnameB','listPrecioB','listidB')" th:object="${producto}" name="producto">
 								<option value=""></option>
 								<option th:each="producto: ${listProdrink}" th:value="${producto.nombreProducto}" th:text="${producto.nombreProducto}" />
 							</select>
 
-							<ul  id="listPrecioB">
+							<ul  id="listidB" style="display: none;">
+								<li th:each="producto:${listProdrink}" th:text="${producto.idProducto}" ></li>
+							</ul>
+							<ul  id="listnameB" style="display: none;">
 								<li th:each="producto:${listProdrink}" th:text="${producto.nombreProducto}"></li>
 							</ul>
-							<ul  id="listPrecioB">
+							<ul  id="listPrecioB" style="display: none;">
 								<li th:each="producto:${listProdrink}" th:text="${producto.precioProducto}"></li>
 							</ul>
 
@@ -73,15 +82,18 @@
 					<div>
 						<div id="snacks">
 							Escoge los Snacks: 
-							<select id="snacklist1" onchange="enlistar('snacklist1','#tablesnack1',1)" th:object="${producto}" name="producto">
+							<select id="snacklist1" onchange="enlistar('snacklist1','#tablesnack1',1,'listnameS','listPrecioS','listidS')" th:object="${producto}" name="producto">
 								<option value=""></option>
 								<option th:each="producto: ${listProsnack}" th:value="${producto.nombreProducto}" th:text="${producto.nombreProducto}" />
 							</select>
 
-							<ul  id="listPrecioS">
+							<ul  id="listidS" style="display: none;">
+								<li th:each="producto:${listProsnack}" th:text="${producto.idProducto}" ></li>
+							</ul>
+							<ul  id="listnameS" style="display: none;">
 								<li th:each="producto:${listProsnack}" th:text="${producto.nombreProducto}"></li>
 							</ul>
-							<ul  id="listPrecioS">
+							<ul  id="listPrecioS" style="display: none;">
 								<li th:each="producto:${listProsnack}" th:text="${producto.precioProducto}"></li>
 							</ul>
 						</div>
@@ -93,58 +105,41 @@
 					</div>
 
 					<div id="botones">
+						
+							<button type="button" id="borrar1" onclick="erasetab()">Borrar</button>
+							<button type="button" id="erase1" onclick="eraseall('drinktable1','tablesnack1')">Borrar todo</button>
 						<div id="idto">
 							<button type="button" id="total1" onclick="totales('.precio1','latotal1')">Total</button>
-							<label for="" id="latotal1"> Total</label>
-
-						</div>
-						<button type="button" id="borrar1" onclick="erasetab()">Borrar</button>
-						<button type="button" id="erase1" onclick="eraseall('drinktable1','tablesnack1')">Borrar
-							todo</button>
-						<button type="submit" id="ok" >Guardar</button>
+							<label for="" id="latotal1" name="precioTotal"> </label>	
+						</div>				
+							<button type="submit" >Guardar</button>					
 					</div>
 				</div>
 			</form>
 
+<!-- ------------------------------------------------------- CAMBIO DE FORMULARIO--------------------------------------------------------->
 
-
-
-
-
-
-
-
-
-
-
-			<form action="" class="t-form" id="form2" index="2">
+			<form action="" class="t-form" id="form2" index="2" method="post" th:action="@{/venta}" th:object="${venta}">
 				<div id="inform">
 					<div id="drinkContent">
 						<div id="drinks">
-							<select id="drinkList2"
-								onchange="enlistar('drinkList2','#drinktable2',2)">
+							Escoge las bebidas: 
+							<select id="drinkList2" onchange="enlistar('drinkList2','#drinktable2',2,'listnameB','listPrecioB','listidB')" th:object="${producto}" name="producto">
 								<option value=""></option>
-								<option value="Tinto">Tinto</option>
-								<option value="Capuchino">Capuchino</option>
-								<option value="Aromatica">Aromatica</option>
-								<option value="Cafe">Cafe</option>
-								<option value="Mocachino">mocachino</option>
-								<option value="Milo">Milo</option>
-								<option value="Carajillo">Carajillo</option>
-								<option value="Leche">Leche</option>
-								<option value="Matte">Matte</option>
-								<option value="Turko">turko</option>
+								<option th:each="producto: ${listProdrink}" th:value="${producto.nombreProducto}" th:text="${producto.nombreProducto}" />
 							</select>
-						</div>
-						<div id="vasos" onchange="">
-							<select name="" id="">
-								<option value=""></option>
-								<option value="">mini</option>
-								<option value="">medio</option>
-								<option value="">grande</option>
-							</select>
-						</div>
+							
+							<ul  id="listidB" style="display: none;">
+								<li th:each="producto:${listProdrink}" th:text="${producto.idProducto}"></li>
+							</ul>
+							<ul  id="listnameB" style="display: none;">
+								<li th:each="producto:${listProdrink}" th:text="${producto.nombreProducto}"></li>
+							</ul>
+							<ul  id="listPrecioB" style="display: none;">
+								<li th:each="producto:${listProdrink}" th:text="${producto.precioProducto}"></li>
+							</ul>
 					</div>
+				</div>
 
 					<table id="drinktable2">
 
@@ -155,162 +150,135 @@
 				</div>
 
 				<div>
-					<div id="snacks">
-						<select id="snacklist2"
-							onchange="enlistar('snacklist2','#tablesnack2',2)">
-							<option value=""></option>
-							<option value="Galletadeavena">Galleta de avena</option>
-							<option value="Calentanos">Calentanos</option>
-							<option value="Galletasdecoco">Galletas de coco</option>
-							<option value="Achiras">Achiras</option>
-							<option value="Frutaseca">Fruta seca</option>
-							<option value="chilets">chilets</option>
-							<option value="cigarrillo">cigarrillos</option>
-							<option value="Mantecada">Mantecada</option>
-							<option value="Torta">Torta</option>
-							<option value="Bocadillo">Bocadillo</option>
-						</select>
+					<div id="snacks">					
+					Escoge los Snacks: 
+							<select id="snacklist2" onchange="enlistar('snacklist2','#tablesnack2',2,'listnameS','listPrecioS','listidS')" th:object="${producto}" name="producto">
+								<option value=""></option>
+								<option th:each="producto: ${listProsnack}" th:value="${producto.nombreProducto}" th:text="${producto.nombreProducto}" />
+							</select>
+							
+							<ul  id="listidS" style="display: none;">
+								<li th:each="producto:${listProsnack}" th:text="${producto.idProducto}"></li>
+							</ul>
+							<ul  id="listnameS" style="display: none;">
+								<li th:each="producto:${listProsnack}" th:text="${producto.nombreProducto}"></li>
+							</ul>
+							<ul  id="listPrecioS" style="display: none;">
+								<li th:each="producto:${listProsnack}" th:text="${producto.precioProducto}"></li>
+							</ul>
+						
 					</div>
 
-					<table id="tablesnack2">
-
-					</table>
-
-
+					<table id="tablesnack2"></table>
 					<label> Total snacks</label>
 
 				</div>
 
 				<div id="botones">
+					
+						<button type="button" id="borrar2" onclick="erasetab()">Borrar</button>
+						<button type="button" id="erase2" onclick="eraseall('drinktable2','tablesnack2')">Borrar todo</button>
 					<div id="idto">
-						<button type="button" id="total2"
-							onclick="totales('.precio2','latotal2')">Total</button>
-						<label for="" id="latotal2"> Total</label>
-
+						<button type="button" id="total2" onclick="totales('.precio2','latotal2')">Total</button>
+						<label for="" id="latotal2" name="precioTotal"> </label>
 					</div>
-					<button type="button" id="ok" onclick="">Guardar</button>
-					<button type="button" id="borrar2" onclick="erasetab()">Borrar</button>
-					<button type="button" id="erase2"
-						onclick="eraseall('drinktable2','tablesnack2')">Borrar
-						todo</button>
+						<button type="button" id="ok" onclick="">Guardar</button>
 				</div>
 			</form>
 
+<!-- ------------------------------------------------------- CAMBIO DE FORMULARIO--------------------------------------------------------->
 
-
-
-
-
-
-
-			<form action="" class="t-form" id="form3" index="3">
+			<form action="" class="t-form" id="form3" index="3" method="post" th:action="@{/venta}" th:object="${venta}">
 				<div id="inform">
 					<div id="drinkContent">
 						<div id="drinks">
-							<select id="drinkList3"
-								onchange="enlistar('drinkList3','#drinktable3',3)">
+							Escoge las bebidas: 
+							<select id="drinkList3" onchange="enlistar('drinkList3','#drinktable3',3,'listnameB','listPrecioB','listidB')" th:object="${producto}" name="producto">
 								<option value=""></option>
-								<option value="Tinto">Tinto</option>
-								<option value="Capuchino">Capuchino</option>
-								<option value="Aromatica">Aromatica</option>
-								<option value="Cafe">Cafe</option>
-								<option value="Mocachino">mocachino</option>
-								<option value="Milo">Milo</option>
-								<option value="Carajillo">Carajillo</option>
-								<option value="Leche">Leche</option>
-								<option value="Matte">Matte</option>
-								<option value="Turko">turko</option>
+								<option th:each="producto: ${listProdrink}" th:value="${producto.nombreProducto}" th:text="${producto.nombreProducto}" />
 							</select>
-						</div>
-						<div id="vasos" onchange="">
-							<select name="" id="">
-								<option value=""></option>
-								<option value="">mini</option>
-								<option value="">medio</option>
-								<option value="">grande</option>
-							</select>
-						</div>
+							<ul  id="listidB" style="display: none;">
+								<li th:each="producto:${listProdrink}" th:text="${producto.idProducto}"></li>
+							</ul>
+
+							<ul  id="listnameB" style="display: none;">
+								<li th:each="producto:${listProdrink}" th:text="${producto.nombreProducto}"></li>
+							</ul>
+							<ul  id="listPrecioB" style="display: none;">
+								<li th:each="producto:${listProdrink}" th:text="${producto.precioProducto}"></li>
+							</ul>
+						
 					</div>
+				</div>
 
 					<table id="drinktable3">
 
 					</table>
 
 					<label id="labdrink"> Total Bebidas</label>
-					<p id="camino">formulario tres</p>
-
 
 				</div>
 
 				<div>
 					<div id="snacks">
-						<select id="snacklist3"
-							onchange="enlistar('snacklist3','#tablesnack3',3)">
-							<option value=""></option>
-							<option value="Galletadeavena">Galleta de avena</option>
-							<option value="Calentanos">Calentanos</option>
-							<option value="Galletasdecoco">Galletas de coco</option>
-							<option value="Achiras">Achiras</option>
-							<option value="Frutaseca">Fruta seca</option>
-							<option value="chilets">chilets</option>
-							<option value="cigarrillo">cigarrillos</option>
-							<option value="Mantecada">Mantecada</option>
-							<option value="Torta">Torta</option>
-							<option value="Bocadillo">Bocadillo</option>
-						</select>
-					</div>
+						Escoge los Snacks: 
+							<select id="snacklist3" onchange="enlistar('snacklist3','#tablesnack3',3,'listnameS','listPrecioS','listidS')" th:object="${producto}" name="producto">
+								<option value=""></option>
+								<option th:each="producto: ${listProsnack}" th:value="${producto.nombreProducto}" th:text="${producto.nombreProducto}" />
+							</select>
+							<ul  id="listidS" style="display: none;">
+								<li th:each="producto:${listProsnack}" th:text="${producto.idProducto}"></li>
+							</ul>
 
-					<table id="tablesnack3">
-
-					</table>
-
-
-					<label> Total snacks</label>
-
+							<ul  id="listnameS" style="display: none;">
+								<li th:each="producto:${listProsnack}" th:text="${producto.nombreProducto}"></li>
+							</ul>
+							<ul  id="listPrecioS" style="display: none;">
+								<li th:each="producto:${listProsnack}" th:text="${producto.precioProducto}"></li>
+							</ul>
+						
+					</div>	
+						<table id="tablesnack3"></table>
+						<label> Total snacks</label>
 				</div>
 
 				<div id="botones">
+					
+					
+						<button type="button" id="borrar3" onclick="erasetab()">Borrar</button>
+						<button type="button" id="erase3" onclick="eraseall('drinktable3','tablesnack3')">Borrar Todo</button>
 					<div id="idto">
-						<button type="button" id="total3"
-							onclick="totales('.precio3','latotal3')">Total</button>
-						<label for="" id="latotal3"> Total</label>
-
+						<button type="button" id="total3" onclick="totales('.precio3','latotal3')">Total</button>
+						<label for="" id="latotal3" name="precioTotal"> </label>
 					</div>
-					<button type="button" id="ok" onclick="">Guardar</button>
-					<button type="button" id="borrar3" onclick="erasetab()">Borrar</button>
-					<button type="button" id="erase3"
-						onclick="eraseall('drinktable3','tablesnack3')">Borrar
-						todo</button>
+						<button type="button" id="ok" onclick="">Guardar</button>
 				</div>
 			</form>
+			
+<!-- ------------------------------------------------------- CAMBIO DE FORMULARIO--------------------------------------------------------->			
 
 			<form action="" id="formulario">
 				<div id="inform">
 					<div id="drinkContent">
 						<div id="drinks">
-							Escoge las bebidas: <select id="drinkList"
-								onchange="enlistar('drinkList','#drinktable',0)">
+							Escoge las bebidas: 
+							<select id="drinkList" onchange="">
 								<option value=""></option>
-								<option value="Tinto">Tinto</option>
-								<option value="Capuchino">Capuchino</option>
-								<option value="Aromatica">Aromatica</option>
-								<option value="Cafe">Cafe</option>
-								<option value="Mocachino">mocachino</option>
-								<option value="Milo">Milo</option>
-								<option value="Carajillo">Carajillo</option>
-								<option value="Leche">Leche</option>
-								<option value="Matte">Matte</option>
-								<option value="Turko">turko</option>
+								<option th:each="producto: ${listProdrink}" th:value="${producto.nombreProducto}" th:text="${producto.nombreProducto}" />
 							</select>
+							<ul  id="listidB" style="display: none;">
+								<li th:each="producto:${listProdrink}" th:text="${producto.idProducto}"></li>
+							</ul>
+							
+							<ul  id="listnameB" style="display: none;">
+								<li th:each="producto:${listProdrink}" th:text="${producto.nombreProducto}"></li>
+							</ul>
+							<ul  id="listPrecioB" style="display: none;">
+								<li th:each="producto:${listProdrink}" th:text="${producto.precioProducto}"></li>
+							</ul>
+							
 						</div>
-						<div id="vasos" onchange="">
-							<select name="" id="" onchange="chnprice()">
-								<option value=""></option>
-								<option value="">mini</option>
-								<option value="">medio</option>
-								<option value="">grande</option>
-							</select>
-						</div>
+				
 					</div>
 
 					<table id="drinktable"></table>
@@ -323,20 +291,21 @@
 
 				<div>
 					<div id="snacks">
-						Escoge los snacks: <select id="snacklist"
-							onchange="enlistar('snacklist','#tablesnack')">
+						Escoge los snacks: 
+						<select id="snacklist" onchange="">
 							<option value=""></option>
-							<option value="Galletadeavena">Galleta de avena</option>
-							<option value="Calentanos">Calentanos</option>
-							<option value="Galletasdecoco">Galletas de coco</option>
-							<option value="Achiras">Achiras</option>
-							<option value="Frutaseca">Fruta seca</option>
-							<option value="chilets">chilets</option>
-							<option value="cigarrillo">cigarrillos</option>
-							<option value="Mantecada">Mantecada</option>
-							<option value="Torta">Torta</option>
-							<option value="Bocadillo">Bocadillo</option>
+								<option th:each="producto: ${listProsnack}" th:value="${producto.nombreProducto}" th:text="${producto.nombreProducto}" />
 						</select>
+						<ul  id="listidS" style="display: none;">
+								<li th:each="producto:${listProsnack}" th:text="${producto.idProducto}"></li>
+							</ul>
+						
+						<ul  id="listnameS" style="display: none;">
+								<li th:each="producto:${listProsnack}" th:text="${producto.nombreProducto}"></li>
+							</ul>
+							<ul  id="listPrecioS" style="display: none;">
+								<li th:each="producto:${listProsnack}" th:text="${producto.precioProducto}"></li>
+							</ul>
 					</div>
 
 					<table id="tablesnack">
@@ -347,17 +316,15 @@
 				</div>
 
 				<div id="botones">
+					
+						<button type="button" id="borrar">Borrar</button>
+						<button type="button" id="eraseAll" onclick="eraseall()"> Borrar todo</button>
 					<div id="idto">
-						<button type="button" id="total" onclick="totales('.precio')">Total</button>
-						<label for="" id="latotal"> Total</label>
-
+						<button type="button" id="total" onclick="">Total</button>
+						<label for="" id="latotal" name="precioTotal"></label>
 					</div>
-					<button type="button" id="ok">Guardar</button>
-					<button type="button" id="borrar">Borrar</button>
-					<button type="button" id="erase" onclick="eraseall()">
-						Borrar todo</button>
+						<button type="button" id="ok">Guardar</button>
 				</div>
-
 			</form>
 		</section>
 		<aside></aside>

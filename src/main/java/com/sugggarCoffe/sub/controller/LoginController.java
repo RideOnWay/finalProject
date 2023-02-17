@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.sugggarCoffe.sub.model.Usuario;
 import com.sugggarCoffe.sub.service.UsuarioService;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -26,16 +25,15 @@ public class LoginController {
 	  }
 
 	  @PostMapping("/log")
-	  public String usuarioSubmit(@ModelAttribute Usuario usuario, HttpServletRequest request) {
+	  public String usuarioSubmit(@ModelAttribute Usuario usuario,HttpSession session) {
 		  Usuario foundUser = usuarioService.findByUsernameAndPassword(usuario.getCorreoUsuario(), usuario.getContrasenaUsuario());
-	    if (foundUser != null) {
-	    	
-	    	HttpSession session = request.getSession();
-	        session.setAttribute("nombreUsuario", usuario);
+	    if (foundUser != null) {	 
+	    	session.setAttribute("usuarioNombre", foundUser.getNombreUsuario());
+	    	session.setAttribute("idUsuario", foundUser.getIdUsuario());
 	        if(foundUser.getRol().getRolName().equalsIgnoreCase("ADMIN")) {
 	        	return "inventario/gestionInventario";
 	        }else {
-	        	return "venta/venta";
+	        	return "redirect:/venta";
 	        }	 
 	    
 	    } else {

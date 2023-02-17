@@ -9,12 +9,17 @@ import org.springframework.stereotype.Service;
 import com.sugggarCoffe.sub.model.Usuario;
 import com.sugggarCoffe.sub.repository.UsuarioRepository;
 
+import jakarta.servlet.http.HttpSession;
+
 @Service
 public class UsuarioService {
 
 	@Autowired
 	private final UsuarioRepository usuarioRepositorio;
-
+	
+	@Autowired
+	  private HttpSession httpSession;
+	
 
 	    public Usuario getUsuario(Long id) throws NotFoundException {
 	        return usuarioRepositorio.findById(id).orElseThrow(NotFoundException::new);
@@ -44,26 +49,23 @@ public class UsuarioService {
 		public Usuario findByUsernameAndPassword(String usuarioUsuario, String contrasenaUsuario) {
 			List<Usuario> verUser=(List<Usuario>)usuarioRepositorio.findAll();
 			for(Usuario temp:verUser) {
-				if(temp.getNombreUsuario().contentEquals(usuarioUsuario) && temp.getContrasenaUsuario().contentEquals(contrasenaUsuario)) {
+				if(temp.getCorreoUsuario().contentEquals(usuarioUsuario) && temp.getContrasenaUsuario().contentEquals(contrasenaUsuario)) {
 					return temp;
 				}
 			}
-			return null;
-			
+			return null;	
 		}
+		
+		public String getCurrentUsername() {
+		    return (String) httpSession.getAttribute("usuarioNombre");
+		  }
+		
+		public Long getCurrentIdUsuario() {
+		    return (Long) httpSession.getAttribute("idUsuario");
+		  }
+		
+		
 
-//		@Override
-//		public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//			Usuario usuario ;
-//			List<Usuario> verUser=(List<Usuario>)usuarioRepositorio.findAll();
-//			for(Usuario temp:verUser) {
-//				if(temp.getNombreUsuario().contentEquals(username)){
-//					usuario=temp;
-//					return new Usuario(usuario.getUsername(), usuario.getPassword(), usuario.getRol());
-//				}
-//			}
-//			
-//			return null;
-//		}
+
 	    
 }

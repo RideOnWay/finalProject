@@ -59,9 +59,38 @@ function hora() {
   if (mhoy < 10) { mhoy = "0" + mhoy };
   if (min < 10) { min = "0" + min };
 
-  document.getElementById("dia").innerHTML = dhoy + "/" + mhoy + "/" + ahoy;
+  document.getElementById("dia").innerHTML = ahoy + "-" + mhoy + "-" + dhoy ;
   document.getElementById("hora").innerHTML = hour + ":" + min;
+  
+  document.getElementById("diaE").innerHTML = dhoy + "/" + mhoy + "/" + ahoy;
+  document.getElementById("horaE").innerHTML = hour + ":" + min;
   var time = setTimeout(function () { hora() }, 500);
+}
+
+//oculta las pestañas no seleccionadas
+let last;
+function easyTabs1() {
+  var clicks = document.querySelectorAll('.t-tab');
+  for (let i = 0; i < clicks.length; i++) {
+    if (i != clicks.length - 1) {
+      clicks[i].onclick = function () {
+        last = undefined;
+        var tSiblings = this.parentElement.children;
+        for (let i = 0; i < tSiblings.length; i++) {
+          tSiblings[i].className = "t-tab";
+        }
+        this.className = "t-tab selected";
+        var idx = this.getAttribute("index");
+        var cSiblings = document.querySelectorAll('.t-form');
+        for (let i = 0; i < cSiblings.length; i++) {
+          cSiblings[i].className = "t-form";
+          if (cSiblings[i].getAttribute("index") == idx) {
+            cSiblings[i].className = "t-form selected";
+          }
+        }
+      };
+    }
+  }
 }
 
 // new tab, begin on 4 
@@ -103,19 +132,19 @@ function creaform(inc) {
 
   let chnselect = document.getElementById('drinkList');
   chnselect.id = 'drinkList' + inc;
-  chnselect.setAttribute('onchange', "enlistar('drinkList" + inc + "','#drinktable" + inc + "','" + inc + "')");
+  chnselect.setAttribute('onchange', "enlistar('drinkList" + inc + "','#drinktable" + inc + "','" + inc + "','listnameB','listPrecioB','listidB')");
 
   let chntbldrk = document.getElementById('drinktable');
   chntbldrk.id = 'drinktable' + inc;
 
   let chnslcsnk = document.getElementById('snacklist');
   chnslcsnk.id = 'snacklist' + inc;
-  chnslcsnk.setAttribute('onchange', "enlistar('snacklist" + inc + "','#tablesnack" + inc + "','" + inc + "')");
+  chnslcsnk.setAttribute('onchange', "enlistar('snacklist" + inc + "','#tablesnack" + inc + "','" + inc + "','listnameS','listPrecioS','listidS')");
 
   let chntblsnk = document.getElementById('tablesnack');
   chntblsnk.id = 'tablesnack' + inc;
 
-  let chnbtt = document.getElementById('erase');
+  let chnbtt = document.getElementById('eraseAll');
   chnbtt.id = 'erase' + inc;
   chnbtt.setAttribute('onclick', "eraseall('" + chntbldrk.id + "','" + chntblsnk.id + "' )");
 
@@ -133,7 +162,7 @@ function creaform(inc) {
 }
 
 //new list with drinks or snacks objects  aqui se generan las tablas de los productos seleccionados
-async function enlistar(selectid, tableid, num) {
+async function enlistar(selectid, tableid, num, list1, list2,list3) {
   let auz;
   let entrada = document.getElementById(selectid).value;
   if (selectid.includes('drink')) {
@@ -152,11 +181,17 @@ async function enlistar(selectid, tableid, num) {
     const table = document.querySelector(tableid);
     table.appendChild(tr);
 
-    document.getElementById(tr.id).innerHTML = "<td id='column" + aux + 1 + "'></td><td th:text='${producto.precioProducto}'class='precio" + num + "' id ='column" + aux + 2 + "'> <td id='column" + aux + 3 + "'></td>"
+    document.getElementById(tr.id).innerHTML = "<td id='column" + aux + 4 + "'></td><td id='column" + aux + 1 + "'></td><td class='precio" + num + "' id ='column" + aux + 2 + "'> <td id='column" + aux + 3 + "'></td>"
 
+    const list01 = document.getElementById(list1);
+    const list02 = document.getElementById(list2);
+    const list03 = document.getElementById(list3);
+    
+	document.getElementById('column' + aux + 4).setAttribute('name',"producto");
+	document.getElementById('column' + aux + 4).innerHTML = await price(entrada,list01,list03);
     document.getElementById('column' + aux + 1).innerHTML = entrada;
-    document.getElementById('column' + aux + 2).innerHTML =  "<td th:text='${producto.precioProducto}'></td>"; //await price(entrada, auz);<td class='precio" + num + "' id ='column" + aux + 2 + "'></td>                        
-    document.getElementById('column' + aux + 3).innerHTML = "<input type='number' class='price' onchange='multi(event)' value='1'> ";
+    document.getElementById('column' + aux + 2).innerHTML = await price(entrada,list01,list02);                        
+    document.getElementById('column' + aux + 3).innerHTML = "<input type='number' class='price' onchange='sumaPrecio(event)' value='1'> ";
 
   }
   document.getElementById(selectid).value = "";
@@ -164,114 +199,68 @@ async function enlistar(selectid, tableid, num) {
 
 }
 
-/*call the json archives to give price to list
-async function fetchExam(auz) {
+//METODO QUE BUSCA EL PRECIO SEGUN EL PRODUCTO SELECCIONADO
+async function price(valor, lista1, lista2){
+                                                              // buscamos el índice del valor en la primera lista
+  const indice = Array.from(lista1.children).findIndex(
+    (elemento) => elemento.textContent === valor);
 
-  if (auz == 1) {
-    try {
-      const response = await fetch('http://localhost:8089/js/objetosCafe.json', {
-        method: 'GET',
-        credentials: 'same-origin'
-      });
-      const exam = await response.json();
-      return exam;
-    } catch (error) {
-      console.error(error);
-    }
+  if (indice !== -1) {
+                                                                // si el valor se encuentra en la primera lista, devolvemos el valor de la segunda lista en la misma posición
+    return lista2.children[indice].textContent;
   } else {
-    try {
-      const response = await fetch('http://localhost:8089/js/snacksobj.json', {
-        method: 'GET',
-        credentials: 'same-origin'
-      });
-      const exam = await response.json();
-      return exam;
-    } catch (error) {
-      console.error(error);
-    }
+                                                                // si el valor no se encuentra en la primera lista, devolvemos null
+    return null;
   }
 }
 
-//select the correct list to load it up
-async function price(intr, auz) {
-  let parts = await fetchExam(auz);
-  return parts[intr];
-}*/
-
 //erase the lists, drink and snack
-function eraseall(table1, table2) {
-  eraseall1(table1);
-  eraseall1(table2);
-
+function eraseall(valor4,valor3) {
+ 	eraseTable(valor4);
+	eraseTable(valor3);
 }
 
 //erase the list, drink or snack
-function eraseall1(valor4) {
-  const list = document.getElementById(valor4);
-  while (list.hasChildNodes()) {
-    list.removeChild(list.firstChild);
+function eraseTable(valor4) {
+  const listdrink = document.getElementById(valor4);
+  while (listdrink.hasChildNodes()) {
+    listdrink.removeChild(listdrink.firstChild);
   }
 }
 
-function erase(valor3) {
-  if (valor3.length > 0) {
-    for (let i = 0; i < valor3.length; i++) {
-      valor3[i].removeChild();
-    }
-  }
-}
-
-
-//oculta las pestañas no seleccionadas
-function easyTabs1() {
-
-  var clicks = document.querySelectorAll('.t-tab');
-  for (let i = 0; i < clicks.length; i++) {
-    if (i != clicks.length - 1) {
-      clicks[i].onclick = function () {
-        last = undefined;
-        var tSiblings = this.parentElement.children;
-        for (let i = 0; i < tSiblings.length; i++) {
-          tSiblings[i].className = "t-tab";
-        }
-        this.className = "t-tab selected";
-        var idx = this.getAttribute("index");
-        var cSiblings = document.querySelectorAll('.t-form');
-        for (let i = 0; i < cSiblings.length; i++) {
-          cSiblings[i].className = "t-form";
-          if (cSiblings[i].getAttribute("index") == idx) {
-            cSiblings[i].className = "t-form selected";
-          }
-        }
-      };
-    }
-  }
-}
-
-//last item selected
+//last item selected painted red
+let lastSelect;
 function thear(event) {
-  last = event.target.parentElement;
-  document.getElementById(last.id).style.background = 'red';
+	if(event.target.classList[0] != "price"){
+		lastSelect = event.target.parentElement;
+		let totale = document.querySelectorAll('td');
+ 		for (let t = 0; t < totale.length; t++) {
+    			totale[t].style.background='white';
+  		}
+  		for (let j = 0; j < lastSelect.children.length; j++) {
+    			lastSelect.children[j].style.background='red';
+  		}
+	} 
 }
 
 //remove the last item selected
 function erasetab() {
-  last.remove();
+  lastSelect.remove();
 }
 
-//get the total price of bill
-function totales(tdclass, lbltot) {
+//get the total price of bill, suma todos los precios ndependiente del tipo
+function totales(tdclass, labeltotal) {
   let suma = new Number();
   let totale = document.querySelectorAll(tdclass);
   for (let t = 0; t < totale.length; t++) {
     suma = parseInt(totale[t].innerHTML) + suma;
   }
-  document.getElementById(lbltot).innerText = suma;
+  document.getElementById(labeltotal).innerText = suma;
 }
 
 //add the number of items
 let sum2, active;
-function multi(event) {
+function sumaPrecio(event) {
   let sum3 = new Number();
   let sum1 = parseInt(event.target.value);
   let colum = event.target.parentElement.id;
@@ -301,9 +290,7 @@ function multi(event) {
   }
 }
 
-function chnprice() {
 
-}
 
 
 

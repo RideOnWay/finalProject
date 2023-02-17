@@ -5,7 +5,7 @@ tr{
 }
 
 tr:hover{
-    background-color: blue;
+    background-color: rgb(119, 118, 123);
     
 }
 
@@ -18,7 +18,7 @@ table{
 }
 
 table tr  {
-    color: rgb(247, 245, 244);
+    color: rgb(0, 0, 0);
     cursor: default;
-    background: #4308e6;
+    background: rgb(255, 255, 255);
   }

@@ -4,12 +4,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -50,7 +47,7 @@ public class Insumo {
 	}
 
 	public Insumo(Long idInsumo, String nombreInsumo, int precioInsumo, String tipoInsumo, LocalDate fechaCreacionInsumo,
-			LocalDate fechaVencimientoInsumo, Proveedor proveedor, String descripcionInsumo, Producto producto) {
+			LocalDate fechaVencimientoInsumo, Proveedor proveedor, String descripcionInsumo,  List<Producto> producto) {
 		this.idInsumo = idInsumo;
 		this.nombreInsumo = nombreInsumo;
 		this.precioInsumo = precioInsumo;
@@ -59,7 +56,7 @@ public class Insumo {
 		this.fechaVencimientoInsumo = fechaVencimientoInsumo;
 		this.proveedor = proveedor;
 		this.descripcionInsumo = descripcionInsumo;
-		
+		this.producto=producto;
 	}
 
 	public Long getIdInsumo() {
