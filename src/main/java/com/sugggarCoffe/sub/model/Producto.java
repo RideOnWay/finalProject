@@ -29,6 +29,9 @@ public class Producto implements Serializable{
     @Column(name="precioProducto")
     private int precioProducto;
     
+    @Column(name="cantidad", columnDefinition = "INT(2) DEFAULT 1")
+    private int cantidad;
+    
     @Column(name="tipo")
     private String tipo;
     
@@ -48,7 +51,7 @@ public class Producto implements Serializable{
 		
 	}
 
-	public Producto(Long idProducto, String nameProduct, int precioProducto, LocalDate fechaCreacionP,String tipo,
+	public Producto(Long idProducto, String nameProduct, int precioProducto,int cantidad, LocalDate fechaCreacionP,String tipo,
 			Proveedor proveedor, String descripcionP,List<Insumo> insumo,List<Venta> venta) {
 		super();
 		this.idProducto = idProducto;
@@ -59,8 +62,17 @@ public class Producto implements Serializable{
 		this.descripcionP = descripcionP;
 		this.insumo=insumo;
 		this.venta=venta;
+		this.cantidad=cantidad;
 	}
 	
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+
 	public List<Venta> getVenta() {
 		return venta;
 	}

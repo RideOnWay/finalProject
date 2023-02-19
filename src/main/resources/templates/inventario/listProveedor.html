@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Proveedores</title>
+<script th:src="@{/js/toEditAll.js}"></script>
 </head>
 <body>
 <h1> Proveedor nuevo</h1>
@@ -13,19 +14,19 @@
 		  <div align="center">
 			
 			 <form action="" class="firma"  method="post" th:object="${proveedor}" th:action="@{/listProveedor}">
-        	<p> id.:</p> <input type="text" name="idProveedor" id="">
+        	<p> id.:</p> <input type="text"  name="idProveedor" id="">
             <p> Proveedor/Razon social: </p> <input type="text" name="razonSocial" id="">
-            <p> Nombre contacto: </p> <input type="text" name="nombreContacto" id="">
-            <p> Fecha de creacion: </p> <input type="date" id="" name="fechaCreacionPr" >
-            <p> Correo: </p> <input type="text" name="correoProveedor" id="">
-            <p> Celular: </p> <input type="number" name="numeroProveedorP" id="">           
+            <p> Nombre contacto: </p> <input type="text"  name="nombreContacto" id="">
+            <p> Fecha de creacion: </p> <input type="date"  name="fechaCreacionPr" >
+            <p> Correo: </p> <input type="text"  name="correoProveedor" id="">
+            <p> Celular: </p> <input type="number"  name="numeroProveedorP" id="">           
             <p> Direccion: </p> <input type="text"  name="direccionProveedor" id="">
             <p> Productos: </p> <input type="text" name="productosProveedor" id="">
             <button type="submit">Guardar</button>
         </form>
 			
 		<h2>Listado de proveedores</h2>	
-			
+			<button type="button" id="borrar1" onclick="getValorAtributoP('name')">Editar</button>
 			<br />
 			<table border="1" >
 				<thead>
@@ -53,7 +54,7 @@
 						<td th:text="${proveedor.direccionProveedor}"></td>
 						<td th:text="${proveedor.productosProveedor}"></td>
 						<td> 
-							<a th:href="@{/proveedor/{id}/edit(id=${proveedor.idProveedor})}" class="edit">Edit</a>
+							<a th:href="@{/proveedor/{id}/edit(id=${proveedor.idProveedor})}" class="edit" >Edit</a>
 							<a th:href="@{/proveedor/{id}/delete(id=${proveedor.idProveedor})}" class="delete">Delete</a> 
 							
 					</tr>

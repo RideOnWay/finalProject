@@ -45,7 +45,7 @@ public class Venta implements Serializable{
     @Column(name="horaVenta")
     private LocalTime horaVenta;
      
-    @Column(name="observacion")
+    @Column(name="observacion",columnDefinition="sin novedad")
     private String observacion;
 
     //constructores

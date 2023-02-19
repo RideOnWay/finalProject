@@ -59,11 +59,11 @@ function hora() {
   if (mhoy < 10) { mhoy = "0" + mhoy };
   if (min < 10) { min = "0" + min };
 
-  document.getElementById("dia").innerHTML = ahoy + "-" + mhoy + "-" + dhoy ;
+  document.getElementById("dia").innerHTML = dhoy + "/" + mhoy + "/" + ahoy; 
   document.getElementById("hora").innerHTML = hour + ":" + min;
   
-  document.getElementById("diaE").innerHTML = dhoy + "/" + mhoy + "/" + ahoy;
-  document.getElementById("horaE").innerHTML = hour + ":" + min;
+  document.getElementById("diaE").innerHTML = ahoy + "-" + mhoy + "-" + dhoy ;
+  document.getElementById("horaE").innerHTML = hour + ":" + min + ":00";
   var time = setTimeout(function () { hora() }, 500);
 }
 
@@ -177,21 +177,22 @@ async function enlistar(selectid, tableid, num, list1, list2,list3) {
   if (entrada != "") {
     const tr = document.createElement("tr");
     tr.id = "fila" + aux;
-    tr.setAttribute('onclick', 'thear(event)');   
-    const table = document.querySelector(tableid);
+    tr.setAttribute('onclick', 'thear(event)');
+    
+  	const table = document.querySelector(tableid);
     table.appendChild(tr);
 
-    document.getElementById(tr.id).innerHTML = "<td id='column" + aux + 4 + "'></td><td id='column" + aux + 1 + "'></td><td class='precio" + num + "' id ='column" + aux + 2 + "'> <td id='column" + aux + 3 + "'></td>"
+    document.getElementById(tr.id).innerHTML = "<td id='column" + aux + 4 + "' ></td> <td id='column" + aux + 1 + "'></td><td class='precio" + num + "' id ='column" + aux + 2 + "'> <td id='column" + aux + 3 + "'></td>"
 
     const list01 = document.getElementById(list1);
     const list02 = document.getElementById(list2);
     const list03 = document.getElementById(list3);
     
-	document.getElementById('column' + aux + 4).setAttribute('name',"producto");
-	document.getElementById('column' + aux + 4).innerHTML = await price(entrada,list01,list03);
+	let idProducto=await price(entrada,list01,list03);
+	document.getElementById('column' + aux + 4).innerHTML = "<input type='number' value="+idProducto+ " readonly name='producto' class='nopaint'>";
     document.getElementById('column' + aux + 1).innerHTML = entrada;
     document.getElementById('column' + aux + 2).innerHTML = await price(entrada,list01,list02);                        
-    document.getElementById('column' + aux + 3).innerHTML = "<input type='number' class='price' onchange='sumaPrecio(event)' value='1'> ";
+    document.getElementById('column' + aux + 3).innerHTML = "<input type='number' class='nopaint' onchange='sumaPrecio(event)' value='1'>";
 
   }
   document.getElementById(selectid).value = "";
@@ -231,7 +232,7 @@ function eraseTable(valor4) {
 //last item selected painted red
 let lastSelect;
 function thear(event) {
-	if(event.target.classList[0] != "price"){
+	if(event.target.classList[0] != "nopaint"){
 		lastSelect = event.target.parentElement;
 		let totale = document.querySelectorAll('td');
  		for (let t = 0; t < totale.length; t++) {
@@ -255,7 +256,8 @@ function totales(tdclass, labeltotal) {
   for (let t = 0; t < totale.length; t++) {
     suma = parseInt(totale[t].innerHTML) + suma;
   }
-  document.getElementById(labeltotal).innerText = suma;
+  let sumatotal=document.getElementById(labeltotal);
+  sumatotal.setAttribute('value', suma);
 }
 
 //add the number of items

@@ -16,7 +16,7 @@
 	            <label for="name">Seleccione los insumos:</label>  
 	           	<select multiple class="form-control" th:object="${insumo}" name="insumo">
 					<option th:each="insumo: ${listInsumo}" th:value="${insumo.idInsumo}" th:text="${insumo.nombreInsumo}" />
-				</select></br>				  
+				</select>			  
 				  
 	            <p> precio producto: </p><input type="number" name="precioProducto">  </br>
 	             

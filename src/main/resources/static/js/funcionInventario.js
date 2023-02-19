@@ -41,3 +41,18 @@ function easyform() {
              forhersibli[i].setAttribute('class','firma');
         }
   }
+  
+  function getValorAtributoP(atributo) {
+	alert('entro');
+  let pValor = document.querySelectorAll('p');
+  let valores = [];
+
+  for (let i = 0; i < pValor.length; i++) {
+    const valor = pValor[i].getAttribute(atributo);
+    valores.push(valor);
+  }
+
+	for (let i = 0; i < pValor.length; i++) {
+    	 pValor[i].setAttribute('th:text',"'${"+valores[i]+" }'");	
+  	}
+}

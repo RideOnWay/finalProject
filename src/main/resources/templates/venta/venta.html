@@ -7,7 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="styles/estilosVentas.css">
 <link rel="stylesheet" href="styles/styleventa2.css">
-<script src="js/funcionVentas.js"></script>
 
 <title>Ventas</title>
 </head>
@@ -28,8 +27,8 @@
 		<menu>
 
 			<span id="fecha">
-				<div id="diaE"></div>
-				<div id="horaE"></div>
+				<div id="dia" ></div>
+				<div id="hora" ></div>
 			</span>
 
 			<nav>
@@ -49,15 +48,21 @@
 			<form class="t-form selected" id="form1" index="1" method="post" th:action="@{/venta}" th:object="${venta}">
 				<div id="inform">
 					
-					<input type="hidden" name="idVenta" th:value="${idUsuario+10}">
-					<input type="hidden" name="idUsuario" th:value="${idUsuario}">
-					<input type="hidden" id="dia" name="fechaVenta">
-					<input type="hidden" id="hora" name="horaVenta">
-							
+					<input type="hidden" name="idVenta" th:value="${#calendars.format(#dates.createNow(),'ss')} +''+${idUsuario}+''+${#calendars.format(#dates.createNow(),'mm')}" >
+					<input type="hidden" name="idUsuario" th:value="${idUsuario}"> 
+					<input type="hidden" id="diaE" name="fechaVenta"  th:value="${#dates.format(#dates.createNowForTimeZone('America/Bogota'), 'yyyy-MM-dd')}">
+					<input type="hidden" id="horaE" name="horaVenta" th:value="${#dates.format(#dates.createNowForTimeZone('America/Bogota'), 'HH:mm:ss')}">
+					
+					<label >Seleccione el cliente:</label>  
+	           		<select  class="form-control" th:object="${cliente}" name="idCliente">
+	           			<option disable >
+						<option th:each="cliente: ${listCliente}" th:value="${cliente.idCliente}" th:text="${cliente.nombreCliente}" />
+					</select>
+					
 					<div id="drinkContent">
 						<div id="drinks">
 							Escoge las bebidas: 
-							<select id="drinkList1" onchange="enlistar('drinkList1','#drinktable1',1,'listnameB','listPrecioB','listidB')" th:object="${producto}" name="producto">
+							<select id="drinkList1" onchange="enlistar('drinkList1','#drinktable1',1,'listnameB','listPrecioB','listidB')"  >
 								<option value=""></option>
 								<option th:each="producto: ${listProdrink}" th:value="${producto.nombreProducto}" th:text="${producto.nombreProducto}" />
 							</select>
@@ -82,7 +87,7 @@
 					<div>
 						<div id="snacks">
 							Escoge los Snacks: 
-							<select id="snacklist1" onchange="enlistar('snacklist1','#tablesnack1',1,'listnameS','listPrecioS','listidS')" th:object="${producto}" name="producto">
+							<select id="snacklist1" onchange="enlistar('snacklist1','#tablesnack1',1,'listnameS','listPrecioS','listidS')" th:object="${producto}" >
 								<option value=""></option>
 								<option th:each="producto: ${listProsnack}" th:value="${producto.nombreProducto}" th:text="${producto.nombreProducto}" />
 							</select>
@@ -103,16 +108,16 @@
 						<label> Total snacks</label>
 
 					</div>
+					<div><textarea name="observacion"></textarea></div>
 
-					<div id="botones">
-						
+					<div id="botones">						
 							<button type="button" id="borrar1" onclick="erasetab()">Borrar</button>
 							<button type="button" id="erase1" onclick="eraseall('drinktable1','tablesnack1')">Borrar todo</button>
 						<div id="idto">
 							<button type="button" id="total1" onclick="totales('.precio1','latotal1')">Total</button>
-							<label for="" id="latotal1" name="precioTotal"> </label>	
+							<input  type="number" readonly id="latotal1" name="precioTotal"> </label>	
 						</div>				
-							<button type="submit" >Guardar</button>					
+							<button type="submit" id="subir" >Guardar</button>					
 					</div>
 				</div>
 			</form>
@@ -330,6 +335,8 @@
 		<aside></aside>
 		<footer> </footer>
 	</div>
+	<script src="js/funcionVentas.js"></script>
+
 </body>
 
 </html>
