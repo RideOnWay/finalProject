@@ -3,14 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insumo</title>
+<script th:src="@{/js/toEditAll.js}"></script>
 </head>
-<body>
+<body onload="editarInsumo()">
 <h1>Insumo nuevo</h1>
 <div id="forms">
         <form action="" class="firma" method="post" th:object="${insumo}" th:action="@{/listInsumo}">
-            <p> idInsumo: </p><input type="number" name="idInsumo">
-            <p>nombreInsumo: </p><input type="text" name="nombreInsumo">
-            <p> precio Insumo: </p><input type="number" name="precioInsumo">
+            <p> idInsumo: </p><input type="number" name="idInsumo" id="idInsumo">
+            <p>nombreInsumo: </p><input type="text" name="nombreInsumo" id="nombreInsumo">
+            <p> precio Insumo: </p><input type="number" name="precioInsumo" id="precioInsumo">
             
             <label> tipo Insumo: </label>
             <select  class="form-control"  name="tipoInsumo">					
@@ -36,7 +37,7 @@
         
         <h2>Lista de insumos</h2>
         
-        <table border="1" >
+        <table border="1" id="tablaInsumo" >
 				<thead>
 					<tr>
 						<th>idInsumo:</th>
@@ -62,7 +63,7 @@
 						<td th:text="${insumo.proveedor.idProveedor} +' - '+${insumo.proveedor.razonSocial} "></td>
 						<td th:text="${insumo.descripcionInsumo}"></td>
 						<td> 
-							<a th:href="@{/insumo/{id}/edit(id=${insumo.idInsumo})}" class="edit">Edit</a>
+							<button type="button" class="btnEditar" >Editar</button>
 							<a th:href="@{/insumo/{id}/delete(id=${insumo.idInsumo})}" class="delete">Delete</a> 
 							
 					</tr>

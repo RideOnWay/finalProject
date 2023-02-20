@@ -3,22 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Productos</title>
+<script th:src="@{/js/toEditAll.js}"></script>
 </head>
-<body>
+<body onload="editarProducto()">
 <h1> Producto nuevo</h1>
 
 <div>
 
 			<form action="" class="firma" method="post" th:object="${producto}" th:action="@{/listProducto}">
-	 			<p> id.: </p> <input type="number" name="idProducto"></br>
-	            <p> Nombre producto: </p><input type="text" name="nombreProducto"></br>
+	 			<p> id.: </p> <input type="number" name="idProducto" id="idProducto"></br>
+	            <p> Nombre producto: </p><input type="text" name="nombreProducto" id="nombreProducto"></br>
 	            
 	            <label for="name">Seleccione los insumos:</label>  
 	           	<select multiple class="form-control" th:object="${insumo}" name="insumo">
 					<option th:each="insumo: ${listInsumo}" th:value="${insumo.idInsumo}" th:text="${insumo.nombreInsumo}" />
 				</select>			  
 				  
-	            <p> precio producto: </p><input type="number" name="precioProducto">  </br>
+	            <p> precio producto: </p><input type="number" name="precioProducto" id="precioProducto">  </br>
 	             
 	             <label for="name">Seleccione el tipo de producto::</label>         
 	            <select  class="form-control"  name="tipo">
@@ -27,13 +28,13 @@
 				</select></br>
 	            
 	            <p> fecha creacion:</p> <input type="date" name="fechaCreacionP"></br>
-	            <p> Descripcion:</p> <input type="text" name="descripcionP"></br>
+	            <p> Descripcion:</p> <input type="text" name="descripcionP" id="descripcionP"></br>
 				<button type="submit">Guardar</button>
        		 </form>
 			
 <h2>Lista de productos</h2>
 
-			<table border="1" >
+			<table border="1" id="tableProducto">
 				<thead>
 					<tr>
 						<th>Product ID</th>
@@ -59,7 +60,7 @@
 						<td th:text="${producto.fechaCreacionP}"></td>
 						<td th:text="${producto.descripcionP}"></td> 
 						<td> 
-							<a th:href="@{/producto/{id}/edit(id=${producto.idProducto})}" class="edit">Edit</a>
+							<button type="button" class="btnEditar" >Editar</button>
 							<a th:href="@{/producto/{id}/delete(id=${producto.idProducto})}" class="delete">Delete</a>
 						</td>
 						

@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Usuarios</title>
+<script th:src="@{/js/toEditAll.js}"></script>
 </head>
-<body>
+<body onload="editarUsuario()">
 <h1>Usuario nuevo</h1>
  <form action="" class="firma" method="post" th:object="${usuario}" th:action="@{/listUsuario}">
- 			<p> id.: </p> <input type="number" name="idUsuario"></br>
-            <p> Nombre: </p><input type="text" name="nombreUsuario">   </br>        
+ 			<p> id.: </p> <input type="number" name="idUsuario" id="idUsuario"></br>
+            <p> Nombre: </p><input type="text" name="nombreUsuario" id="nombreUsuario">   </br>        
             
             <label for="">Seleccione el rol:</label>
             <select  class="form-control" th:object="${rol}" name="rol">
@@ -16,17 +17,17 @@
 			</select>
             
             <p> Fecha de nacimiento: </p> <input type="date" name="fechaNacimientoUsuario"></br>
-            <p> Correo:</p> <input type="text" name="correoUsuario"></br>
-            <p> Numero:</p> <input type="text" name="numeroUsuario"></br>
-            <p> Direccion:</p> <input type="text" name="direccionUsuario"></br>
-            <p> contrasena:</p> <input type="password" name="contrasenaUsuario"></br>
-            <p> Descripcion:</p> <input type="text" name="descripcionUsuario"></br>
+            <p> Correo:</p> <input type="text" name="correoUsuario" id="correoUsuario"></br>
+            <p> Numero:</p> <input type="text" name="numeroUsuario" id="numeroUsuario"></br>
+            <p> Direccion:</p> <input type="text" name="direccionUsuario" id="direccionUsuario"></br>
+            <p> contrasena:</p> <input type="password" name="contrasenaUsuario" id="contrasenaUsuario"></br>
+            <p> Descripcion:</p> <input type="text" name="descripcionUsuario" id="descripcionUsuario"></br>
 			<button type="submit">Guardar</button>
         </form>
        
 <h2>Lista de usuarios</h2>			
 			<br />
-			<table border="1" >
+			<table border="1" id="tablaUsuario">
 				<thead>
 					<tr>
 						<th>idUsuario</th>
@@ -52,7 +53,7 @@
 						<td th:text="${usuario.direccionUsuario}"></td>
 						<td th:text="${usuario.descripcionUsuario}"></td>
 						<td> 
-							<a th:href="@{/usuario/{id}/edit(id=${usuario.idUsuario})}" class="edit">Edit</a>
+							<button type="button" class="btnEditar" >Editar</button>
 							<a th:href="@{/usuario/{id}/delete(id=${usuario.idUsuario})}" class="delete">Delete</a>
 						 </td>
 							

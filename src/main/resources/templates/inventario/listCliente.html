@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Clientes</title>
+<script th:src="@{/js/toEditAll.js}"></script>
 </head>
-<body>
+<body onload="editarCliente()">
 <h1>Cliente nuevo</h1>
 		<form action="" class="firma" method="post" th:object="${cliente}" th:action="@{/listCliente}">
             <p> id Cliente:</p> <input type="number" name="idCliente">
@@ -17,7 +18,7 @@
         
         <h2>Lista de clientes</h2>
         
-        <table border="1" >
+        <table border="1" id="tablaCliente">
 				<thead>
 					<tr>
 						<th> id Cliente</th>
@@ -37,7 +38,7 @@
 						<td th:text="${cliente.direccionCliente}"></td>
 						<td th:text="${cliente.fechaNacimientoCliente}"></td>
 						<td> 
-							<a th:href="@{/cliente/{id}/edit(id=${cliente.idCliente})}" class="edit">Edit</a>
+							<button type="button" class="btnEditar" >Editar</button>
 							<a th:href="@{/cliente/{id}/delete(id=${cliente.idCliente})}" class="delete">Delete</a> 
 							
 					</tr>
