@@ -8,11 +8,12 @@
 <body onload="editarCliente()">
 <h1>Cliente nuevo</h1>
 		<form action="" class="firma" method="post" th:object="${cliente}" th:action="@{/listCliente}">
-            <p> id Cliente:</p> <input type="number" name="idCliente">
-            <p> Nombre: </p> <input type="text" name="nombreCliente">
-            <p> Celular: </p> <input type="number" name="telefonoCliente">
-            <p>Direccion:</p> <input type="text" name="direccionCliente">
-            <p> Fecha de nacimiento:</p> <input type="date" id="" name="fechaNacimientoCliente">
+            <p> id Cliente:</p> <input type="number" name="idCliente" id="idCliente" required placeholder="id del cliente" minlength="4">
+            <p> Nombre: </p> <input type="text" name="nombreCliente" id="nombreCliente" required minlength="4">
+            <p> Celular: </p> <input type="number" name="telefonoCliente" id="telefonoCliente" required minlength="7">
+            <p> Correo:</p> <input type="email" name="correoCliente" id="correoCliente" required pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}">
+            <p>Direccion:</p> <input type="text" name="direccionCliente" id="direccionCliente" required>
+            <p> Fecha de nacimiento:</p> <input type="date" id="" name="fechaNacimientoCliente" required>
             <p><button type="submit">Guardar</button></p>
         </form>
         
@@ -24,6 +25,7 @@
 						<th> id Cliente</th>
 						<th> Nombre: </th>
 						<th>Celular:</th>
+						<th>Correo:</th>
 						<th>Direccion:</th>
 						<th>Fecha de nacimiento:</th>
 						<th>Acciones</th>
@@ -35,6 +37,7 @@
 						 <td th:text="${cliente.idCliente}"></td>
 						<td th:text="${cliente.nombreCliente}"></td>
 						<td th:text="${cliente.telefonoCliente}"></td>
+						<td th:text="${cliente.correoCliente}"></td>
 						<td th:text="${cliente.direccionCliente}"></td>
 						<td th:text="${cliente.fechaNacimientoCliente}"></td>
 						<td> 

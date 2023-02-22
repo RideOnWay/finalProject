@@ -15,11 +15,11 @@
         <form method="post" th:object="${usuario}" th:action="@{/log}">
         
             <label for="name">Username:</label>
-            <input type="name" id="name" name="correoUsuario">
+            <input type="name" id="name" name="correoUsuario" required pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}">
             <!-- Password -->
             <label for="username">Password:</label>
             <p><a href="#">Forgot your password?</a>
-                <input type="password" id="clave" name="contrasenaUsuario">
+                <input type="password" id="clave" name="contrasenaUsuario" required>
                 <div id="lower">
                     <input type="checkbox"><label class="check" for="checkbox">Keep me logged in</label>
                     <!-- Submit Button -->

@@ -39,7 +39,7 @@ public class Insumo {
     
     private List<Producto> producto ;
     
-    @Column(name="descripcionInsumo")
+    @Column(name="descripcionInsumo", columnDefinition="sin descripción")
     private String descripcionInsumo;
 
 	public Insumo() {

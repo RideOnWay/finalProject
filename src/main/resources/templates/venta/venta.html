@@ -14,6 +14,7 @@
 <body onload="easyTabs()">
 	<header>
 		<h1>Ventas</h1>
+		<a href="/closeSession"><label  >Cerrar session </label></a>
 		<img src="images/vecteezy_coffee-logo-vector_.jpg" alt="" id="main_logo">
 	</header>
 
@@ -44,12 +45,12 @@
 		</menu>
 
 		<section class="sec" id="forms">
-		<!-- /////////////////////////////////////////////FORMULARIO//////////////////////////////////////////////////////////////////// -->
+		<!-- /////////////////////////////////////////////  FORMULARIO  1  //////////////////////////////////////////////////////////////////// -->
 			<form class="t-form selected" id="form1" index="1" method="post" th:action="@{/venta}" th:object="${venta}">
 				<div id="inform">
 					
-					<input type="hidden" name="idVenta" th:value="${#calendars.format(#dates.createNow(),'ss')} +''+${idUsuario}+''+${#calendars.format(#dates.createNow(),'mm')}" >
-					<input type="hidden" name="idUsuario" th:value="${idUsuario}"> 
+					<input type="hidden" name="idVenta"  id="idVenta" required>
+					<input type="hidden" name="idUsuario" th:value="${idUsuario != null} ? ${idUsuario} : '-1'" required> 
 					<input type="hidden" id="diaE" name="fechaVenta"  th:value="${#dates.format(#dates.createNowForTimeZone('America/Bogota'), 'yyyy-MM-dd')}">
 					<input type="hidden" id="horaE" name="horaVenta" th:value="${#dates.format(#dates.createNowForTimeZone('America/Bogota'), 'HH:mm:ss')}">
 					
@@ -79,9 +80,9 @@
 
 						</div>
 
-						<table id="drinktable1"></table>
+						<table id="drinktable1" ></table>
 
-						<label id="labdrink"> Total Bebidas</label>
+						
 
 					</div>
 					<div>
@@ -103,21 +104,19 @@
 							</ul>
 						</div>
 
-						<table id="tablesnack1"></table>
-
-						<label> Total snacks</label>
+						<table id="tablesnack1" ></table>
 
 					</div>
 					<div><textarea name="observacion"></textarea></div>
 
 					<div id="botones">						
-							<button type="button" id="borrar1" onclick="erasetab()">Borrar</button>
+							<button type="button" id="borrar1" onclick="eraselast()">Borrar</button>
 							<button type="button" id="erase1" onclick="eraseall('drinktable1','tablesnack1')">Borrar todo</button>
 						<div id="idto">
 							<button type="button" id="total1" onclick="totales('.precio1','latotal1')">Total</button>
-							<input  type="number" readonly id="latotal1" name="precioTotal"> </label>	
+							<input  type="number" readonly id="latotal1" name="precioTotal" required> </label>	
 						</div>				
-							<button type="submit" id="subir" >Guardar</button>					
+							<button type="submit" id="subir1" onclick="submitOrder(event,'form1','drinktable1','tablesnack1')">Guardar</button>					
 					</div>
 				</div>
 			</form>
@@ -126,6 +125,17 @@
 
 			<form action="" class="t-form" id="form2" index="2" method="post" th:action="@{/venta}" th:object="${venta}">
 				<div id="inform">
+				
+				<input type="hidden" name="idVenta"  id="idVenta" required>
+					<input type="hidden" name="idUsuario" th:value="${idUsuario}"> 
+					<input type="hidden" id="diaE" name="fechaVenta"  th:value="${#dates.format(#dates.createNowForTimeZone('America/Bogota'), 'yyyy-MM-dd')}">
+					<input type="hidden" id="horaE" name="horaVenta" th:value="${#dates.format(#dates.createNowForTimeZone('America/Bogota'), 'HH:mm:ss')}">
+				
+				<label >Seleccione el cliente:</label>  
+	           		<select  class="form-control" th:object="${cliente}" name="idCliente">
+	           			<option disable >
+						<option th:each="cliente: ${listCliente}" th:value="${cliente.idCliente}" th:text="${cliente.nombreCliente}" />
+					</select>
 					<div id="drinkContent">
 						<div id="drinks">
 							Escoge las bebidas: 
@@ -150,7 +160,7 @@
 
 					</table>
 
-					<label id="labdrink"> Total Bebidas</label>
+					
 
 				</div>
 
@@ -175,19 +185,20 @@
 					</div>
 
 					<table id="tablesnack2"></table>
-					<label> Total snacks</label>
+					
 
 				</div>
 
+				<div><textarea name="observacion"></textarea></div>
 				<div id="botones">
 					
 						<button type="button" id="borrar2" onclick="erasetab()">Borrar</button>
 						<button type="button" id="erase2" onclick="eraseall('drinktable2','tablesnack2')">Borrar todo</button>
 					<div id="idto">
 						<button type="button" id="total2" onclick="totales('.precio2','latotal2')">Total</button>
-						<label for="" id="latotal2" name="precioTotal"> </label>
+						<input  type="number" readonly id="latotal2" name="precioTotal" required> 
 					</div>
-						<button type="button" id="ok" onclick="">Guardar</button>
+						<button type="submit" id="subir2" onclick="submitOrder(event,'form2','drinktable2','tablesnack2')">Guardar</button>
 				</div>
 			</form>
 
@@ -195,6 +206,17 @@
 
 			<form action="" class="t-form" id="form3" index="3" method="post" th:action="@{/venta}" th:object="${venta}">
 				<div id="inform">
+				
+				<input type="hidden" name="idVenta"  id="idVenta" required>
+					<input type="hidden" name="idUsuario" th:value="${idUsuario}"> 
+					<input type="hidden" id="diaE" name="fechaVenta"  th:value="${#dates.format(#dates.createNowForTimeZone('America/Bogota'), 'yyyy-MM-dd')}">
+					<input type="hidden" id="horaE" name="horaVenta" th:value="${#dates.format(#dates.createNowForTimeZone('America/Bogota'), 'HH:mm:ss')}">
+				
+				<label >Seleccione el cliente:</label>  
+	           		<select  class="form-control" th:object="${cliente}" name="idCliente">
+	           			<option disable >
+						<option th:each="cliente: ${listCliente}" th:value="${cliente.idCliente}" th:text="${cliente.nombreCliente}" />
+					</select>
 					<div id="drinkContent">
 						<div id="drinks">
 							Escoge las bebidas: 
@@ -220,7 +242,7 @@
 
 					</table>
 
-					<label id="labdrink"> Total Bebidas</label>
+					
 
 				</div>
 
@@ -244,9 +266,9 @@
 						
 					</div>	
 						<table id="tablesnack3"></table>
-						<label> Total snacks</label>
+						
 				</div>
-
+					<div><textarea name="observacion"></textarea></div>
 				<div id="botones">
 					
 					
@@ -254,9 +276,9 @@
 						<button type="button" id="erase3" onclick="eraseall('drinktable3','tablesnack3')">Borrar Todo</button>
 					<div id="idto">
 						<button type="button" id="total3" onclick="totales('.precio3','latotal3')">Total</button>
-						<label for="" id="latotal3" name="precioTotal"> </label>
+						<input  type="number" readonly id="latotal3" name="precioTotal" required> </label>
 					</div>
-						<button type="button" id="ok" onclick="">Guardar</button>
+						<button type="submit" id="subir3" onclick="submitOrder(event,'form3','drinktable3','tablesnack3')">Guardar</button>
 				</div>
 			</form>
 			
@@ -264,6 +286,17 @@
 
 			<form action="" id="formulario">
 				<div id="inform">
+				
+				<input type="hidden" name="idVenta"  id="idVenta" required>
+					<input type="hidden" name="idUsuario" th:value="${idUsuario}"> 
+					<input type="hidden" id="diaE" name="fechaVenta"  th:value="${#dates.format(#dates.createNowForTimeZone('America/Bogota'), 'yyyy-MM-dd')}">
+					<input type="hidden" id="horaE" name="horaVenta" th:value="${#dates.format(#dates.createNowForTimeZone('America/Bogota'), 'HH:mm:ss')}">
+				
+				<label >Seleccione el cliente:</label>  
+	           		<select  class="form-control" th:object="${cliente}" name="idCliente">
+	           			<option disable >
+						<option th:each="cliente: ${listCliente}" th:value="${cliente.idCliente}" th:text="${cliente.nombreCliente}" />
+					</select>
 					<div id="drinkContent">
 						<div id="drinks">
 							Escoge las bebidas: 
@@ -288,7 +321,7 @@
 
 					<table id="drinktable"></table>
 
-					<label id="labdrink"> Total Bebidas</label>
+					
 					<p id="camino"></p>
 
 
@@ -316,19 +349,19 @@
 					<table id="tablesnack">
 					</table>
 
-					<label> Total snacks</label>
+					
 
 				</div>
-
+					<div><textarea name="observacion"></textarea></div>
 				<div id="botones">
 					
 						<button type="button" id="borrar">Borrar</button>
 						<button type="button" id="eraseAll" onclick="eraseall()"> Borrar todo</button>
 					<div id="idto">
 						<button type="button" id="total" onclick="">Total</button>
-						<label for="" id="latotal" name="precioTotal"></label>
+						<input  type="number" readonly id="latotal" name="precioTotal" required> </label>
 					</div>
-						<button type="button" id="ok">Guardar</button>
+						<button type="submit" id="subir" >Guardar</button>
 				</div>
 			</form>
 		</section>

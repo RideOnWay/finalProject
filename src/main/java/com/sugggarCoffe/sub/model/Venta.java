@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -33,9 +34,13 @@ public class Venta implements Serializable{
     private Usuario idUsuario;
 	
 	@ManyToMany
-    @JoinTable(name="venta_producto")
+    @JoinTable(name = "venta_producto")
     private List<Producto> producto;
 
+	@ElementCollection
+	@Column(name="cantidades")
+    private List<Integer> cantidades;
+	
 	@Column(name="precioTotal")
     private int precioTotal;
     
@@ -54,8 +59,7 @@ public class Venta implements Serializable{
 	}
 
 	public Venta(Long idVenta, Cliente idCliente, Usuario idUsuario, List<Producto> producto, int precioTotal,
-			LocalDate fechaVenta, LocalTime horaVenta, String observacion) {
-		super();
+			LocalDate fechaVenta, LocalTime horaVenta, String observacion, List<Integer> cantidades) {
 		this.idVenta = idVenta;
 		this.idCliente = idCliente;
 		this.idUsuario = idUsuario;
@@ -64,10 +68,18 @@ public class Venta implements Serializable{
 		this.fechaVenta = fechaVenta;
 		this.horaVenta = horaVenta;
 		this.observacion = observacion;
-		this.producto=producto;
+		this.cantidades=cantidades;
+	}
+	
+	
+
+	public List<Integer> getCantidades() {
+		return cantidades;
 	}
 
-
+	public void setCantidades(List<Integer> cantidades) {
+		this.cantidades = cantidades;
+	}
 
 	public Long getIdVenta() {
 		return idVenta;

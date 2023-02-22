@@ -64,6 +64,19 @@ public class VentaController {
 		return "venta/venta";
 	}
 	
+	@GetMapping("/listVenta")
+	public String getAllUsuario(Model model) {
+		List<Venta> listVenta =ventaService.listarVenta();
+		List<Producto> listProducto  =productoService.listarProducto();
+		try {
+		      model.addAttribute("listVenta", listVenta);	
+		      model.addAttribute("listProducto", listProducto);
+		    } catch (Exception e) {
+		      model.addAttribute("message", e.getMessage()); 
+		    }
+		return "venta/listVenta";
+	}
+	
 	@GetMapping("/venta/{id}/delete")
 	public String borrarVenta(@PathVariable long id ) throws NotFoundException {
 		Venta venta = ventaService.getVenta(id);
@@ -71,16 +84,5 @@ public class VentaController {
 		return "redirect:/listVenta";
 	}
 	
-	 @GetMapping("/venta/{id}/edit")
-	  public String edit(@PathVariable Long id, Model model) throws NotFoundException {
-	      model.addAttribute("venta", ventaService.getVenta(id));
-	      return "inventario/listVenta";
-	  }
-	
-	  @PostMapping("/venta/{id}/edit")
-	  public String edit(Venta venta) {
-	  	ventaService.createVenta(venta);
-	      return "redirect:/listVenta";
-	  }
 
 }

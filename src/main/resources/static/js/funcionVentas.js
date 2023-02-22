@@ -159,6 +159,9 @@ function creaform(inc) {
   let chntotlab = document.getElementById('latotal');
   chntotlab.id = 'latotal' + inc;
 
+  let chnSubmit = document.getElementById('subir');
+  chnSubmit.id='subir'+inc;
+  chnSubmit.setAttribute('onclick', "submitOrder('event','"+newformu.id+"','"+chnselect.id+"','"+chntblsnk.id+"')");
 }
 
 //new list with drinks or snacks objects  aqui se generan las tablas de los productos seleccionados
@@ -189,10 +192,10 @@ async function enlistar(selectid, tableid, num, list1, list2,list3) {
     const list03 = document.getElementById(list3);
     
 	let idProducto=await price(entrada,list01,list03);
-	document.getElementById('column' + aux + 4).innerHTML = "<input type='number' value="+idProducto+ " readonly name='producto' class='nopaint'>";
+	document.getElementById('column' + aux + 4).innerHTML = "<input type='number' value="+idProducto+ " readonly  name='producto' class='nopaint' id='indiceProducto'>";
     document.getElementById('column' + aux + 1).innerHTML = entrada;
     document.getElementById('column' + aux + 2).innerHTML = await price(entrada,list01,list02);                        
-    document.getElementById('column' + aux + 3).innerHTML = "<input type='number' class='nopaint' onchange='sumaPrecio(event)' value='1'>";
+    document.getElementById('column' + aux + 3).innerHTML = "<input type='number' class='nopaint' onchange='sumaPrecio(event)' value='1'  name='cantidades'>";
 
   }
   document.getElementById(selectid).value = "";
@@ -222,8 +225,8 @@ function eraseall(valor4,valor3) {
 }
 
 //erase the list, drink or snack
-function eraseTable(valor4) {
-  const listdrink = document.getElementById(valor4);
+function eraseTable(valor5) {
+  const listdrink = document.getElementById(valor5);
   while (listdrink.hasChildNodes()) {
     listdrink.removeChild(listdrink.firstChild);
   }
@@ -245,8 +248,9 @@ function thear(event) {
 }
 
 //remove the last item selected
-function erasetab() {
+function eraselast() {
   lastSelect.remove();
+  
 }
 
 //get the total price of bill, suma todos los precios ndependiente del tipo
@@ -292,6 +296,32 @@ function sumaPrecio(event) {
   }
 }
 
+//enviar informacion asincrona de cada ventavar  
+function submitOrder(event,form,tabla1,tabla2) {
+  event.preventDefault();
+  
+  const formulario = document.getElementById(form);
+  const idUsuario = formulario.elements.idUsuario.value;
+  const precioTotal = formulario.elements.precioTotal.value;
+  const numero = Math.floor(Math.random()*10000);
+  
+  formulario.elements.idVenta.value=idUsuario+numero;
+  if( idUsuario > 0){
+	if( precioTotal > 0){
+	  var datosFormulario = new FormData(formulario);
+	  var xhr = new XMLHttpRequest();
+	  xhr.open("POST", "/venta");
+	  xhr.send(datosFormulario);
+	  alert("venta enviada exitosamente.");
+  	  eraseall(tabla1,tabla2);
+  	  formulario.reset();
+   	}else{
+		alert("La venta debe tener valor.");
+	}
+  }else{
+	alert("Debe ingresar primero para registrar la venta.");
+	}
+	};
 
 
 
@@ -335,57 +365,6 @@ function sumaPrecio(event) {
 
 
 
-
-
-/*function easyTabs1() {
-    var groups = document.querySelectorAll('.t-container');
-    if (groups.length > 0) {
-      for (i = 0; i < groups.length; i++) {
-        var tabs = groups[i].querySelectorAll('.t-tab');
-        for (t = 0; t < tabs.length; t++) {
-          tabs[t].setAttribute("index", t+1);
-          if (t == 0) tabs[t].className = "t-tab selected";
-        }
-        var contents = groups[i].querySelectorAll('.t-content');
-        for (c = 0; c < contents.length; c++) {
-          contents[c].setAttribute("index", c+1);
-          if (c == 0) contents[c].className = "t-content selected";
-        }
-      }
-      var clicks = document.querySelectorAll('.t-tab');
-      for (i = 0; i < clicks.length; i++) {
-        clicks[i].onclick = function() {
-          var tSiblings = this.parentElement.children;
-          for (i = 0; i < tSiblings.length; i++) {
-            tSiblings[i].className = "t-tab";
-          }
-          this.className = "t-tab selected";
-          var idx = this.getAttribute("index");
-          var cSiblings = this.parentElement.parentElement.querySelectorAll('.t-content');
-          for (i = 0; i < cSiblings.length; i++) {
-            cSiblings[i].className = "t-content";
-            if (cSiblings[i].getAttribute("index") == idx) {
-              cSiblings[i].className = "t-content selected";
-            }
-          }
-        };
-      }
-    }
- var tabs = document.querySelectorAll('.t-tab');
-      for (t = 0; t < tabs.length; t++) {
-        if(t != tabs.length-1) {
-          tabs[t].setAttribute("index", t+1);
-          if (t == 0) tabs[t].className = "t-tab selected"; 
-        } 
-      } 
-
-      var tabs1 = document.querySelectorAll('.t-form');
-      for (t = 0; t < tabs1.length; t++) {
-        tabs1[t].setAttribute("index", t+1);
-        if (t == 0) tabs1[t].className = "t-form selected";
-      }
- 
-  }*/
 
 
 

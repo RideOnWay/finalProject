@@ -3,6 +3,8 @@ package com.sugggarCoffe.sub.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class AppController {
 	
@@ -39,6 +41,12 @@ public class AppController {
 	@GetMapping("/listOtros")
 	public String listOtro() {
 		return "inventario/listOtros";
+	}
+	
+	@GetMapping("/closeSession")
+	public String closeSession(HttpSession session) {
+		session.invalidate();
+		return "index";
 	}
 	
 

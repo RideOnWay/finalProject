@@ -9,12 +9,12 @@
 <h1>Insumo nuevo</h1>
 <div id="forms">
         <form action="" class="firma" method="post" th:object="${insumo}" th:action="@{/listInsumo}">
-            <p> idInsumo: </p><input type="number" name="idInsumo" id="idInsumo">
-            <p>nombreInsumo: </p><input type="text" name="nombreInsumo" id="nombreInsumo">
-            <p> precio Insumo: </p><input type="number" name="precioInsumo" id="precioInsumo">
+            <p> idInsumo: </p><input type="number" name="idInsumo" id="idInsumo" required placeholder="id del insumo">
+            <p>nombreInsumo: </p><input type="text" name="nombreInsumo" id="nombreInsumo" required>
+            <p> precio Insumo: </p><input type="number" name="precioInsumo" id="precioInsumo" required minlength="3">
             
             <label> tipo Insumo: </label>
-            <select  class="form-control"  name="tipoInsumo">					
+            <select  class="form-control"  name="tipoInsumo" required>					
 					<option  th:value="Alimento" th:text="Alimento" />
 					<option  th:value="Desechables" th:text="Desechables" />
 					<option  th:value="Aseo" th:text="Aseo" />
@@ -22,11 +22,11 @@
 					<option  th:value="Otros" th:text="Otros" />
 				</select></br>
         
-            <p>fechaCreacionInsumo: </p><input type="date" name="fechaCreacionInsumo">
+            <p>fechaCreacionInsumo: </p><input type="date" name="fechaCreacionInsumo" required>
             <p>fechaVencimientoInsumo: </p><input type="date" name="fechaVencimientoInsumo">
             
             <label for="name">Seleccione el proveedor:</label>
-            <select  class="form-control" th:object="${proveedor}" name="proveedor">
+            <select  class="form-control" th:object="${proveedor}" name="proveedor" required>
 				<option th:each="proveedor : ${listProveedor}" th:value="${proveedor.idProveedor}" th:text="${proveedor.idProveedor}" />
 			</select>
             

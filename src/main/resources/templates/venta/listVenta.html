@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Ventas</title>
+<script th:src="@{/}"></script>
+</head>
+<body>
+	<h1>Listado de ventas</h1>
+
+		<table  id="tablaVenta">
+				<thead>
+					<tr>
+						<th>id venta</th>
+						<th>id cliente</th>
+						<th>id Usuario</th>
+						<th>productos</th>
+						<th>cantidades</th>
+						<th>precio total</th>
+						<th>fecha venta</th>
+						<th>hora venta</th>
+						<th>Comentarios</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				
+				 <tbody>
+					<tr th:each="venta : ${listVenta}">
+						<td th:text="${venta.idVenta}"></td>
+						<td th:text="${venta.idCliente.idCliente}"></td>
+						<td th:text="${venta.idUsuario.idUsuario}"></td>
+						
+						<td ><li th:each="producto :${venta.producto}" th:text="${producto.nombreProducto}" ></li></td>
+						<td ><li th:each="cantidades :${venta.cantidades}" th:text="${cantidades}" ></li></td>
+						
+						<td th:text="${venta.precioTotal}"></td>
+						<td th:text="${venta.fechaVenta}"></td>
+						<td th:text="${venta.horaVenta}"></td>
+						<td th:text="${venta.observacion}"></td>
+						<td> 
+							<a th:href="@{/venta/{id}/delete(id=${venta.idVenta})}" class="delete">Delete</a>
+						 </td>
+							
+					</tr>
+					
+				</tbody>
+			</table>
+</body>
+</html>

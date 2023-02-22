@@ -12,14 +12,14 @@
 
 
 	<div align="center">
-	 <form th:action="@{/listProveedor}" th:object="${proveedor}" method="post">
-        	<p> id.:</p> <input name="idProveedor" type="number" id="idProveedor">
-            <p> Proveedor/Razon social: </p> <input type="text" name="razonSocial" id="razonSocial">
-            <p> Nombre contacto: </p> <input type="text"  name="nombreContacto" id="nombreContacto">
-            <p> Fecha de creacion: </p> <input type="date"  name="fechaCreacionPr" >
-            <p> Correo: </p> <input type="text"  name="correoProveedor" id="correoProveedor">
-            <p> Celular: </p> <input type="number"  name="numeroProveedorP" id="numeroProveedorP">           
-            <p> Direccion: </p> <input type="text"  name="direccionProveedor" id="direccionProveedor">
+	 <form th:action="@{/listProveedor}" th:object="${proveedor}" method="post" >
+        	<p> id.:</p> <input name="idProveedor" type="number" id="idProveedor" required placeholder="id del proveedor">
+            <p> Proveedor/Razon social: </p> <input type="text" name="razonSocial" id="razonSocial" required>
+            <p> Nombre contacto: </p> <input type="text"  name="nombreContacto" id="nombreContacto" required>
+            <p> Fecha de creacion: </p> <input type="date"  name="fechaCreacionPr" required>
+            <p> Correo: </p> <input type="email"  name="correoProveedor" id="correoProveedor" required pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}">
+            <p> Celular: </p> <input type="number"  name="numeroProveedorP" id="numeroProveedorP" required>           
+            <p> Direccion: </p> <input type="text"  name="direccionProveedor" id="direccionProveedor" required>
             <p> Productos: </p> <input type="text" name="productosProveedor" >
             <button type="submit">Guardar</button>
         </form>

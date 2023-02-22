@@ -20,6 +20,9 @@ public class Cliente {
 	
 	@Column(name="telefonoCliente")
 	private String telefonoCliente;
+
+	@Column(name="correoCliente")
+	private String correoCliente;
 	
 	@Column(name="direccionCliente")
 	private String direccionCliente;
@@ -32,13 +35,22 @@ public class Cliente {
 	}
 
 	public Cliente(Long idCliente, String nombreCliente, String telefonoCliente, String direccionCliente,
-			LocalDate fechaNacimientoCliente) {
+			LocalDate fechaNacimientoCliente,String correoCliente) {
 		super();
 		this.idCliente = idCliente;
 		this.nombreCliente = nombreCliente;
 		this.telefonoCliente = telefonoCliente;
+		this.correoCliente = correoCliente;
 		this.direccionCliente = direccionCliente;
 		this.fechaNacimientoCliente = fechaNacimientoCliente;
+	}
+
+	public String getCorreoCliente() {
+		return correoCliente;
+	}
+
+	public void setCorreoCliente(String correoCliente) {
+		this.correoCliente = correoCliente;
 	}
 
 	public Long getIdCliente() {

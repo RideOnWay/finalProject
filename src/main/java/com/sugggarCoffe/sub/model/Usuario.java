@@ -39,7 +39,7 @@ public class Usuario{
     @Column(name="direccionUsuario")
     private String direccionUsuario;
     
-    @Column(name="descripcionUsuario")
+    @Column(name="descripcionUsuario", columnDefinition="sin descripción")
     private String descripcionUsuario;
 
 	@Column(name="contrasenaUsuario")

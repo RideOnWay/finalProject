@@ -117,10 +117,10 @@ function editarInsumo(){
             const direccionCliente = fila.querySelector('td:nth-child(4)').textContent;
             
                                                   // Mostrar los datos en los labels correspondientes
-            document.getElementsByName('idCliente').value=idCliente;
-          document.getElementByName('nombreCliente').value=nombreCliente;
-          document.getElementByName('telefonoCliente').value=telefonoCliente;
-          document.getElementByName('direccionCliente').value=direccionCliente;
+            document.getElementById('idCliente').value=idCliente;
+          document.getElementById('nombreCliente').value=nombreCliente;
+          document.getElementById('telefonoCliente').value=telefonoCliente;
+          document.getElementById('direccionCliente').value=direccionCliente;
             
           });
         });

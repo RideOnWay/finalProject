@@ -11,24 +11,24 @@
 <div>
 
 			<form action="" class="firma" method="post" th:object="${producto}" th:action="@{/listProducto}">
-	 			<p> id.: </p> <input type="number" name="idProducto" id="idProducto"></br>
-	            <p> Nombre producto: </p><input type="text" name="nombreProducto" id="nombreProducto"></br>
+	 			<p> id.: </p> <input type="number" name="idProducto" id="idProducto" required placeholder="id del producto"></br>
+	            <p> Nombre producto: </p><input type="text" name="nombreProducto" id="nombreProducto" required minlength="3"></br>
 	            
 	            <label for="name">Seleccione los insumos:</label>  
-	           	<select multiple class="form-control" th:object="${insumo}" name="insumo">
+	           	<select multiple class="form-control" th:object="${insumo}" name="insumo" required>
 					<option th:each="insumo: ${listInsumo}" th:value="${insumo.idInsumo}" th:text="${insumo.nombreInsumo}" />
 				</select>			  
 				  
-	            <p> precio producto: </p><input type="number" name="precioProducto" id="precioProducto">  </br>
+	            <p> precio producto: </p><input type="number" name="precioProducto" id="precioProducto" required minlength="3">  </br>
 	             
-	             <label for="name">Seleccione el tipo de producto::</label>         
-	            <select  class="form-control"  name="tipo">
+	             <label for="name">Seleccione el tipo de producto:</label>         
+	            <select  class="form-control"  name="tipo" required>
 					<option  th:value="Bebida" th:text="Bebida" />
 					<option  th:value="Snack" th:text="Snack" />
 				</select></br>
 	            
-	            <p> fecha creacion:</p> <input type="date" name="fechaCreacionP"></br>
-	            <p> Descripcion:</p> <input type="text" name="descripcionP" id="descripcionP"></br>
+	            <p> fecha creacion:</p> <input type="date" name="fechaCreacionP" required></br>
+	            <p> Descripcion:</p> <input type="text" name="descripcionP" id="descripcionP" ></br>
 				<button type="submit">Guardar</button>
        		 </form>
 			

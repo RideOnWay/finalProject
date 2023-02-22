@@ -8,19 +8,19 @@
 <body onload="editarUsuario()">
 <h1>Usuario nuevo</h1>
  <form action="" class="firma" method="post" th:object="${usuario}" th:action="@{/listUsuario}">
- 			<p> id.: </p> <input type="number" name="idUsuario" id="idUsuario"></br>
-            <p> Nombre: </p><input type="text" name="nombreUsuario" id="nombreUsuario">   </br>        
+ 			<p> id.: </p> <input type="number" name="idUsuario" id="idUsuario" required placeholder="id del usuario"></br>
+            <p> Nombre: </p><input type="text" name="nombreUsuario" id="nombreUsuario" required>   </br>        
             
             <label for="">Seleccione el rol:</label>
-            <select  class="form-control" th:object="${rol}" name="rol">
+            <select  class="form-control" th:object="${rol}" name="rol" required>
 				<option th:each="rol:${listRol}" th:value="${rol.idRol}" th:text="${rol.rolName}" />
 			</select>
             
-            <p> Fecha de nacimiento: </p> <input type="date" name="fechaNacimientoUsuario"></br>
-            <p> Correo:</p> <input type="text" name="correoUsuario" id="correoUsuario"></br>
-            <p> Numero:</p> <input type="text" name="numeroUsuario" id="numeroUsuario"></br>
-            <p> Direccion:</p> <input type="text" name="direccionUsuario" id="direccionUsuario"></br>
-            <p> contrasena:</p> <input type="password" name="contrasenaUsuario" id="contrasenaUsuario"></br>
+            <p> Fecha de nacimiento: </p> <input type="date" name="fechaNacimientoUsuario" required></br>
+            <p> Correo:</p> <input type="email" name="correoUsuario" id="correoUsuario" required pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"></br>
+            <p> Numero:</p> <input type="text" name="numeroUsuario" id="numeroUsuario" required></br>
+            <p> Direccion:</p> <input type="text" name="direccionUsuario" id="direccionUsuario" required></br>
+            <p> contrasena:</p> <input type="password" name="contrasenaUsuario" id="contrasenaUsuario" required pattern="^(?=.*[a-zA-Z])(?=.*\d)(?!.*\s).{6,}$"></br>
             <p> Descripcion:</p> <input type="text" name="descripcionUsuario" id="descripcionUsuario"></br>
 			<button type="submit">Guardar</button>
         </form>
