@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Inventario diario</title>
+</head>
+<body>
+<form class="firma" method="post" th:object="${iDiario}" th:action="@{/listIDiario}">
+			<input readonly  th:value="${idUsuario != null} ? ${idUsuario} : '-1'" name="idUsuario" required>
+			<input readonly id="dia" name="fechaIDiario"  th:value="${#dates.format(#dates.createNowForTimeZone('America/Bogota'), 'yyyy-MM-dd')}">
+            <input readonly  name="idIDiario"  th:value="${#dates.format(#dates.createNowForTimeZone('America/Bogota'), 'MMdd')} +''+ ${idUsuario}">
+            <li th:each="producto : ${listProducto}" th:object="${iDiario}">
+            	<ul>
+            		<p  th:value="${producto.idProducto}" th:text="${producto.nombreProducto}" name="producto"> </p>
+            		<input type="number" name="cantidadIDiario">
+            	</ul>
+            </li>
+            <textarea rows="4" cols="20" name="novedadesInventario"></textarea>
+            <button type="submit">Guardar</button>
+
+        </form>
+</body>
+</html>

@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import com.sugggarCoffe.sub.model.Cliente;
 import com.sugggarCoffe.sub.repository.ClienteRepository;
 
-
-
 @Service
 public class ClienteService {
 

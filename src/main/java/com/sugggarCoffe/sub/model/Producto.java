@@ -35,7 +35,7 @@ public class Producto implements Serializable{
     @Column(name="fechaCreacionP")
     private LocalDate fechaCreacionP;
     
-    @Column(name="descripcionP", length=100)
+    @Column(name="descripcionP", length=200)
     private String descripcionP;
       
     @ManyToMany

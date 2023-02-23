@@ -22,11 +22,6 @@ public class AppController {
 	public String toLogin() {
 		return "login";
 	}
-	
-	@GetMapping("/listInventariod")
-	public String listInventariod() {
-		return "inventario/listInventariod";
-	}
 
 	@GetMapping("/listReporte")
 	public String listReportes() {

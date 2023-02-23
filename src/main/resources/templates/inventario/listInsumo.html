@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insumo</title>
+<link rel="stylesheet" th:href="@{/styles/estilosListados.css}">
 <script th:src="@{/js/toEditAll.js}"></script>
 </head>
 <body onload="editarInsumo()">
@@ -13,7 +14,7 @@
             <p>nombreInsumo: </p><input type="text" name="nombreInsumo" id="nombreInsumo" required>
             <p> precio Insumo: </p><input type="number" name="precioInsumo" id="precioInsumo" required minlength="3">
             
-            <label> tipo Insumo: </label>
+            <p> tipo Insumo: </p>
             <select  class="form-control"  name="tipoInsumo" required>					
 					<option  th:value="Alimento" th:text="Alimento" />
 					<option  th:value="Desechables" th:text="Desechables" />
@@ -25,19 +26,19 @@
             <p>fechaCreacionInsumo: </p><input type="date" name="fechaCreacionInsumo" required>
             <p>fechaVencimientoInsumo: </p><input type="date" name="fechaVencimientoInsumo">
             
-            <label for="name">Seleccione el proveedor:</label>
+            <p for="name">Seleccione el proveedor:</p>
             <select  class="form-control" th:object="${proveedor}" name="proveedor" required>
 				<option th:each="proveedor : ${listProveedor}" th:value="${proveedor.idProveedor}" th:text="${proveedor.idProveedor}" />
 			</select>
             
-            <p>descripcionInsumo: </p><input type="text" name="descripcionInsumo">
+            <p>descripcionInsumo: </p><textarea  name="descripcionInsumo"></textarea></br>
             <button type="submit">Guardar</button>
         </form>
         </div>
         
         <h2>Lista de insumos</h2>
         
-        <table border="1" id="tablaInsumo" >
+        <table  id="tablaInsumo" >
 				<thead>
 					<tr>
 						<th>idInsumo:</th>
