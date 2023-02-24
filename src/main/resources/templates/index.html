@@ -1,45 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/estilosIndex.css">
+    <link rel="stylesheet" th:href="@{/styles/indexestilos.css}">
     <title>Coffe Project</title>
+    
 </head>
 
-<body>
+<body onload="permiso()">
+    <header>
+        <div class="logo">
+          <a href="/index"><img th:src="@{/images/logo.jpg}" alt="Logo de la empresa"></a>
+        </div>
+        
+        <h1> Cafe Project </h1>
+        <nav>
+          <ul>
+          	<li><a th:href="@{/venta}">Ventas</a></li>
+            <li><a  id="toGestion">Inventario</a></li>
+            <li><a th:href="@{/login}">Ingresar</a></li>
+          </ul>
+        </nav>
+      </header>
     <div >
-        <header id="headn">
-            <img src="images/vecteezy_coffee-logo-vector_.jpg" alt="" id="main_logo">
-            <strong>
-                <h1> Coffee shop</h1>
-            </strong>
-            <nav class="navegador">
-                <ul class="nav">
-                    <li><a href="">Inicio</a></li>
-                    <li><a href="/venta">Ventas</a></li>
-                    <li><a href="/gestionInventario">Inventario</a></li>
-                    <li><a href="/listVenta">Contactanos</a></li>
-                    <li><a href="/login">Ingresar</a></li>
-                </ul>
-               
-            </nav>
-            <form class="buscador">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-
-        </header>
+        
         &nbsp;
         <main>
+        <input type="hidden" id="rolUsuario" th:value="${rolUsuario != null} ? ${rolUsuario}:'NOUSER'" >
             <div>
-                <img src="images/A_small_cup_of_coffee.JPG" alt="" width="100px" height="100px">
-                <img src="images/coffeCupAndB.jpg" alt="" width="100px" height="100px">
-                <img src="images/coffePlant.jpg" alt="" width="100px" height="100px">
-                <img src="images/huge.jpg" alt="" width="100px" height="100px">
-                <img src="images/pure-strong-coffee-beans-500x500.jpg" alt="" width="100px" height="100px">
+            
+                <img th:src="@{images/cupCafe.JPG}"  >
+                <img src="images/coffeCupAndB.jpg"  >
+                <img src="images/coffePlant.jpg"  >
+                <img src="images/huge.jpg"  >
+                <img th:src="@{images/brindisCafe.jpg}"  >
 
             </div>
             <p>
@@ -183,8 +180,9 @@
                 </tbody>
             </table>
 
-            <p>
+            
                <h2> About SCA </h2><br>
+               <p>
                 The "Sugar Cafe" is a trade association built on foundations of openness,
                 inclusivity, and the power of shared knowledge. SCA’s purpose is to foster global coffee communities to
                 support activities to make coffee a more sustainable, equitable, and thriving activity for the whole
@@ -216,10 +214,33 @@
         <section>
 
         </section>
-        <footer>
-
-        </footer>
+        
     </div>
+    <footer>
+        <h3>Foolish Developer</h3>
+        <p>The "Sugar Cafe" is a trade association built on foundations of openness,
+            inclusivity, and the power of shared knowledge. 
+        </p>
+        <p>copyright &copy;2021 Coffee Sugar Bogota  </p>
+    </footer>
 </body>
+<script  th:inline="javascript">
+	    		function permiso() {
+	    			let roluser=document.getElementById("rolUsuario").value.toUpperCase();
+	    			let gestion= document.getElementById("toGestion");
+	    			switch (roluser) {
+	    				case 'CAJERO':
+	    				  gestion.setAttribute('th:href','@{/cajeroGestion}');
+	    			    break;
+	    			  case 'ADMIN':	  
+	    				  gestion.setAttribute('th:href','@{/gestionInventario}');
+	    			    break;
+	    			  
+	    			  case 'NOUSER':  
+	    				  gestion.setAttribute('th:href','@{/index}');
+	    			    break;		  
+	    			}
+	    		}
+			</script>
 
 </html>

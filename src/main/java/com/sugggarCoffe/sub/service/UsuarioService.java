@@ -48,9 +48,9 @@ public class UsuarioService {
 
 		public Usuario findByUsernameAndPassword(String usuarioUsuario, String contrasenaUsuario) {
 			List<Usuario> verUser=(List<Usuario>)usuarioRepositorio.findAll();
-			for(Usuario temp:verUser) {
-				if(temp.getCorreoUsuario().contentEquals(usuarioUsuario) && temp.getContrasenaUsuario().contentEquals(contrasenaUsuario)) {
-					return temp;
+			for(Usuario usertemp:verUser) {
+				if(usertemp.getCorreoUsuario().contentEquals(usuarioUsuario) && usertemp.getContrasenaUsuario().contentEquals(contrasenaUsuario)) {
+					return usertemp;
 				}
 			}
 			return null;	
@@ -62,6 +62,9 @@ public class UsuarioService {
 		
 		public Long getCurrentIdUsuario() {
 		    return (Long) httpSession.getAttribute("idUsuario");
+		  }
+		public String getCurrentRolUsuario() {
+		    return (String) httpSession.getAttribute("rolUsuario");
 		  }
 		
 		

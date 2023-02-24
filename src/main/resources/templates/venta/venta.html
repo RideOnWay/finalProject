@@ -6,25 +6,33 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="styles/estilosVentas.css">
-<link rel="stylesheet" href="styles/styleventa2.css">
 
 <title>Ventas</title>
 </head>
 
 <body onload="easyTabs()">
 	<header>
-		<h1>Ventas</h1>
-		<a href="/closeSession"><label  >Cerrar session </label></a>
-		<img src="images/vecteezy_coffee-logo-vector_.jpg" alt="" id="main_logo">
-	</header>
+		<div class="logo">
+		  <a href="/index"><img th:src="@{/images/logo.jpg}" alt="Logo de la empresa"></a>
+		</div>
+		<h1> Venta </h1>
+		<nav>
+		  <ul>
+			<li><a href="/index">Inicio</a></li>
+			<li><a href="/venta">Venta</a></li>
+			<li><a href="/listCliente">Cliente</a></li>
+			<li><a href="/closeSession" id="botonSalir">Salir</a></li>
+		  </ul>
+		</nav>
+	  </header>
 
 		<div id="wrapper">
 			<div id="erasetab" ondrop="drop(event)" ondragover="allowDrop(event)">
 			<img src="./images/basura.png" id="bote">
 		</div>
 
-		<div id="nomempl" >Hola, <span th:text="${nombreUsuario}"></span></div>
-
+		<p id="nomempl" >Hola, <span th:text="${nombreUsuario}"></span></p>
+		<input type="hidden" id="idUsuario" th:value="${idUsuario != null} ? ${idUsuario}:'-1'" >
 		<menu>
 
 			<span id="fecha">
@@ -50,7 +58,7 @@
 				<div id="inform">
 					
 					<input type="hidden" name="idVenta"  id="idVenta" required>
-					<input type="hidden" name="idUsuario" th:value="${idUsuario != null} ? ${idUsuario} : '-1'" required> 
+					<input type="hidden" name="idUsuario" th:value="${idUsuario != null} ? ${idUsuario}:'-1'" required> 
 					<input type="hidden" id="diaE" name="fechaVenta"  th:value="${#dates.format(#dates.createNowForTimeZone('America/Bogota'), 'yyyy-MM-dd')}">
 					<input type="hidden" id="horaE" name="horaVenta" th:value="${#dates.format(#dates.createNowForTimeZone('America/Bogota'), 'HH:mm:ss')}">
 					
@@ -114,7 +122,7 @@
 							<button type="button" id="erase1" onclick="eraseall('drinktable1','tablesnack1')">Borrar todo</button>
 						<div id="idto">
 							<button type="button" id="total1" onclick="totales('.precio1','latotal1')">Total</button>
-							<input readonly id="latotal1" name="precioTotal" required> </label>	
+							<input contenteditable="false" id="latotal1" name="precioTotal" required> </label>	
 						</div>				
 							<button type="submit" id="subir1" onclick="submitOrder(event,'form1','drinktable1','tablesnack1')">Guardar</button>					
 					</div>
@@ -368,6 +376,13 @@
 		<aside></aside>
 		<footer> </footer>
 	</div>
+	<footer>
+        <h3>Foolish Developer</h3>
+        <p>The "Sugar Cafe" is a trade association built on foundations of openness,
+            inclusivity, and the power of shared knowledge. 
+        </p>
+        <p>copyright &copy;2021 Coffee Sugar Bogota  </p>
+    </footer>
 	<script src="js/funcionVentas.js"></script>
 
 </body>

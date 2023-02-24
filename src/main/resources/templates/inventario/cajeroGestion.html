@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion cajero</title>
+    <link rel="stylesheet" th:href="@{/styles/estilosInventario.css}">   
+    <script src="./js/funcioninventario"></script>
+</head>
+
+<body onload='onchar()'>
+    <header>
+        <div class="logo">
+          <a href="/index"><img th:src="@{/images/logo.jpg}" alt="Logo de la empresa"></a>
+        </div>
+        <h1>Gestion cajero</h1>
+        <nav>
+          <ul>
+            <li><a href="/index">Inicio</a></li>
+            <li><a href="/venta">Ventas</a></li>
+            <li><a href="/closeSession">Salir</a></li>
+          </ul>
+        </nav>
+      </header>
+ 
+    <section>
+        <ul id="fhather">
+            
+            
+            <a href="/listIDiario"><li id="invdiario" class="ilc" >Inventario diario </br>
+                <img src="./images/inventoryimg.png" alt="" class="icon">
+            </li></a>
+            
+            <a href="/listReporte"><li id="reporte" class="ilc" >Reportes </br>
+                <img src="./images/reports.png" alt="" class="icon">
+            </li></a>
+            
+            <a href="/listDevolucione"><li id="devolucion" class="ilc" >Devoluciones </br>
+                <img src="./images/returns.png" alt="" class="icon">
+            </li></a>
+            
+            <a href="/listCliente"><li id="cliente" class="ilc" >Clientes </br>
+                <img src="./images/customer.png" alt="" class="icon">
+            </li></a>
+    
+        </ul>
+    </section>
+
+      <footer>
+        <h3>Foolish Developer</h3>
+        <p>The "Sugar Cafe" is a trade association built on foundations of openness,
+            inclusivity, and the power of shared knowledge. 
+        </p>
+        <p>copyright &copy;2021 Coffee Sugar Bogota  </p>
+    </footer>
+</body>
+
+</html>

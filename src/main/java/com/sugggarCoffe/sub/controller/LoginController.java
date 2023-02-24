@@ -30,10 +30,11 @@ public class LoginController {
 	    if (foundUser != null) {	 
 	    	session.setAttribute("usuarioNombre", foundUser.getNombreUsuario());
 	    	session.setAttribute("idUsuario", foundUser.getIdUsuario());
-	        if(foundUser.getRol().getRolName().equalsIgnoreCase("ADMIN")) {
+	    	session.setAttribute("rolUsuario", foundUser.getRol().getRolName());        
+	    	if(foundUser.getRol().getRolName().equalsIgnoreCase("ADMIN")) {
 	        	return "inventario/gestionInventario";
 	        }else {
-	        	return "redirect:/venta";
+	        	return "inventario/cajeroGestion";
 	        }	 
 	    
 	    } else {

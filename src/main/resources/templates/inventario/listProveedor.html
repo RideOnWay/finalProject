@@ -1,34 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>Proveedores</title>
-<link rel="stylesheet" th:href="@{/styles/estilosListados.css}">
-<script th:src="@{/js/toEditAll.js}"></script>
+	<meta charset="UTF-8">
+	<title>Proveedores</title>
+	<link rel="stylesheet" th:href="@{/styles/estilosListados.css}">
+	<script th:src="@{/js/toEditAll.js}"></script>
 </head>
+
 <body onload="editarProveedor()">
-<h1> Proveedor nuevo</h1>
+	<header>
+		<div class="logo">
+			<a href="/index"><img th:src="@{/images/logo.jpg}" alt="Logo de la empresa"></a>
+		</div>
+		<h1> Proveedor </h1>
+		<nav>
+			<ul>
+				<li><a href="/index">Inicio</a></li>
+				<li><a href="/venta">Ventas</a></li>
+				<li><a href="/closeSession">Salir</a></li>
+			</ul>
+		</nav>
+	</header>
 
-<div>
+
+	<main>
 
 
-	<div >
-	 <form th:action="@{/listProveedor}" th:object="${proveedor}" method="post" >
-        	<p> id.:</p> <input name="idProveedor" type="number" id="idProveedor" required placeholder="id del proveedor">
-            <p> Proveedor/Razon social: </p> <input type="text" name="razonSocial" id="razonSocial" required>
-            <p> Nombre contacto: </p> <input type="text"  name="nombreContacto" id="nombreContacto" required>
-            <p> Fecha de creacion: </p> <input type="date"  name="fechaCreacionPr" required>
-            <p> Correo: </p> <input type="email"  name="correoProveedor" id="correoProveedor" required pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}">
-            <p> Celular: </p> <input type="number"  name="numeroProveedorP" id="numeroProveedorP" required>           
-            <p> Direccion: </p> <input type="text"  name="direccionProveedor" id="direccionProveedor" required>
-            <p> Productos: </p> <textarea name="productosProveedor" ></textarea> </br>
-            <button type="submit">Guardar</button>
-        </form>
-			
-		<h2>Listado de proveedores</h2>	
-			
+		<div>
+			<form th:action="@{/listProveedor}" th:object="${proveedor}" method="post">
+				<p> id.:</p> <input name="idProveedor" type="number" id="idProveedor" required
+					placeholder="id del proveedor">
+				<p> Proveedor/Razon social: </p> <input type="text" name="razonSocial" id="razonSocial" required>
+				<p> Nombre contacto: </p> <input type="text" name="nombreContacto" id="nombreContacto" required>
+				<p> Fecha de creacion: </p> <input type="date" name="fechaCreacionPr" required>
+				<p> Correo: </p> <input type="email" name="correoProveedor" id="correoProveedor" required
+					pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}">
+				<p> Celular: </p> <input type="number" name="numeroProveedorP" id="numeroProveedorP" required>
+				<p> Direccion: </p> <input type="text" name="direccionProveedor" id="direccionProveedor" required>
+				<p> Productos: </p> <textarea name="productosProveedor"></textarea> </br>
+				<button type="submit">Guardar</button>
+			</form>
+
+			<h2>Listado de proveedores</h2>
+
 			<br />
-			<table  id="tablaProveedor">
+			<table id="tablaProveedor">
 				<thead>
 					<tr>
 						<th>NIT Proveedor</th>
@@ -42,8 +59,8 @@
 						<th>Acciones</th>
 					</tr>
 				</thead>
-				
-				 <tbody>
+
+				<tbody>
 					<tr th:each="proveedor : ${listProveedor}">
 						<td th:text="${proveedor.idProveedor}"></td>
 						<td th:text="${proveedor.razonSocial}"></td>
@@ -53,18 +70,27 @@
 						<td th:text="${proveedor.numeroProveedorP}"></td>
 						<td th:text="${proveedor.direccionProveedor}"></td>
 						<td th:text="${proveedor.productosProveedor}">c</td>
-						<td> 
-							<button type="button" class="btnEditar" >Editar</button>
-							<a th:href="@{/proveedor/{id}/delete(id=${proveedor.idProveedor})}" class="delete">Delete</a> 
-							
+						<td>
+							<button type="button" class="btnEditar">Editar</button>
+							<a th:href="@{/proveedor/{id}/delete(id=${proveedor.idProveedor})}"
+								class="delete">Delete</a>
+
 					</tr>
-					
+
 				</tbody>
 			</table>
-			
+
 		</div>
 
-	</div>
+	</main>
+	<footer>
+		<h3>Foolish Developer</h3>
+		<p>The "Sugar Cafe" is a trade association built on foundations of openness,
+			inclusivity, and the power of shared knowledge.
+		</p>
+		<p>copyright &copy;2021 Coffee Sugar Bogota </p>
+	</footer>
 
 </body>
+
 </html>

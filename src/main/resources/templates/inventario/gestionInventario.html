@@ -6,19 +6,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventario</title>
-    <link rel="stylesheet" href="./styles/estilosInventario.css">
+    <link rel="stylesheet" th:href="@{/styles/estilosInventario.css}">   
     <script src="./js/funcioninventario"></script>
 </head>
 
 <body onload='onchar()'>
     <header>
-        <h1>
-            INVENTARIO
-        </h1>
-    </header>
-    <nav>
-        <a href="/index"><button>Volver</button></a>
-    </nav>
+        <div class="logo">
+          <a href="/index"><img th:src="@{/images/logo.jpg}" alt="Logo de la empresa"></a>
+        </div>
+        <h1>Gestion</h1>
+        <nav>
+          <ul>
+            <li><a href="/index">Inicio</a></li>
+            <li><a href="/venta">Ventas</a></li>
+            <li><a href="/closeSession">Salir</a></li>
+          </ul>
+        </nav>
+      </header>
+ 
     <section>
         <ul id="fhather">
             <a href="/listInsumo"><li id="insumo" class="ilc" >Ingreso de insumos </br>
@@ -60,7 +66,11 @@
     </section>
 
     <footer>
-
+        <h3>Foolish Developer</h3>
+        <p>The "Sugar Cafe" is a trade association built on foundations of openness,
+            inclusivity, and the power of shared knowledge. 
+        </p>
+        <p>copyright &copy;2021 Coffee Sugar Bogota  </p>
     </footer>
 </body>
 

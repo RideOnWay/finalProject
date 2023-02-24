@@ -1,17 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Reporte</title>
-</head>
-<body>
-<h1>Reportes</h1>
 
-        <form action="" class="firma" index="3">
-            <p> Desde:</p> <input type="date" name="" id="">
-            <p> Hasta: </p><input type="date" name="" id="">
-            <p> Objetivo: </p><input type="text">
-            <button>Buscar</button>
-        </form>
+<head>
+  <meta charset="UTF-8">
+  <title>Reporte</title>
+  <link rel="stylesheet" th:href="@{/styles/estilosListados.css}">
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <a href="/index"><img th:src="@{/images/logo.jpg}" alt="Logo de la empresa"></a>
+    </div>
+    <h1>Reportes</h1>
+    <nav>
+      <ul>
+        <li><a href="/index">Inicio</a></li>
+        <li><a href="/venta">Ventas</a></li>
+        <li><a href="/closeSession">Salir</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <form action="" class="firma" index="3">
+      <p> Desde:</p> <input type="date" name="" id="">
+      <p> Hasta: </p><input type="date" name="" id="">
+      <p> Objetivo: </p><input type="text">
+      <button>Buscar</button>
+    </form>
+  </main>
+  <footer>
+    <h3>Foolish Developer</h3>
+    <p>The "Sugar Cafe" is a trade association built on foundations of openness,
+      inclusivity, and the power of shared knowledge.
+    </p>
+    <p>copyright &copy;2021 Coffee Sugar Bogota </p>
+  </footer>
 </body>
+
 </html>

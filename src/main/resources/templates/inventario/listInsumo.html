@@ -1,76 +1,102 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>Insumo</title>
-<link rel="stylesheet" th:href="@{/styles/estilosListados.css}">
-<script th:src="@{/js/toEditAll.js}"></script>
+	<meta charset="UTF-8">
+	<title>Insumo</title>
+	<link rel="stylesheet" th:href="@{/styles/estilosListados.css}">
+	<script th:src="@{/js/toEditAll.js}"></script>
 </head>
+
 <body onload="editarInsumo()">
-<h1>Insumo nuevo</h1>
-<div id="forms">
-        <form action="" class="firma" method="post" th:object="${insumo}" th:action="@{/listInsumo}">
-            <p> idInsumo: </p><input type="number" name="idInsumo" id="idInsumo" required placeholder="id del insumo">
-            <p>nombreInsumo: </p><input type="text" name="nombreInsumo" id="nombreInsumo" required>
-            <p> precio Insumo: </p><input type="number" name="precioInsumo" id="precioInsumo" required minlength="3">
-            
-            <p> tipo Insumo: </p>
-            <select  class="form-control"  name="tipoInsumo" required>					
-					<option  th:value="Alimento" th:text="Alimento" />
-					<option  th:value="Desechables" th:text="Desechables" />
-					<option  th:value="Aseo" th:text="Aseo" />
-					<option  th:value="BebidaAlcoholica" th:text="BebidaAlcoholica" />
-					<option  th:value="Otros" th:text="Otros" />
+	<header>
+		<div class="logo">
+			<a href="/index"><img th:src="@{/images/logo.jpg}" alt="Logo de la empresa"></a>
+		</div>
+		<h1>Insumo </h1>
+		<nav>
+			<ul>
+				<li><a href="/index">Inicio</a></li>
+				<li><a href="/venta">Ventas</a></li>
+				<li><a href="/closeSession">Salir</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<div id="forms">
+			<form action="" class="firma" method="post" th:object="${insumo}" th:action="@{/listInsumo}">
+				<p> idInsumo: </p><input type="number" name="idInsumo" id="idInsumo" required
+					placeholder="id del insumo">
+				<p>nombreInsumo: </p><input type="text" name="nombreInsumo" id="nombreInsumo" required>
+				<p> precio Insumo: </p><input type="number" name="precioInsumo" id="precioInsumo" required
+					minlength="3">
+
+				<p> tipo Insumo: </p>
+				<select class="form-control" name="tipoInsumo" required>
+					<option th:value="Alimento" th:text="Alimento" />
+					<option th:value="Desechables" th:text="Desechables" />
+					<option th:value="Aseo" th:text="Aseo" />
+					<option th:value="BebidaAlcoholica" th:text="BebidaAlcoholica" />
+					<option th:value="Otros" th:text="Otros" />
 				</select></br>
-        
-            <p>fechaCreacionInsumo: </p><input type="date" name="fechaCreacionInsumo" required>
-            <p>fechaVencimientoInsumo: </p><input type="date" name="fechaVencimientoInsumo">
-            
-            <p for="name">Seleccione el proveedor:</p>
-            <select  class="form-control" th:object="${proveedor}" name="proveedor" required>
-				<option th:each="proveedor : ${listProveedor}" th:value="${proveedor.idProveedor}" th:text="${proveedor.idProveedor}" />
-			</select>
-            
-            <p>descripcionInsumo: </p><textarea  name="descripcionInsumo"></textarea></br>
-            <button type="submit">Guardar</button>
-        </form>
-        </div>
-        
-        <h2>Lista de insumos</h2>
-        
-        <table  id="tablaInsumo" >
-				<thead>
-					<tr>
-						<th>idInsumo:</th>
-						<th>nombreInsumo:</th>
-						<th>precioInsumo:</th>
-						<th>tipoInsumo:</th>
-						<th>fechaCreacionInsumo:</th>
-						<th>fechaVencimientoInsumo:</th>
-						<th>proveedor:</th>
-						<th>descripcionInsumo:</th>			
-						<th>Acciones</th>
-					</tr>
-				</thead>
-				
-				 <tbody>
-					<tr th:each="insumo : ${listInsumo}" >
-						<td th:text="${insumo.idInsumo}"></td>
-						<td th:text="${insumo.nombreInsumo}"></td>
-						<td th:text="${insumo.precioInsumo}"></td>
-						<td th:text="${insumo.tipoInsumo}"></td>
-						<td th:text="${insumo.fechaCreacionInsumo}"></td>
-						<td th:text="${insumo.fechaVencimientoInsumo}"></td>
-						<td th:text="${insumo.proveedor.idProveedor} +' - '+${insumo.proveedor.razonSocial} "></td>
-						<td th:text="${insumo.descripcionInsumo}"></td>
-						<td> 
-							<button type="button" class="btnEditar" >Editar</button>
-							<a th:href="@{/insumo/{id}/delete(id=${insumo.idInsumo})}" class="delete">Delete</a> 
-							
-					</tr>
-					
-				</tbody>
-			</table>
+
+				<p>fechaCreacionInsumo: </p><input type="date" name="fechaCreacionInsumo" required>
+				<p>fechaVencimientoInsumo: </p><input type="date" name="fechaVencimientoInsumo">
+
+				<p for="name">Seleccione el proveedor:</p>
+				<select class="form-control" th:object="${proveedor}" name="proveedor" required>
+					<option th:each="proveedor : ${listProveedor}" th:value="${proveedor.idProveedor}"
+						th:text="${proveedor.idProveedor}" />
+				</select>
+
+				<p>descripcionInsumo: </p><textarea name="descripcionInsumo"></textarea></br>
+				<button type="submit">Guardar</button>
+			</form>
+		</div>
+
+		<h2>Lista de insumos</h2>
+
+		<table id="tablaInsumo">
+			<thead>
+				<tr>
+					<th>idInsumo:</th>
+					<th>nombreInsumo:</th>
+					<th>precioInsumo:</th>
+					<th>tipoInsumo:</th>
+					<th>fechaCreacionInsumo:</th>
+					<th>fechaVencimientoInsumo:</th>
+					<th>proveedor:</th>
+					<th>descripcionInsumo:</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="insumo : ${listInsumo}">
+					<td th:text="${insumo.idInsumo}"></td>
+					<td th:text="${insumo.nombreInsumo}"></td>
+					<td th:text="${insumo.precioInsumo}"></td>
+					<td th:text="${insumo.tipoInsumo}"></td>
+					<td th:text="${insumo.fechaCreacionInsumo}"></td>
+					<td th:text="${insumo.fechaVencimientoInsumo}"></td>
+					<td th:text="${insumo.proveedor.idProveedor} +' - '+${insumo.proveedor.razonSocial} "></td>
+					<td th:text="${insumo.descripcionInsumo}"></td>
+					<td>
+						<button type="button" class="btnEditar">Editar</button>
+						<a th:href="@{/insumo/{id}/delete(id=${insumo.idInsumo})}" class="delete">Delete</a>
+
+				</tr>
+
+			</tbody>
+		</table>
+	</main>
+	<footer>
+		<h3>Foolish Developer</h3>
+		<p>The "Sugar Cafe" is a trade association built on foundations of openness,
+			inclusivity, and the power of shared knowledge.
+		</p>
+		<p>copyright &copy;2021 Coffee Sugar Bogota </p>
+	</footer>
 </body>
 
 </html>

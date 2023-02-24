@@ -1,75 +1,104 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>Productos</title>
-<link rel="stylesheet" th:href="@{/styles/estilosListados.css}">
-<script th:src="@{/js/toEditAll.js}"></script>
+	<meta charset="UTF-8">
+	<title>Productos</title>
+	<link rel="stylesheet" th:href="@{/styles/estilosListados.css}">
+	<script th:src="@{/js/toEditAll.js}"></script>
 </head>
+
 <body onload="editarProducto()">
-<h1> Producto nuevo</h1>
-
-<div>
-
-			<form action="" class="firma" method="post" th:object="${producto}" th:action="@{/listProducto}">
-	 			<p> id.: </p> <input type="number" name="idProducto" id="idProducto" required placeholder="id del producto"></br>
-	            <p> Nombre producto: </p><input type="text" name="nombreProducto" id="nombreProducto" required minlength="3"></br>
-	            
-	            <p >Seleccione los insumos:</p>  
-	           	<select multiple class="form-control" th:object="${insumo}" name="insumo" required>
-					<option th:each="insumo: ${listInsumo}" th:value="${insumo.idInsumo}" th:text="${insumo.nombreInsumo}" />
-				</select>			  
-				  
-	            <p> precio producto: </p><input type="number" name="precioProducto" id="precioProducto" required minlength="3">  </br>
-	             
-	             <p>Seleccione el tipo de producto:</p>         
-	            <select  class="form-control"  name="tipo" required>
-					<option  th:value="Bebida" th:text="Bebida" />
-					<option  th:value="Snack" th:text="Snack" />
-				</select></br>
-	            
-	            <p> fecha creacion:</p> <input type="date" name="fechaCreacionP" required></br>
-	            <p> Descripcion:</p> <textarea  name="descripcionP" id="descripcionP" > </textarea></br>
-				<button type="submit">Guardar</button>
-       		 </form>
-			
-<h2>Lista de productos</h2>
-
-			<table  id="tableProducto">
-				<thead>
-					<tr>
-						<th>Product ID</th>
-						<th>NOMBRE PRODUCTO:</th>
-						<th>precio:</th>
-						<th>insumo:</th>
-						<th>tipo:</th>
-						<th>FECHA CREACION:</th>					
-						<th>DESCRIPCION:</th>
-						<th>acciones:</th>
-					</tr>
-				</thead>
-				
-				 <tbody>
-					<tr th:each="producto : ${listProducto}">
-						<td th:text="${producto.idProducto}"></td>
-						<td th:text="${producto.nombreProducto}"></td>
-						<td th:text="${producto.precioProducto}"></td>
-						
-						<td ><li th:each="insumo:${producto.insumo}" th:text="${insumo.nombreInsumo}" ></li></td>
-						
-						 <td th:text="${producto.tipo}"></td>
-						<td th:text="${producto.fechaCreacionP}"></td>
-						<td th:text="${producto.descripcionP}"></td> 
-						<td> 
-							<button type="button" class="btnEditar" >Editar</button>
-							<a th:href="@{/producto/{id}/delete(id=${producto.idProducto})}" class="delete">Delete</a>
-						</td>
-						
-					</tr>
-					
-				</tbody>
-			</table>
+	<header>
+		<div class="logo">
+			<a href="/index"><img th:src="@{/images/logo.jpg}" alt="Logo de la empresa"></a>
 		</div>
+		<h1> Producto </h1>
+		<nav>
+			<ul>
+				<li><a href="/index">Inicio</a></li>
+				<li><a href="/venta">Ventas</a></li>
+				<li><a href="/closeSession">Salir</a></li>
+			</ul>
+		</nav>
+	</header>
+
+
+	<main>
+
+		<form action="" class="firma" method="post" th:object="${producto}" th:action="@{/listProducto}">
+			<p> id.: </p> <input type="number" name="idProducto" id="idProducto" required
+				placeholder="id del producto"></br>
+			<p> Nombre producto: </p><input type="text" name="nombreProducto" id="nombreProducto" required
+				minlength="3"></br>
+
+			<p>Seleccione los insumos:</p>
+			<select multiple class="form-control" th:object="${insumo}" name="insumo" required>
+				<option th:each="insumo: ${listInsumo}" th:value="${insumo.idInsumo}"
+					th:text="${insumo.nombreInsumo}" />
+			</select>
+
+			<p> precio producto: </p><input type="number" name="precioProducto" id="precioProducto" required
+				minlength="3"> </br>
+
+			<p>Seleccione el tipo de producto:</p>
+			<select class="form-control" name="tipo" required>
+				<option th:value="Bebida" th:text="Bebida" />
+				<option th:value="Snack" th:text="Snack" />
+			</select></br>
+
+			<p> fecha creacion:</p> <input type="date" name="fechaCreacionP" required></br>
+			<p> Descripcion:</p> <textarea name="descripcionP" id="descripcionP"> </textarea></br>
+			<button type="submit">Guardar</button>
+		</form>
+
+		<h2>Lista de productos</h2>
+
+		<table id="tableProducto">
+			<thead>
+				<tr>
+					<th>Product ID</th>
+					<th>NOMBRE PRODUCTO:</th>
+					<th>precio:</th>
+					<th>insumo:</th>
+					<th>tipo:</th>
+					<th>FECHA CREACION:</th>
+					<th>DESCRIPCION:</th>
+					<th>acciones:</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="producto : ${listProducto}">
+					<td th:text="${producto.idProducto}"></td>
+					<td th:text="${producto.nombreProducto}"></td>
+					<td th:text="${producto.precioProducto}"></td>
+
+					<td>
+						<li th:each="insumo:${producto.insumo}" th:text="${insumo.nombreInsumo}"></li>
+					</td>
+
+					<td th:text="${producto.tipo}"></td>
+					<td th:text="${producto.fechaCreacionP}"></td>
+					<td th:text="${producto.descripcionP}"></td>
+					<td>
+						<button type="button" class="btnEditar">Editar</button>
+						<a th:href="@{/producto/{id}/delete(id=${producto.idProducto})}" class="delete">Delete</a>
+					</td>
+
+				</tr>
+
+			</tbody>
+		</table>
+	</main>
+	<footer>
+		<h3>Foolish Developer</h3>
+		<p>The "Sugar Cafe" is a trade association built on foundations of openness,
+			inclusivity, and the power of shared knowledge.
+		</p>
+		<p>copyright &copy;2021 Coffee Sugar Bogota </p>
+	</footer>
 
 </body>
+
 </html>

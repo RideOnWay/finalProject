@@ -1,15 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Devoluciones</title>
-</head>
-<body>
-<form action="" class="firma" index="5">
-            <p> Producto: </p> <input type="text">
-            <p> Proveedor: </p> <input type="text">
-            <p> motivo: </p> <input type="text">
-        </form>
 
+<head>
+    <meta charset="UTF-8">
+    <title>Devoluciones</title>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <a href="/index"><img th:src="@{/images/logo.jpg}" alt="Logo de la empresa"></a>
+        </div>
+        <h1>Invenario Diario</h1>
+        <nav>
+            <ul>
+                <li><a href="/index">Inicio</a></li>
+                <li><a href="/venta">Ventas</a></li>
+                <li><a href="/closeSession">Salir</a></li>
+            </ul>
+        </nav>
+    </header>
+    <form action="" class="firma" index="5">
+        <p> Producto: </p> <input type="text">
+        <p> Proveedor: </p> <input type="text">
+        <p> motivo: </p> <input type="text">
+    </form>
+    <footer>
+        <h3>Foolish Developer</h3>
+        <p>The "Sugar Cafe" is a trade association built on foundations of openness,
+            inclusivity, and the power of shared knowledge.
+        </p>
+        <p>copyright &copy;2021 Coffee Sugar Bogota </p>
+    </footer>
 </body>
+
 </html>

@@ -1,23 +1,54 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Inventario diario</title>
-</head>
-<body>
-<form class="firma" method="post" th:object="${iDiario}" th:action="@{/listIDiario}">
-			<input readonly  th:value="${idUsuario != null} ? ${idUsuario} : '-1'" name="idUsuario" required>
-			<input readonly id="dia" name="fechaIDiario"  th:value="${#dates.format(#dates.createNowForTimeZone('America/Bogota'), 'yyyy-MM-dd')}">
-            <input readonly  name="idIDiario"  th:value="${#dates.format(#dates.createNowForTimeZone('America/Bogota'), 'MMdd')} +''+ ${idUsuario}">
-            <li th:each="producto : ${listProducto}" th:object="${iDiario}">
-            	<ul>
-            		<p  th:value="${producto.idProducto}" th:text="${producto.nombreProducto}" name="producto"> </p>
-            		<input type="number" name="cantidadIDiario">
-            	</ul>
-            </li>
-            <textarea rows="4" cols="20" name="novedadesInventario"></textarea>
-            <button type="submit">Guardar</button>
 
-        </form>
+<head>
+  <meta charset="UTF-8">
+  <title>Inventario diario</title>
+  <link rel="stylesheet" th:href="@{/styles/estilosListados.css}">
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <a href="/index"><img th:src="@{/images/logo.jpg}" alt="Logo de la empresa"></a>
+    </div>
+    <h1>Invenario Diario</h1>
+    <nav>
+      <ul>
+        <li><a href="/index">Inicio</a></li>
+        <li><a href="/venta">Ventas</a></li>
+        <li><a href="/closeSession">Salir</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <form class="firma" method="post" th:object="${iDiario}" th:action="@{/listIDiario}">
+      <p>Usuario</p>
+      <input readonly th:value="${idUsuario != null} ? ${idUsuario} : '-1'" name="idUsuario" required>
+      <p>Fecha</p>
+      <input readonly id="dia" name="fechaIDiario"
+        th:value="${#dates.format(#dates.createNowForTimeZone('America/Bogota'), 'yyyy-MM-dd')}">
+      <p>Id inentario</p>
+      <input readonly name="idIDiario"
+        th:value="${#dates.format(#dates.createNowForTimeZone('America/Bogota'), 'MMdd')} +''+ ${idUsuario}">
+      <li th:each="producto : ${listProducto}" th:object="${iDiario}">
+        <ul>
+          <p th:value="${producto.idProducto}" th:text="${producto.nombreProducto}" name="producto"> </p>
+          <input type="number" name="cantidadIDiario">
+        </ul>
+      </li>
+      <textarea rows="4" cols="20" name="novedadesInventario"></textarea></br>
+      <button type="submit">Guardar</button>
+
+    </form>
+  </main>
+  <footer>
+    <h3>Foolish Developer</h3>
+    <p>The "Sugar Cafe" is a trade association built on foundations of openness,
+      inclusivity, and the power of shared knowledge.
+    </p>
+    <p>copyright &copy;2021 Coffee Sugar Bogota </p>
+  </footer>
 </body>
+
 </html>

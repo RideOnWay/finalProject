@@ -1,24 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Otros</title>
+	<link rel="stylesheet" th:href="@{/styles/estilosListados.css}">
 </head>
+
 <body>
+	<header>
+		<div class="logo">
+			<a href="/index"><img th:src="@{/images/logo.jpg}" alt="Logo de la empresa"></a>
+		</div>
+		<h1> Producto </h1>
+		<nav>
+			<ul>
+				<li><a href="/index">Inicio</a></li>
+				<li><a href="/venta">Ventas</a></li>
+				<li><a href="/closeSession">Salir</a></li>
+			</ul>
+		</nav>
+	</header>
 
+	<main>
+		<form action="" class="firma" method="post" th:object="${proveedor}" th:action="@{/listUsuario}">
 
+			<select class="form-control">
+				<option th:each="proveedor : ${listProveedor}" th:value="${proveedor.idProveedor}"
+					th:text="${proveedor.idProveedor}" />
+			</select>
 
-	<form action="" class="firma" method="post" th:object="${proveedor}" th:action="@{/listUsuario}">
-		
-		<select  class="form-control">
-			<option th:each="proveedor : ${listProveedor}" th:value="${proveedor.idProveedor}"
-				th:text="${proveedor.idProveedor}" />
-		</select>
-
-		<p>Otros:</p>
-		<input type="text">
-	</form>
+			<p>Otros:</p>
+			<input type="text">
+		</form>
+	</main>
+	<footer>
+		<h3>Foolish Developer</h3>
+		<p>The "Sugar Cafe" is a trade association built on foundations of openness,
+			inclusivity, and the power of shared knowledge.
+		</p>
+		<p>copyright &copy;2021 Coffee Sugar Bogota </p>
+	</footer>
 </body>
-</html>
 
-<!--th:field="*{proveedor}"  -->
+</html>

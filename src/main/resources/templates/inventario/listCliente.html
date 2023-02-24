@@ -1,54 +1,80 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>Clientes</title>
-<link rel="stylesheet" th:href="@{/styles/estilosListados.css}">
-<script th:src="@{/js/toEditAll.js}"></script>
+	<meta charset="UTF-8">
+	<title>Clientes</title>
+	<link rel="stylesheet" th:href="@{/styles/estilosListados.css}">
+	<script th:src="@{/js/toEditAll.js}"></script>
 </head>
+
 <body onload="editarCliente()">
-<h1>Cliente nuevo</h1>
+	<header>
+		<div class="logo">
+			<a href="/index"><img th:src="@{/images/logo.jpg}" alt="Logo de la empresa"></a>
+		</div>
+		<h1>Cliente </h1>
+		<nav>
+			<ul>
+				<li><a href="/index">Inicio</a></li>
+				<li><a href="/venta">Ventas</a></li>
+				<li><a href="/closeSession">Salir</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
 		<form action="" class="firma" method="post" th:object="${cliente}" th:action="@{/listCliente}">
-            <p> id Cliente:</p> <input type="number" name="idCliente" id="idCliente" required placeholder="id del cliente" minlength="4">
-            <p> Nombre: </p> <input type="text" name="nombreCliente" id="nombreCliente" required minlength="4">
-            <p> Celular: </p> <input type="number" name="telefonoCliente" id="telefonoCliente" required minlength="7">
-            <p> Correo:</p> <input type="email" name="correoCliente" id="correoCliente" required pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}">
-            <p>Direccion:</p> <input type="text" name="direccionCliente" id="direccionCliente" required>
-            <p> Fecha de nacimiento:</p> <input type="date" id="" name="fechaNacimientoCliente" required>
-            <p><button type="submit">Guardar</button></p>
-        </form>
-        
-        <h2>Lista de clientes</h2>
-        
-        <table  id="tablaCliente">
-				<thead>
-					<tr>
-						<th> id Cliente</th>
-						<th> Nombre: </th>
-						<th>Celular:</th>
-						<th>Correo:</th>
-						<th>Direccion:</th>
-						<th>Fecha de nacimiento:</th>
-						<th>Acciones</th>
-					</tr>
-				</thead>
-				
-				 <tbody>
-					<tr th:each="cliente : ${listCliente}">
-						 <td th:text="${cliente.idCliente}"></td>
-						<td th:text="${cliente.nombreCliente}"></td>
-						<td th:text="${cliente.telefonoCliente}"></td>
-						<td th:text="${cliente.correoCliente}"></td>
-						<td th:text="${cliente.direccionCliente}"></td>
-						<td th:text="${cliente.fechaNacimientoCliente}"></td>
-						<td> 
-							<button type="button" class="btnEditar" >Editar</button>
-							<a th:href="@{/cliente/{id}/delete(id=${cliente.idCliente})}" class="delete">Delete</a> 
-							
-					</tr>
-					
-				</tbody>
-			</table>
+			<p> id Cliente:</p> <input type="number" name="idCliente" id="idCliente" required
+				placeholder="id del cliente" minlength="4">
+			<p> Nombre: </p> <input type="text" name="nombreCliente" id="nombreCliente" required minlength="4">
+			<p> Celular: </p> <input type="number" name="telefonoCliente" id="telefonoCliente" required minlength="7">
+			<p> Correo:</p> <input type="email" name="correoCliente" id="correoCliente" required
+				pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}">
+			<p>Direccion:</p> <input type="text" name="direccionCliente" id="direccionCliente" required>
+			<p> Fecha de nacimiento:</p> <input type="date" id="" name="fechaNacimientoCliente" required>
+			<p><button type="submit">Guardar</button></p>
+		</form>
+
+		<h2>Lista de clientes</h2>
+
+		<table id="tablaCliente">
+			<thead>
+				<tr>
+					<th> id Cliente</th>
+					<th> Nombre: </th>
+					<th>Celular:</th>
+					<th>Correo:</th>
+					<th>Direccion:</th>
+					<th>Fecha de nacimiento:</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="cliente : ${listCliente}">
+					<td th:text="${cliente.idCliente}"></td>
+					<td th:text="${cliente.nombreCliente}"></td>
+					<td th:text="${cliente.telefonoCliente}"></td>
+					<td th:text="${cliente.correoCliente}"></td>
+					<td th:text="${cliente.direccionCliente}"></td>
+					<td th:text="${cliente.fechaNacimientoCliente}"></td>
+					<td>
+						<button type="button" class="btnEditar">Editar</button>
+						<a th:href="@{/cliente/{id}/delete(id=${cliente.idCliente})}" class="delete">Delete</a>
+
+				</tr>
+
+			</tbody>
+		</table>
+	</main>
+	<footer>
+		<h3>Foolish Developer</h3>
+		<p>The "Sugar Cafe" is a trade association built on foundations of openness,
+			inclusivity, and the power of shared knowledge.
+		</p>
+		<p>copyright &copy;2021 Coffee Sugar Bogota </p>
+	</footer>
 
 </body>
+
 </html>

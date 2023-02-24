@@ -1,67 +1,94 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>Usuarios</title>
-<link rel="stylesheet" th:href="@{/styles/estilosListados.css}">
-<script th:src="@{/js/toEditAll.js}"></script>
+	<meta charset="UTF-8">
+	<title>Usuarios</title>
+	<link rel="stylesheet" th:href="@{/styles/estilosListados.css}">
+	<script th:src="@{/js/toEditAll.js}"></script>
 </head>
+
 <body onload="editarUsuario()">
-<h1>Usuario nuevo</h1>
- <form action="" class="firma" method="post" th:object="${usuario}" th:action="@{/listUsuario}">
- 			<p> id.: </p> <input type="number" name="idUsuario" id="idUsuario" required placeholder="id del usuario"></br>
-            <p> Nombre: </p><input type="text" name="nombreUsuario" id="nombreUsuario" required>   </br>        
-            
-            <p >Seleccione el rol:</p>
-            <select  class="form-control" th:object="${rol}" name="rol" required>
+
+	<header>
+		<div class="logo">
+			<a href="/index"><img th:src="@{/images/logo.jpg}" alt="Logo de la empresa"></a>
+		</div>
+		<h1>Usuario </h1>
+		<nav>
+			<ul>
+				<li><a href="/index">Inicio</a></li>
+				<li><a href="/venta">Ventas</a></li>
+				<li><a href="/closeSession">Salir</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<form action="" class="firma" method="post" th:object="${usuario}" th:action="@{/listUsuario}">
+			<p> id.: </p> <input type="number" name="idUsuario" id="idUsuario" required
+				placeholder="id del usuario"></br>
+			<p> Nombre: </p><input type="text" name="nombreUsuario" id="nombreUsuario" required> </br>
+
+			<p>Seleccione el rol:</p>
+			<select class="form-control" th:object="${rol}" name="rol" required>
 				<option th:each="rol:${listRol}" th:value="${rol.idRol}" th:text="${rol.rolName}" />
 			</select>
-            
-            <p> Fecha de nacimiento: </p> <input type="date" name="fechaNacimientoUsuario" required></br>
-            <p> Correo:</p> <input type="email" name="correoUsuario" id="correoUsuario" required pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"></br>
-            <p> Numero:</p> <input type="text" name="numeroUsuario" id="numeroUsuario" required></br>
-            <p> Direccion:</p> <input type="text" name="direccionUsuario" id="direccionUsuario" required></br>
-            <p> contrasena:</p> <input type="password" name="contrasenaUsuario" id="contrasenaUsuario" required pattern="^(?=.*[a-zA-Z])(?=.*\d)(?!.*\s).{6,}$"></br>
-            <p> Descripcion:</p> <textarea  name="descripcionUsuario" id="descripcionUsuario"></textarea></br>
-			<button type="submit">Guardar</button>
-        </form>
-       
-<h2>Lista de usuarios</h2>			
-			<br />
-			<table border="1" id="tablaUsuario">
-				<thead>
-					<tr>
-						<th>idUsuario</th>
-						<th>nombreUsuario</th>
-						<th>Rol</th>
-						<th>fechaNacimientoUsuario</th>
-						<th>Correo</th>
-						<th>Numero</th>
-						<th>Direccion</th>
-						<th>descripcion</th>
-						<th>Acciones</th>
-					</tr>
-				</thead>
-				
-				 <tbody>
-					<tr th:each="usuario : ${listUsuario}">
-						<td th:text="${usuario.idUsuario}"></td>
-						<td th:text="${usuario.nombreUsuario}"></td>
-						<td th:text="${usuario.rol.rolName}"></td>
-						<td th:text="${usuario.fechaNacimientoUsuario}"></td>
-						<td th:text="${usuario.correoUsuario}"></td>
-						<td th:text="${usuario.numeroUsuario}"></td>
-						<td th:text="${usuario.direccionUsuario}"></td>
-						<td th:text="${usuario.descripcionUsuario}"></td>
-						<td> 
-							<button type="button" class="btnEditar" >Editar</button>
-							<a th:href="@{/usuario/{id}/delete(id=${usuario.idUsuario})}" class="delete">Delete</a>
-						 </td>
-							
-					</tr>
-					
-				</tbody>
-			</table>
 
+			<p> Fecha de nacimiento: </p> <input type="date" name="fechaNacimientoUsuario" required></br>
+			<p> Correo:</p> <input type="email" name="correoUsuario" id="correoUsuario" required
+				pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"></br>
+			<p> Numero:</p> <input type="text" name="numeroUsuario" id="numeroUsuario" required></br>
+			<p> Direccion:</p> <input type="text" name="direccionUsuario" id="direccionUsuario" required></br>
+			<p> contrasena:</p> <input type="password" name="contrasenaUsuario" id="contrasenaUsuario" required
+				pattern="^(?=.*[a-zA-Z])(?=.*\d)(?!.*\s).{6,}$"></br>
+			<p> Descripcion:</p> <textarea name="descripcionUsuario" id="descripcionUsuario"></textarea></br>
+			<button type="submit">Guardar</button>
+		</form>
+
+		<h2>Lista de usuarios</h2>
+		<br />
+		<table id="tablaUsuario">
+			<thead>
+				<tr>
+					<th>idUsuario</th>
+					<th>nombreUsuario</th>
+					<th>Rol</th>
+					<th>fechaNacimientoUsuario</th>
+					<th>Correo</th>
+					<th>Numero</th>
+					<th>Direccion</th>
+					<th>descripcion</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="usuario : ${listUsuario}">
+					<td th:text="${usuario.idUsuario}"></td>
+					<td th:text="${usuario.nombreUsuario}"></td>
+					<td th:text="${usuario.rol.rolName}"></td>
+					<td th:text="${usuario.fechaNacimientoUsuario}"></td>
+					<td th:text="${usuario.correoUsuario}"></td>
+					<td th:text="${usuario.numeroUsuario}"></td>
+					<td th:text="${usuario.direccionUsuario}"></td>
+					<td th:text="${usuario.descripcionUsuario}"></td>
+					<td>
+						<button type="button" class="btnEditar">Editar</button>
+						<a th:href="@{/usuario/{id}/delete(id=${usuario.idUsuario})}" class="delete">Delete</a>
+					</td>
+
+				</tr>
+
+			</tbody>
+		</table>
+	</main>
+	<footer>
+		<h3>Foolish Developer</h3>
+		<p>The "Sugar Cafe" is a trade association built on foundations of openness,
+			inclusivity, and the power of shared knowledge.
+		</p>
+		<p>copyright &copy;2021 Coffee Sugar Bogota </p>
+	</footer>
 </body>
+
 </html>
