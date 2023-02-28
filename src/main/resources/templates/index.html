@@ -10,7 +10,7 @@
     
 </head>
 
-<body onload="permiso()">
+<body onload='estado()'>
     <header>
         <div class="logo">
           <a href="/index"><img th:src="@{/images/logo.jpg}" alt="Logo de la empresa"></a>
@@ -20,8 +20,8 @@
         <nav>
           <ul>
           	<li><a th:href="@{/venta}">Ventas</a></li>
-            <li><a  id="toGestion">Inventario</a></li>
-            <li><a th:href="@{/login}">Ingresar</a></li>
+            <li><a  onclick='permiso()'>Inventario</a></li>
+            <li><a th:href="@{/login}" id="userStade">Ingresar</a></li>
           </ul>
         </nav>
       </header>
@@ -29,7 +29,7 @@
         
         &nbsp;
         <main>
-        <input type="hidden" id="rolUsuario" th:value="${rolUsuario != null} ? ${rolUsuario}:'NOUSER'" >
+        	<input type="hidden" id="rolUsuario" th:value="${rolUsuario != null} ? ${rolUsuario}:'NOUSER'" >
             <div>
             
                 <img th:src="@{images/cupCafe.JPG}"  >
@@ -48,7 +48,7 @@
                 value chain.
             </p>
 
-        </main>
+        
         <article>
             <table >
                 <caption>
@@ -215,7 +215,8 @@
 
         </section>
         
-    </div>
+    	</div>
+    </main>
     <footer>
         <h3>Foolish Developer</h3>
         <p>The "Sugar Cafe" is a trade association built on foundations of openness,
@@ -227,18 +228,28 @@
 <script  th:inline="javascript">
 	    		function permiso() {
 	    			let roluser=document.getElementById("rolUsuario").value.toUpperCase();
-	    			let gestion= document.getElementById("toGestion");
 	    			switch (roluser) {
 	    				case 'CAJERO':
-	    				  gestion.setAttribute('th:href','@{/cajeroGestion}');
+	    				  window.location.href = '/cajeroGestion';
 	    			    break;
 	    			  case 'ADMIN':	  
-	    				  gestion.setAttribute('th:href','@{/gestionInventario}');
+	    				  window.location.href = '/gestionInventario';
 	    			    break;
 	    			  
 	    			  case 'NOUSER':  
-	    				  gestion.setAttribute('th:href','@{/index}');
+	    				  alert("Debe ingresar primero");
+	    				  //gestion.setAttribute('th:href','@{/index}');
 	    			    break;		  
+	    			}
+	    		}
+	    		
+	    		async function estado(){
+	    			let roluser=document.getElementById("rolUsuario").value.toUpperCase();
+	    			if(roluser !== 'NOUSER'){
+	    				let inOut =document.getElementById('userStade');
+	    				inOut.innerHTML='Salir';
+	    				inOut.setAttribute('href','/closeSession');
+
 	    			}
 	    		}
 			</script>

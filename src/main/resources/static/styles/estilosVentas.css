@@ -1,6 +1,6 @@
 body {
 	margin: 0;
-	padding-top: 6em;
+	padding-top: 5em;
 	font-family: Helvetica, Arial, sans-serif;
 	font-size: 1em;
 	line-height: 1.5em;
@@ -9,12 +9,7 @@ body {
   background-attachment: fixed;
   position: relative;
 }
-
-#bote{
-  height: 2.5em;
-  width: 35x;
-  padding: 3px;
-}
+/* ----------------------------------------------------------HEADER-------------------------------------------------------*/
 
 header {
   position: fixed;
@@ -80,10 +75,19 @@ header nav a:hover {
   color: #fff;
 }
 
+/* ----------------------------------------------------------BORRAR TAB-------------------------------------------------------*/
+
 #wrapper{
-  width: 80%;
+  width: 60%;
   margin: auto;
 }
+
+#bote{
+  height: 2.5em;
+  width: 35x;
+  padding: 3px;
+}
+
 
 #erasetab{
   height: 3em;
@@ -93,15 +97,13 @@ header nav a:hover {
   text-align: center;
 }
 
+/* ----------------------------------------------------------USUARIO-------------------------------------------------------*/
+
 #nomempl{
   color: white;
 }
 
-menu {
-  display: flex;
-  justify-content: space-around;
- 
-}
+/* ----------------------------------------------------------FECHA-------------------------------------------------------*/
 
 #fecha {
   background-color: #252525;
@@ -118,6 +120,14 @@ menu {
   padding: 3px;
   margin: 0 3em;
 
+}
+
+/* ----------------------------------------------------------TABS-------------------------------------------------------*/
+
+menu {
+  display: flex;
+  justify-content: space-around;
+ 
 }
 
 menu nav{
@@ -173,64 +183,18 @@ menu nav{
     border: 1px solid white;
   }
 
+  /* ----------------------------------------------------------FORMULARIO-------------------------------------------------------*/
+
   #formulario{
    visibility: hidden; 
   }
- 
-  .price{
-    width: 3em;
-    height: 1.5em;
-    font-size: 1em;
-    border-radius: 5px;
-  }
 
-  #drinks{
-    height: 7em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-  }
-
-  #snacks{
-    height: 7em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-  }
-  
-  select{
-    display: inline;
-    height: 2em;
-    width: 10em;
-    border-radius: 5px;
-  }
-
-  option{
-    height: 10em;
-    margin: 2em;
-  }
-
-  .lista{
-    text-align: center;
-  }
-
-  label{
-    display: flex;
-   justify-content: space-around;
-    
-  }
-
-  textarea{
-    resize: none;
-  }
   .t-form {
     padding: 0 1em;
     background-color: #333;
     box-sizing: border-box;   
     color: #eeedea;
-    line-height: 1.3em;
+    line-height: 1em;
     text-align: justify;
     z-index: 1;
     position: relative;
@@ -244,26 +208,75 @@ menu nav{
     
   }
 
-  #botones{
-    display: flex;   
+  .price{
+    width: 3em;
+    height: 1.5em;
+    font-size: 1em;
+    border-radius: 5px;
+  }
+
+  #content{
+    height: 5em;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+  }
+
+  form div{
+    width: 100%;
+    text-align: center;
+    display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 5em; 
+  flex-direction: column;
   }
 
-  button{
-    height: 2em; 
-
-  }
-
-  #idto{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-
+  p{
+    margin-bottom: 2px;
+    display: block;
+    border-bottom:0;
   }
   
+  select{
+    display: inline;
+    height: 3em;
+    width: 40%;
+    border-radius: 5px;
+  }
+
+  option{
+    height: 10em;
+    margin: 2em;
+  }
+
+  .lista{
+    text-align: center;
+  }
+
+  textarea{
+    margin: 1em;
+    margin-top: 2px;
+    max-height: 6em;
+    height: 3em;
+    width: 40%;
+  }
   
+  /* ----------------------------------------------------------botones-------------------------------------------------------*/
+
+  #contentbutton{
+    height: 3em;
+    display:flex;
+    flex-direction:row;
+    justify-content: center; 
+  }
+
+ button{
+  display: block;
+  margin: 1em;
+ }
+  
+  /* ----------------------------------------------------------tabla-------------------------------------------------------*/
+
 tr:hover{
     background-color: rgb(119, 118, 123);
     
@@ -281,7 +294,36 @@ table tr  {
     color: rgb(0, 0, 0);
     cursor: default;
     background: rgb(255, 255, 255);
+    position:relative;
   }
+
+  input{
+    width: 4em;
+  	padding: 0;
+  	margin: 0;
+  }
+  /* ----------------------------------------------------------FOOOTER-------------------------------------------------------*/
+
+  footer{  
+    position:relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #111;
+    color: white;
+    text-align:center;
+    padding-top: 1em;
+}
+
+footer h3{
+    margin: 0%;
+}
+
+footer p{
+    background: none;
+    margin: 0%;
+    padding: 1em;
+}
   
 
 

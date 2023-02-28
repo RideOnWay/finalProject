@@ -160,7 +160,7 @@ function creaform(inc) {
 
   let chnerabtt = document.getElementById('borrar');
   chnerabtt.id = 'borrar' + inc;
-  chnerabtt.setAttribute('onclick', "erasetab()");
+  chnerabtt.setAttribute('onclick', "eraselast()");
 
   let chntotbtt = document.getElementById('total');
   chntotbtt.id = 'total' + inc;
@@ -202,7 +202,7 @@ async function enlistar(selectid, tableid, num, list1, list2,list3) {
     const list03 = document.getElementById(list3);
     
 	let idProducto=await price(entrada,list01,list03);
-	document.getElementById('column' + aux + 4).innerHTML = "<input value="+idProducto+ " contenteditable='false'  name='producto' class='nopaint' id='indiceProducto'>";
+	document.getElementById('column' + aux + 4).innerHTML = "<input value="+idProducto+ " readonly  name='producto' class='nopaint' id='indiceProducto'>";
     document.getElementById('column' + aux + 1).innerHTML = entrada;
     document.getElementById('column' + aux + 2).innerHTML = await price(entrada,list01,list02);                        
     document.getElementById('column' + aux + 3).innerHTML = "<input type='number' class='nopaint' onchange='sumaPrecio(event)' value='1'  name='cantidades'>";
@@ -306,7 +306,7 @@ function sumaPrecio(event) {
   }
 }
 
-//enviar informacion asincrona de cada ventavar  
+//enviar informacion asincrona de cada pestana 
 function submitOrder(event,form,tabla1,tabla2) {
   event.preventDefault();
   

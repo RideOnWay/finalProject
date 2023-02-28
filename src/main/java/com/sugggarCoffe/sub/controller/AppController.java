@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.sugggarCoffe.sub.model.Reporte;
 import com.sugggarCoffe.sub.service.UsuarioService;
+import com.sugggarCoffe.sub.service.VentaService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -14,6 +16,9 @@ public class AppController {
 	
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private VentaService ventaService;
 	
 	@GetMapping("/index")
 	public String toIndex(Model model) {
